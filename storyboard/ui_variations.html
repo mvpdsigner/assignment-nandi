@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Location Screen Options</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--sage:#7D9D86;--dark:#355C4D;--light:#DDE8DF;--cream:#F8F7F2;--char:#28332D;--line:#C9D6CC;--muted:#5E6E64}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{width:2400px;height:1500px;background:var(--cream);font-family:Inter,Helvetica,Arial,sans-serif;color:var(--char);position:relative;overflow:hidden}
+.wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:50}
+.wm span{font-size:300px;font-weight:800;color:var(--dark);opacity:.05;transform:rotate(-20deg)}
+.head{position:absolute;left:90px;top:60px}
+.head small{font-size:22px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+.head h1{margin:10px 0 0;font-size:56px;color:var(--dark);letter-spacing:-1px}
+.head p{margin:12px 0 0;font-size:24px;color:var(--muted);max-width:1500px;line-height:1.45}
+.row{position:absolute;left:90px;right:90px;top:300px;display:grid;grid-template-columns:repeat(4,1fr);gap:50px}
+.col h2{margin:0 0 6px;font-size:30px;color:var(--dark)}
+.col h2 b{color:var(--sage);margin-right:10px}
+.col .note{font-size:20px;color:var(--muted);line-height:1.4;height:58px;margin-bottom:20px}
+.phone{width:440px;height:900px;border-radius:64px;background:var(--char);padding:16px;box-shadow:0 30px 70px rgba(40,51,45,.25);position:relative}
+.screen{width:100%;height:100%;border-radius:50px;overflow:hidden;position:relative;background:#fff}
+.notch{position:absolute;left:50%;top:12px;width:120px;height:30px;border-radius:16px;background:var(--char);transform:translateX(-50%);z-index:5}
+.status{height:56px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 30px 6px;font-size:17px;font-weight:700}
+
+/* ---- original (reference) */
+.orig{padding:120px 30px 0;text-align:center;font-family:Helvetica,Arial,sans-serif}
+.orig h3{color:#1F6B47;font-size:30px;margin:0}
+.orig p{font-size:17px;margin:16px 0 22px;line-height:1.35}
+.orig .btn{background:#2E7D55;color:#fff;border-radius:8px;padding:18px 0;font-size:19px}
+.orig .ok{margin:40px 0 30px;font-size:18px}
+.orig .ln{font-size:17px;margin:12px 0}
+
+/* ---- A: clean card */
+.a{background:var(--cream);height:100%}
+.a .bar{display:flex;align-items:center;gap:12px;padding:18px 26px 0}
+.a .logo{width:44px;height:44px;border-radius:12px;background:var(--dark);display:flex;align-items:center;justify-content:center}
+.a .bar b{font-size:20px;color:var(--dark)}
+.a .hero{margin:22px 22px 0;background:#fff;border-radius:28px;padding:26px 24px;box-shadow:0 8px 24px rgba(40,51,45,.08)}
+.a .ill{height:150px;border-radius:20px;background:var(--light);position:relative;overflow:hidden}
+.a h3{margin:22px 0 6px;font-size:28px;color:var(--char);letter-spacing:-.4px}
+.a .hero p{margin:0;font-size:17px;color:var(--muted);line-height:1.45}
+.a .btn{margin-top:20px;background:var(--dark);color:#fff;border-radius:18px;padding:18px 0;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px}
+.a .res{margin:16px 22px 0;background:#fff;border-radius:24px;padding:20px 22px;box-shadow:0 8px 24px rgba(40,51,45,.08)}
+.a .ok{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700;color:var(--dark)}
+.a .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.a .tile{background:var(--cream);border-radius:16px;padding:12px 14px}
+.a .tile small{display:block;font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.a .tile b{font-size:22px;color:var(--char)}
+.a .acc{margin-top:10px;display:inline-flex;align-items:center;gap:8px;background:var(--light);color:var(--dark);font-size:15px;font-weight:700;padding:7px 12px;border-radius:999px}
+
+/* ---- B: map first */
+.b{height:100%;background:#EEF2EF;position:relative}
+.b .map{position:absolute;inset:0 0 360px 0;background:#E4ECE6}
+.b .top{position:absolute;left:20px;right:20px;top:66px;background:rgba(255,255,255,.95);border-radius:20px;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 20px rgba(40,51,45,.12);z-index:2}
+.b .top b{font-size:19px;color:var(--char)}
+.b .top small{display:block;font-size:14px;color:var(--muted);font-weight:500}
+.b .sheet{position:absolute;left:0;right:0;bottom:0;height:400px;background:#fff;border-radius:34px 34px 0 0;padding:16px 26px;box-shadow:0 -10px 30px rgba(40,51,45,.12)}
+.b .grab{width:56px;height:6px;border-radius:3px;background:var(--line);margin:0 auto 18px}
+.b .ok{display:flex;align-items:center;gap:12px}
+.b .ok b{font-size:22px;color:var(--char)}
+.b .ok small{display:block;font-size:15px;color:var(--muted);font-weight:500}
+.b .coord{margin-top:18px;font-size:32px;font-weight:800;color:var(--dark);letter-spacing:-.5px}
+.b .meta{display:flex;gap:10px;margin-top:12px}
+.b .chip{background:var(--light);color:var(--dark);font-size:15px;font-weight:700;padding:8px 12px;border-radius:999px}
+.b .btn{position:absolute;left:26px;right:26px;bottom:34px;background:var(--dark);color:#fff;border-radius:18px;padding:18px 0;font-size:19px;font-weight:700;text-align:center}
+
+/* ---- C: dark radar */
+.c{height:100%;background:var(--dark);color:var(--cream);position:relative}
+.c .title{padding:22px 30px 0}
+.c .title small{font-size:15px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--light);opacity:.7}
+.c .title h3{margin:6px 0 0;font-size:30px;letter-spacing:-.4px}
+.c .title p{margin:8px 0 0;font-size:16px;color:var(--light);opacity:.8;line-height:1.45}
+.c .radar{position:absolute;left:50%;top:420px;transform:translate(-50%,-50%)}
+.c .btn{position:absolute;left:50%;top:420px;transform:translate(-50%,-50%);width:150px;height:150px;border-radius:50%;background:var(--cream);color:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:15px;font-weight:800;text-align:center;line-height:1.2;box-shadow:0 0 0 12px rgba(221,232,223,.18)}
+.c .panel{position:absolute;left:22px;right:22px;bottom:30px;background:rgba(40,51,45,.55);border:1.5px solid rgba(221,232,223,.25);border-radius:26px;padding:20px 22px}
+.c .saved{display:inline-flex;align-items:center;gap:8px;background:var(--sage);color:#fff;font-size:15px;font-weight:700;padding:7px 14px;border-radius:999px}
+.c .grid{display:grid;grid-template-columns:auto 1fr;gap:12px 18px;margin-top:16px;font-family:'JetBrains Mono',Menlo,monospace;align-items:baseline}
+.c .grid span{font-size:14px;color:var(--light);opacity:.7;letter-spacing:.08em}
+.c .grid b{font-size:24px}
+</style>
+</head>
+<body>
+<div class="wm"><span>TutorBin</span></div>
+<div class="head">
+  <small>Section 2 · website screen · options</small>
+  <h1>A more modern "Get My Location" screen</h1>
+  <p>Same content and the same steps as your website (Get My Location → saved → latitude, longitude, accuracy), redrawn in the video palette. Coordinates are shown rounded, as agreed. Each option animates in the video: the button press, a short "locating" state, then the saved result.</p>
+</div>
+
+<div class="row">
+  <!-- reference -->
+  <div class="col">
+    <h2><b>·</b>Current</h2>
+    <div class="note">Your website screenshot, as used in the video now.</div>
+    <div class="phone"><div class="screen">
+      <div class="orig">
+        <h3>Solar Tracker Setup</h3>
+        <p>Place your phone near the solar tracker and press the button below.</p>
+        <div class="btn">Get My Location</div>
+        <div class="ok">Location successfully saved!</div>
+        <div class="ln">Latitude: 25.232442639099176</div>
+        <div class="ln">Longitude: 51.56428737975297</div>
+        <div class="ln">Accuracy: 10.3 meters</div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- A -->
+  <div class="col">
+    <h2><b>A</b>Clean Card</h2>
+    <div class="note">Modern app layout: soft cards, big button, results as tiles.</div>
+    <div class="phone"><div class="screen"><div class="notch"></div>
+      <div class="a">
+        <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+        <div class="bar"><div class="logo"><svg width="26" height="26" viewBox="0 0 48 48"><g fill="none" stroke="#F8F7F2" stroke-width="3.5" stroke-linecap="round"><circle cx="24" cy="24" r="8"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l4 4M38 10l-4 4M14 34l-4 4"/></g></svg></div><b>Solar Tracker</b></div>
+        <div class="hero">
+          <div class="ill">
+            <svg width="100%" height="150" viewBox="0 0 352 150" preserveAspectRatio="xMidYMid slice"><g stroke="#C9D6CC" stroke-width="10" fill="none"><path d="M-10 110 L120 60 L360 90"/><path d="M90 -10 L140 160"/><path d="M230 -10 L250 160"/></g><circle cx="176" cy="70" r="46" fill="#7D9D86" opacity=".25"/><circle cx="176" cy="70" r="26" fill="#7D9D86" opacity=".35"/><path d="M176 98s20-18 20-34a20 20 0 0 0-40 0c0 16 20 34 20 34z" fill="#355C4D"/><circle cx="176" cy="63" r="7" fill="#F8F7F2"/></svg>
+          </div>
+          <h3>Solar Tracker Setup</h3>
+          <p>Place your phone near the solar tracker and press the button below.</p>
+          <div class="btn"><svg width="22" height="22" viewBox="0 0 48 48"><g fill="none" stroke="#fff" stroke-width="4"><path d="M24 44s14-13 14-24a14 14 0 0 0-28 0c0 11 14 24 14 24z"/><circle cx="24" cy="20" r="5"/></g></svg>Get My Location</div>
+        </div>
+        <div class="res">
+          <div class="ok"><svg width="26" height="26" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#7D9D86"/><path d="M15 24l6 6 12-13" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>Location successfully saved</div>
+          <div class="tiles"><div class="tile"><small>Latitude</small><b>25.23° N</b></div><div class="tile"><small>Longitude</small><b>51.56° E</b></div></div>
+          <div class="acc">◎ Accuracy ± 10.3 m</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- B -->
+  <div class="col">
+    <h2><b>B</b>Map First</h2>
+    <div class="note">Like a navigation app: a map with a pulsing pin and a bottom sheet with the result.</div>
+    <div class="phone"><div class="screen"><div class="notch"></div>
+      <div class="b">
+        <svg class="map" width="408" height="510" viewBox="0 0 408 510" style="position:absolute;left:0;top:0">
+          <rect width="408" height="510" fill="#E4ECE6"/>
+          <g fill="#D3DED6"><rect x="20" y="120" width="120" height="90" rx="10"/><rect x="170" y="90" width="90" height="120" rx="10"/><rect x="290" y="130" width="100" height="80" rx="10"/><rect x="30" y="250" width="90" height="110" rx="10"/><rect x="250" y="250" width="140" height="100" rx="10"/><rect x="40" y="400" width="140" height="80" rx="10"/><rect x="230" y="390" width="150" height="90" rx="10"/></g>
+          <g stroke="#fff" stroke-width="16" fill="none" stroke-linecap="round"><path d="M-10 230 C120 220 260 240 420 225"/><path d="M150 -10 C160 150 140 330 170 520"/><path d="M-10 380 C140 370 280 380 420 372"/></g>
+          <path d="M230 -10 C230 120 220 200 215 230" stroke="#C9D6CC" stroke-width="8" fill="none"/>
+          <circle cx="200" cy="305" r="70" fill="#7D9D86" opacity=".18"/><circle cx="200" cy="305" r="40" fill="#7D9D86" opacity=".28"/>
+          <path d="M200 330s24-22 24-41a24 24 0 0 0-48 0c0 19 24 41 24 41z" fill="#355C4D"/><circle cx="200" cy="289" r="8" fill="#F8F7F2"/>
+        </svg>
+        <div class="top"><svg width="28" height="28" viewBox="0 0 48 48"><g fill="none" stroke="#355C4D" stroke-width="3.5" stroke-linecap="round"><circle cx="24" cy="24" r="8"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6"/></g></svg><div><b>Solar Tracker Setup</b><small>Place your phone near the solar tracker</small></div></div>
+        <div class="sheet">
+          <div class="grab"></div>
+          <div class="ok"><svg width="40" height="40" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#7D9D86"/><path d="M15 24l6 6 12-13" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Location saved</b><small>Successfully stored for this tracker</small></div></div>
+          <div class="coord">25.23° N, 51.56° E</div>
+          <div class="meta"><span class="chip">Lat 25.23</span><span class="chip">Long 51.56</span><span class="chip">± 10.3 m</span></div>
+          <div class="btn">Get My Location</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- C -->
+  <div class="col">
+    <h2><b>C</b>Dark Radar</h2>
+    <div class="note">Bold and techy: a round locate button with radar rings, readout in monospace.</div>
+    <div class="phone"><div class="screen"><div class="notch"></div>
+      <div class="c">
+        <div class="status" style="color:#F8F7F2"><span>9:41</span><span>●●● ▮</span></div>
+        <div class="title"><small>Solar Tracker</small><h3>Solar Tracker Setup</h3><p>Place your phone near the solar tracker and press the button below.</p></div>
+        <svg class="radar" width="380" height="380" viewBox="0 0 380 380"><g fill="none" stroke="#DDE8DF"><circle cx="190" cy="190" r="110" opacity=".35" stroke-width="2"/><circle cx="190" cy="190" r="150" opacity=".22" stroke-width="2"/><circle cx="190" cy="190" r="185" opacity=".12" stroke-width="2"/></g><path d="M190 190 L190 40 A150 150 0 0 1 320 115 Z" fill="#7D9D86" opacity=".25"/></svg>
+        <div class="btn"><svg width="40" height="40" viewBox="0 0 48 48"><g fill="none" stroke="#355C4D" stroke-width="3.5"><path d="M24 44s14-13 14-24a14 14 0 0 0-28 0c0 11 14 24 14 24z"/><circle cx="24" cy="20" r="5"/></g></svg>Get My<br>Location</div>
+        <div class="panel">
+          <span class="saved">✓ Location saved</span>
+          <div class="grid"><span>LAT</span><b>25.23° N</b><span>LONG</span><b>51.56° E</b><span>ACC</span><b>± 10.3 m</b></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</div>
+</body>
+</html>

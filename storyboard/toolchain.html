@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video Production Toolchain</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--sage:#7D9D86;--dark:#355C4D;--light:#DDE8DF;--cream:#F8F7F2;--char:#28332D;--line:#C9D6CC;--muted:#5E6E64}
+*{box-sizing:border-box}
+html,body{margin:0;background:#E4E8E4;color:var(--char);font-family:Inter,-apple-system,Helvetica,Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:A4 landscape;margin:0}
+.page{width:297mm;height:210mm;padding:10mm 13mm 12mm;background:var(--cream);position:relative;overflow:hidden;break-after:page}
+@media screen{.page{margin:18px auto;box-shadow:0 4px 18px rgba(40,51,45,.18)}}
+.wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:60}
+.wm span{font-size:150px;font-weight:800;letter-spacing:-2px;color:var(--dark);opacity:.05;transform:rotate(-22deg)}
+.footer{position:absolute;left:13mm;right:13mm;bottom:5mm;display:flex;justify-content:space-between;font-size:8px;color:var(--muted)}
+.footer b{color:var(--dark)}
+.eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+h1{font-size:28px;margin:3mm 0 2mm;color:var(--dark);letter-spacing:-.4px}
+h2{font-size:15px;margin:0 0 3mm;color:var(--dark)}
+.lead{font-size:11px;line-height:1.55;max-width:230mm}
+.pipe{display:flex;align-items:stretch;gap:0;margin:6mm 0 6mm}
+.pipe div{flex:1;background:#fff;border:1px solid var(--line);border-radius:7px;padding:9px 11px;font-size:9.6px;line-height:1.4;position:relative}
+.pipe div b{display:block;font-size:11px;color:var(--dark);margin-bottom:2px}
+.pipe div small{color:var(--muted);font-size:9px}
+.pipe i{flex:0 0 7mm;display:flex;align-items:center;justify-content:center;color:var(--sage);font-style:normal;font-size:16px;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:9.8px}
+th{text-align:left;font-size:8.6px;text-transform:uppercase;letter-spacing:.07em;color:var(--sage);padding:5px 7px;border-bottom:1.5px solid var(--line)}
+td{padding:6px 7px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+td:first-child{font-weight:700;color:var(--dark);white-space:nowrap}
+td:nth-child(2){font-weight:600;white-space:nowrap}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:9mm}
+.box{background:#fff;border:1px solid var(--line);border-radius:7px;padding:10px 12px;margin-bottom:4mm}
+.box h3{margin:0 0 5px;font-size:11.5px;color:var(--dark)}
+.box p,.box li{font-size:9.8px;line-height:1.5;margin:0}
+.box ul,.box ol{margin:0;padding-left:15px}
+.box li{margin-bottom:2px}
+pre,code{font-family:"JetBrains Mono",Menlo,monospace}
+pre{background:var(--char);color:#E8EEE9;border-radius:6px;padding:8px 10px;font-size:9px;line-height:1.5;margin:5px 0 0;white-space:pre}
+code{background:var(--light);color:var(--dark);padding:1px 4px;border-radius:3px;font-size:9px}
+.tree{font-size:9px}
+.tree .c{color:#9FB8A6}
+.spec{display:grid;grid-template-columns:repeat(5,1fr);gap:3mm;margin-top:5mm}
+.spec div{background:var(--dark);color:var(--cream);border-radius:7px;padding:8px 10px}
+.spec small{display:block;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--light);opacity:.85;margin-bottom:2px}
+.spec b{font-size:11px}
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="eyebrow">Rooftop Solar Assessment Video · Production toolchain</div>
+  <h1>How the video is made</h1>
+  <div class="lead">The video is built as <b>code-based motion graphics</b>. Every scene is written as a small program that places your images, screenshots and vector graphics on a 1920 × 1080 canvas and animates them frame by frame. A renderer then turns the frames into an MP4. Because everything is defined in code, replacing a placeholder, correcting a value or adjusting timing only means editing a file and re-rendering. Nothing has to be re-animated by hand.</div>
+
+  <div class="pipe">
+    <div><b>1 · Your materials</b>Device render, website screenshot, camera image, shading outputs, dashboard recording<br><small>prepared with FFmpeg</small></div><i>→</i>
+    <div><b>2 · Storyboard</b>Keyframe layouts in HTML/CSS, exported to PDF for approval<br><small>Google Chrome</small></div><i>→</i>
+    <div><b>3 · Animation</b>Scenes coded as React components in TypeScript<br><small>Remotion 4</small></div><i>→</i>
+    <div><b>4 · Live preview</b>Scrub the timeline frame by frame in the browser<br><small>Remotion Studio</small></div><i>→</i>
+    <div><b>5 · Render</b>Frames rendered in headless Chromium, encoded to MP4<br><small>FFmpeg · H.264</small></div>
+  </div>
+
+  <table>
+    <tr><th>Layer</th><th>Tool</th><th>Role in this project</th></tr>
+    <tr><td>Animation framework</td><td>Remotion 4.0</td><td>Open-source video framework. Each frame of the video is generated from React code, so timing is frame-accurate (30 fps) and motion uses consistent easing curves and springs.</td></tr>
+    <tr><td>Language</td><td>TypeScript + React 18</td><td>Each scene is a component (e.g. <code>SceneDevice</code>, <code>SceneLocation</code>), and shared parts such as title pills and the cursor are reused across scenes.</td></tr>
+    <tr><td>Graphics</td><td>SVG + CSS</td><td>Rooftop illustration, icons, arrows, spotlight masks, rings and data packets are drawn as resolution-independent vectors in your five-colour palette.</td></tr>
+    <tr><td>Your imagery</td><td>Original files</td><td>Your device render, website screenshot, camera and shading images are used unaltered; the animation crops, zooms and masks them. No stock or generic hardware images are used.</td></tr>
+    <tr><td>Typography</td><td>Inter (Google Fonts)</td><td>Clean sans-serif typeface for on-screen titles, under the SIL Open Font Licence (free for any use).</td></tr>
+    <tr><td>Rendering</td><td>Headless Chromium</td><td>Renders every frame exactly as designed, the same way on any machine.</td></tr>
+    <tr><td>Encoding</td><td>FFmpeg (H.264)</td><td>Encodes the frames into a standard MP4 (yuv420p) that plays in PowerPoint, Windows, macOS and browsers. Also used to extract frames from your dashboard recording.</td></tr>
+    <tr><td>Runtime</td><td>Node.js</td><td>Runs the project and the render command. Free on Windows, macOS and Linux.</td></tr>
+  </table>
+
+  <div class="spec">
+    <div><small>Resolution</small><b>1920 × 1080 · 16:9</b></div>
+    <div><small>Frame rate</small><b>30 fps</b></div>
+    <div><small>Codec</small><b>H.264 MP4 (yuv420p)</b></div>
+    <div><small>Audio</small><b>None</b></div>
+    <div><small>Size</small><b>≈ 4 MB per 10 s</b></div>
+  </div>
+  <div class="footer"><span><b>TutorBin</b> · Production toolchain · 6 Nov 2026</span><span>Page 1 / 2</span></div>
+</section>
+
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="eyebrow">Editable source files</div>
+  <h1>What you receive and how to edit it</h1>
+  <div class="cols" style="margin-top:4mm">
+    <div>
+      <div class="box">
+        <h3>Project structure</h3>
+<pre class="tree">preview/
+├─ public/                <span class="c"># your images (swap files here)</span>
+│  ├─ device_render.jpg
+│  └─ website_location.jpg
+├─ src/
+│  ├─ Root.tsx            <span class="c"># video settings: size, fps, length</span>
+│  ├─ theme.ts            <span class="c"># colour palette, font, easing</span>
+│  ├─ components.tsx      <span class="c"># title pill, cursor, image crop</span>
+│  ├─ SceneDevice.tsx     <span class="c"># Scene 1: device introduction</span>
+│  └─ SceneLocation.tsx   <span class="c"># Scene 2: location acquisition</span>
+├─ out/                   <span class="c"># rendered MP4 files</span>
+└─ package.json</pre>
+        <p style="margin-top:6px">Each new scene (3–9) is added as its own <code>Scene…tsx</code> file, so every part of the video can be edited on its own.</p>
+      </div>
+      <div class="box">
+        <h3>Why code-based animation suits this project</h3>
+        <ul>
+          <li><b>Accurate:</b> numbers and images come directly from your files, so no value is retyped or invented.</li>
+          <li><b>Easy revisions:</b> placeholders (final interface, irradiance data, extra captures) can be swapped later without redoing the animation.</li>
+          <li><b>Consistent:</b> one palette, font and motion style shared by all scenes.</li>
+          <li><b>Reproducible:</b> the same source always renders the same video, and it can be kept under version control (Git).</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="box">
+        <h3>Open, preview and render</h3>
+        <ol>
+          <li>Install <b>Node.js</b> (version 18 or newer) from nodejs.org.</li>
+          <li>Open a terminal in the <code>preview</code> folder and install the dependencies once:
+<pre>npm install</pre></li>
+          <li>Open the live editor (a browser timeline you can scrub):
+<pre>npm run studio</pre></li>
+          <li>Render the final MP4 into <code>out/</code>:
+<pre>npm run render</pre></li>
+        </ol>
+      </div>
+      <div class="box">
+        <h3>Common edits</h3>
+        <ul>
+          <li><b>Replace an image:</b> put the new file in <code>public/</code> with the same name and re-render.</li>
+          <li><b>Change on-screen text:</b> edit the text in the scene file (e.g. the title in <code>SceneDevice.tsx</code>).</li>
+          <li><b>Change colours:</b> edit the palette in <code>theme.ts</code>; it updates everywhere.</li>
+          <li><b>Adjust timing:</b> each animation is defined by frame numbers (30 frames = 1 second) in its scene file.</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Licensing</h3>
+        <p>Remotion is free for individuals, non-profits and companies of up to 3 people; larger companies need a paid company licence (see remotion.dev/license). Inter, React, Node.js and FFmpeg are free and open source. The finished MP4 can be used without restriction.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span><b>TutorBin</b> · Production toolchain · 6 Nov 2026</span><span>Page 2 / 2</span></div>
+</section>
+</body>
+</html>

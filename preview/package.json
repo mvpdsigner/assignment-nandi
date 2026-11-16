@@ -1,0 +1,22 @@
+{
+  "name": "rooftop-solar-preview",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts Preview out/Preview_10s_TutorBin.mp4 --codec h264 --crf 18",
+    "render:full": "remotion render src/index.ts FullVideo out/Rooftop_Solar_Assessment_75s.mp4 --codec h264 --crf 18",
+    "render:full-clean": "remotion render src/index.ts FullVideo out/Rooftop_Solar_Assessment_75s_clean.mp4 --codec h264 --crf 18 --props={\"watermark\":\"\"}",
+    "render:iso": "remotion render src/index.ts PreviewIso out/Preview_StyleC_10s_TutorBin.mp4 --codec h264 --crf 18"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.541",
+    "@remotion/google-fonts": "^4.0.541",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.541"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.31",
+    "typescript": "^7.0.2"
+  }
+}

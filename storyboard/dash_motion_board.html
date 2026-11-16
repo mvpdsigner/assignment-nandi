@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Dashboard Motion Board</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--sage:#7D9D86;--dark:#355C4D;--light:#DDE8DF;--cream:#F8F7F2;--char:#28332D;--line:#C9D6CC;--muted:#5E6E64}
+*{box-sizing:border-box}
+html,body{margin:0;background:#E4E8E4;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:1920px 1080px;margin:0}
+.page{width:1920px;height:1080px;position:relative;overflow:hidden;break-after:page;background:var(--cream);font-family:Inter,Helvetica,Arial,sans-serif;color:var(--char)}
+@media screen{.page{margin:0 auto 20px}}
+.wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:90}
+.wm span{font-size:300px;font-weight:800;color:var(--dark);opacity:.045;transform:rotate(-20deg)}
+.foot{position:absolute;left:70px;right:70px;bottom:26px;display:flex;justify-content:space-between;font-size:16px;color:var(--muted)}
+.foot b{color:var(--dark)}
+.hd{position:absolute;left:70px;top:40px;width:1060px}
+.hd small{font-size:18px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+.hd h1{margin:8px 0 0;font-size:46px;color:var(--dark);letter-spacing:-1px}
+.hd p{margin:10px 0 0;font-size:20px;line-height:1.45;color:var(--muted)}
+.cur{position:absolute;top:44px;right:70px;display:flex;gap:14px}
+.cur figure{margin:0}
+.cur img{height:128px;display:block;border-radius:8px;border:1px solid var(--line)}
+.cur figcaption{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:.08em;text-transform:uppercase}
+.mono{font-family:'JetBrains Mono',Menlo,monospace}
+.grid{position:absolute;left:220px;right:220px;top:212px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px 30px}
+.k img{width:100%;display:block;border-radius:12px;border:1px solid var(--line);box-shadow:0 10px 26px rgba(40,51,45,.12)}
+.k .t{display:flex;align-items:baseline;gap:12px;margin:10px 0 3px}
+.k .n{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:15px;background:var(--dark);color:var(--cream);border-radius:6px;padding:3px 8px}
+.k .ts{white-space:nowrap;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;color:var(--sage)}
+.k h3{margin:0;white-space:nowrap;font-size:20px;color:var(--dark)}
+.k p{margin:0;font-size:15px;line-height:1.4;color:var(--muted)}
+.hero{position:absolute;left:70px;top:200px;width:1240px}
+.hero img{width:100%;display:block;border-radius:14px;border:1px solid var(--line);box-shadow:0 18px 40px rgba(40,51,45,.16)}
+.notes{position:absolute;left:1350px;right:70px;top:200px}
+.note{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:16px}
+.note h4{margin:0 0 8px;font-size:18px;color:var(--dark)}
+.note p,.note li{font-size:15.5px;line-height:1.45;color:var(--muted);margin:0}
+.note ul{margin:0;padding-left:18px}
+.note.ask{background:var(--dark);border-color:var(--dark)}
+.note.ask h4{color:var(--cream)}.note.ask p{color:var(--light)}
+.sw{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px}
+</style></head><body>
+
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="hd">
+    <small>Section 7 · Final assessment</small>
+    <h1>Dashboard &amp; energy chart, rebuilt in motion</h1>
+    <p>Both screens are now built from scratch in the dark UI, not from screenshots, so every card, number and bar animates. The 7-second sequence replaces the static dashboard in Section 7.</p>
+  </div>
+  <div class="cur">
+    <figure><figcaption>Now · their screenshot</figcaption><img src="../assets/07_dashboard_report/frame_overview.jpg"></figure>
+    <figure><figcaption>Now · their chart image</figcaption><img src="../assets/07_dashboard_report/energy_by_panel_chart.jpg"></figure>
+  </div>
+  <div class="grid">
+    <div class="k"><img src="dash_motion/k12.jpg"><div class="t"><span class="n">1</span><span class="ts">0.0 – 0.7 s</span><h3>Windows rise in</h3></div><p>The app window and the chart card slide up. The title bar, tabs and heading follow one after another. The status reads <b>Pending</b>.</p></div>
+    <div class="k"><img src="dash_motion/k36.jpg"><div class="t"><span class="n">2</span><span class="ts">0.7 – 2.0 s</span><h3>Pending, then analysing</h3></div><p>The cards show "Pending assessment" with a shimmer, just like their real app. A scan line sweeps down and the chart gridlines draw across.</p></div>
+    <div class="k"><img src="dash_motion/k60.jpg"><div class="t"><span class="n">3</span><span class="ts">1.3 – 3.6 s</span><h3>Cards resolve, capacity bars grow</h3></div><p>Each card ticks off and its number counts up: location, panel, 10,354 kWh/yr, 23,747 QAR, 15.1 years, 93 %. The capacity bars grow from left to right.</p></div>
+    <div class="k"><img src="dash_motion/k92.jpg"><div class="t"><span class="n">4</span><span class="ts">2.1 – 4.0 s</span><h3>Losses appear</h3></div><p>The "with shade" bars grow in, then the "with shade + dust" bars, so the drop from capacity is easy to see. The status turns to <b>Assessment complete</b>.</p></div>
+    <div class="k"><img src="dash_motion/k140.jpg"><div class="t"><span class="n">5</span><span class="ts">4.0 – 5.0 s</span><h3>Spotlight on LONGi X10</h3></div><p>The other panels dim and the LONGi X10 485 bif bars get a frame. The <b>10,354</b> value lifts off the energy card and flies onto the chart.</p></div>
+    <div class="k"><img src="dash_motion/k200.jpg"><div class="t"><span class="n">6</span><span class="ts">5.0 – 7.0 s</span><h3>Value linked to its bar, hold</h3></div><p>A leader line ties the callout to the "with shade" bar, which shows 10,354 exactly. The full dashboard holds before the closing pull-back.</p></div>
+  </div>
+  <div class="foot"><span><b>Rooftop Solar Assessment</b> · Dashboard motion board</span><span>Preview: <span class="mono">Dashboard_Motion_7s_TutorBin.mp4</span></span></div>
+</section>
+
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="hd" style="width:1700px">
+    <small>Final frame · what's on screen and where it comes from</small>
+    <h1>Every value comes from the client</h1>
+  </div>
+  <div class="hero"><img src="dash_motion/hero.jpg"></div>
+  <div class="notes">
+    <div class="note"><h4>Overview cards</h4><p>Their app's layout: the same title, tabs and card order. The values come from their report: south-facing, 25° tilt, portrait; LONGi Hi-MO X10 485 W bifacial ×10, 4.85 kWp; 10,354 kWh/yr; 23,747 QAR; 15.1 years; ROI 93 % over 30 years. All are labelled as estimates.</p></div>
+    <div class="note"><h4>One card renamed</h4><p>Their app has an "Estimated Annual Savings (QAR/year)" card, but we never received that figure. It shows the <b>installation cost of 23,747 QAR</b> instead. If they send the annual savings, it can go back.</p></div>
+    <div class="note"><h4>Energy chart</h4><ul>
+      <li>Same 12 panels and 3 series as their chart, redrawn in the palette: <span class="sw" style="background:rgba(53,92,77,.18);border:1.5px solid #7D9D86"></span>capacity <span class="sw" style="background:#DDE8DF;border:1px solid #C9D6CC"></span>with shade <span class="sw" style="background:#9DBBA5"></span>with shade + dust.</li>
+      <li>The bar heights are traced from their chart image to within about ±30 kWh. The highlighted bar is their exact 10,354, which matches the "with shade" bar of LONGi X10 485 bif.</li></ul></div>
+    <div class="note ask"><h4>Optional ask for the client</h4><p>If they send the numbers behind the chart (a CSV or the Python output), the bars will be exact instead of traced.</p></div>
+  </div>
+  <div class="foot"><span><b>Rooftop Solar Assessment</b> · Dashboard motion board</span><span>Editable source: <span class="mono">preview/src/dash/DashMotion.tsx</span></span></div>
+</section>
+</body></html>

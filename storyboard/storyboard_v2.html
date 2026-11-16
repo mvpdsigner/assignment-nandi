@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solar Video Storyboard v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sage:#7D9D86; --dark:#355C4D; --light:#DDE8DF; --cream:#F8F7F2; --char:#28332D;
+  --line:#C9D6CC; --muted:#5E6E64; --flag:#C9820A; --flagbg:#FBF1DE;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#E4E8E4;color:var(--char);font-family:Inter,-apple-system,Helvetica,Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:A4 landscape;margin:0}
+.page{width:297mm;height:210mm;padding:9mm 12mm 11mm;background:var(--cream);position:relative;overflow:hidden;break-after:page}
+@media screen{.page{margin:18px auto;box-shadow:0 4px 18px rgba(40,51,45,.18)}}
+.wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:60}
+.wm span{font-size:150px;font-weight:800;letter-spacing:-2px;color:var(--dark);opacity:.055;transform:rotate(-22deg)}
+.footer{position:absolute;left:12mm;right:12mm;bottom:5mm;display:flex;justify-content:space-between;font-size:8px;color:var(--muted)}
+.footer b{color:var(--dark)}
+
+/* scene header */
+.sh{display:flex;align-items:center;gap:12px;border-bottom:1.5px solid var(--line);padding-bottom:7px}
+.sh .num{font-size:30px;font-weight:800;color:var(--sage);line-height:1}
+.sh h2{margin:0;font-size:19px;font-weight:700;color:var(--dark)}
+.sh .time{margin-left:auto;background:var(--dark);color:var(--cream);font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:99px;white-space:nowrap}
+.sh .ost{background:var(--light);color:var(--dark);font-size:10px;font-weight:600;padding:4px 10px;border-radius:99px;white-space:nowrap}
+.sh .ost i{font-style:normal;color:var(--muted);font-weight:500}
+
+/* keyframes */
+.frames{display:grid;grid-template-columns:repeat(3,1fr);gap:5mm;margin-top:8mm}
+.kf .hd{display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:var(--dark);margin-bottom:3px}
+.kf .hd span:last-child{color:var(--muted);font-weight:600}
+.frame{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:5px;border:1px solid var(--line);background:#fff}
+.fi{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;font-family:Inter,Helvetica,Arial,sans-serif}
+.kf p{margin:7px 0 0;font-size:11.6px;line-height:1.5;color:var(--char)}
+
+/* notes */
+.notes{display:grid;grid-template-columns:1.2fr 1fr 1.1fr;gap:7mm;margin-top:10mm;padding-top:7mm;border-top:1px solid var(--line)}
+.notes h4{margin:0 0 7px;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--sage)}
+.notes ol,.notes ul{margin:0;padding-left:15px;font-size:11.2px;line-height:1.55}
+.notes li{margin-bottom:3px}
+.flag{background:var(--flagbg);border-left:3px solid var(--flag);padding:7px 11px;border-radius:3px;margin-top:8px;font-size:11px;line-height:1.5}
+.flag:first-of-type{margin-top:0}
+.flag b{color:#8A5A06}
+.trans{margin-top:10px;font-size:11.2px;line-height:1.5;color:var(--muted)}
+.trans b{color:var(--dark)}
+
+/* in-frame primitives (1920x1080 space) */
+.a{position:absolute}
+.crop{position:absolute;overflow:hidden}
+.crop img{position:absolute;max-width:none}
+.tag{position:absolute;left:56px;top:46px;display:flex;align-items:center;gap:16px;background:var(--dark);color:var(--cream);font-size:34px;font-weight:700;padding:10px 30px 10px 10px;border-radius:999px;box-shadow:0 8px 24px rgba(40,51,45,.25);z-index:5}
+.tag b{background:var(--cream);color:var(--dark);border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-size:26px}
+.lbl{position:absolute;background:#fff;color:var(--dark);font-size:30px;font-weight:700;padding:12px 22px;border-radius:16px;box-shadow:0 8px 24px rgba(40,51,45,.22);white-space:nowrap;line-height:1.2}
+.lbl small{display:block;font-size:24px;font-weight:500;color:var(--muted)}
+.dp{position:absolute;background:var(--sage);color:#fff;font-size:28px;font-weight:700;padding:10px 20px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 18px rgba(40,51,45,.25)}
+.dp.dk{background:var(--dark)}
+.photo{position:absolute;background:#fff;padding:12px 12px 46px;border-radius:10px;box-shadow:0 16px 40px rgba(40,51,45,.3)}
+.photo img{display:block;width:100%}
+.photo span{position:absolute;left:0;right:0;bottom:8px;text-align:center;font-size:24px;font-weight:600;color:var(--dark)}
+.card{position:absolute;background:#fff;border-radius:28px;box-shadow:0 14px 40px rgba(40,51,45,.16)}
+.win{position:absolute;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 18px 50px rgba(40,51,45,.22)}
+.win .bar{height:60px;background:var(--light);display:flex;align-items:center;gap:12px;padding:0 24px;font-size:28px;font-weight:600;color:var(--dark)}
+.win .bar i{width:18px;height:18px;border-radius:50%;background:var(--sage);display:inline-block}
+.review{position:absolute;border:6px dashed var(--flag);border-radius:18px}
+.review span{position:absolute;top:-56px;left:0;background:var(--flag);color:#fff;font-size:26px;font-weight:700;padding:6px 14px;border-radius:8px;white-space:nowrap}
+.ph{position:absolute;border:4px dashed var(--flag);border-radius:12px;background:var(--flagbg);color:#8A5A06;font-weight:700;display:flex;align-items:center;justify-content:center}
+/* data tray: persistent, bottom-right */
+.tray{position:absolute;right:50px;bottom:40px;display:flex;gap:14px;padding:14px;background:rgba(248,247,242,.95);border:3px solid var(--line);border-radius:26px;box-shadow:0 10px 30px rgba(40,51,45,.18);z-index:4}
+.slot{width:152px;height:100px;border:3px dashed var(--line);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:20px;font-weight:600;color:var(--muted)}
+.slot svg{width:40px;height:40px}
+.slot.on{border-style:solid;border-color:var(--dark);background:var(--dark);color:var(--cream)}
+.slot.new{box-shadow:0 0 0 8px rgba(125,157,134,.55)}
+/* route bar for the transfer scene */
+.route{position:absolute;left:56px;bottom:52px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.95);border-radius:999px;padding:14px 30px;font-size:24px;font-weight:600;color:#9AAAA0;box-shadow:0 8px 24px rgba(40,51,45,.15);z-index:4}
+.route i{width:16px;height:16px;border-radius:50%;background:#C9D6CC;display:inline-block}
+.route .d{color:var(--sage)} .route .d i{background:var(--sage)}
+.route .on{color:var(--dark);font-weight:800} .route .on i{background:var(--dark);box-shadow:0 0 0 6px rgba(53,92,77,.25)}
+.route em{font-style:normal;color:#C9D6CC}
+
+/* cover */
+.cover h1{font-size:30px;line-height:1.12;margin:4mm 0 2mm;color:var(--dark);letter-spacing:-.5px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+.lead{font-size:11.2px;line-height:1.5;max-width:255mm;color:var(--char)}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm;margin-top:4mm}
+.meta div{background:#fff;border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.meta small{display:block;font-size:8.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--sage);font-weight:700;margin-bottom:2px}
+.meta b{font-size:11.5px;color:var(--dark)}
+.tl{display:flex;height:40px;margin-top:4mm;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.tl div{display:flex;flex-direction:column;justify-content:center;padding:0 7px;font-size:8.5px;line-height:1.25;color:var(--cream);border-right:1px solid rgba(248,247,242,.35)}
+.tl div b{font-size:10px}
+.tlaxis{position:relative;height:12px;font-size:8px;color:var(--muted);margin-top:2px}
+.tlaxis span{position:absolute;transform:translateX(-50%)}
+.map{margin-top:3mm;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 10px 4px}
+.map h3,.cols h3{font-size:11px;margin:0 0 3px;color:var(--dark)}
+.cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7mm;margin-top:4mm}
+.cols ul{margin:0;padding-left:14px;font-size:9.3px;line-height:1.48}
+.sw{display:flex;gap:2mm;margin-top:3px}
+.sw i{flex:1;height:16px;border-radius:3px;border:1px solid var(--line)}
+
+/* last page */
+table{width:100%;border-collapse:collapse;font-size:10.4px}
+th{text-align:left;font-size:8.3px;text-transform:uppercase;letter-spacing:.06em;color:var(--sage);padding:4px 6px;border-bottom:1.5px solid var(--line)}
+td{padding:6px 6px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.38}
+td.ok{color:var(--dark);font-weight:700}
+td.need{color:#8A5A06;font-weight:700}
+</style>
+</head>
+<body>
+
+<!-- reusable icons -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-cam" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="5" y="12" width="38" height="28" rx="6"/><circle cx="24" cy="26" r="8"/><path d="M17 12l3-5h8l3 5"/></g></symbol>
+    <symbol id="i-tower" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M24 20L15 44M24 20l9 24M18 36h12M20 29h8"/><circle cx="24" cy="17" r="3"/><path d="M15 10a12 12 0 0 0 0 14M33 10a12 12 0 0 1 0 14M10 6a18 18 0 0 0 0 22M38 6a18 18 0 0 1 0 22"/></g></symbol>
+    <symbol id="i-cloud" viewBox="0 0 48 48"><path d="M14 36h22a8 8 0 0 0 0-16 11 11 0 0 0-21-2A9 9 0 0 0 14 36z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+    <symbol id="i-server" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3"><rect x="8" y="7" width="32" height="10" rx="3"/><rect x="8" y="19" width="32" height="10" rx="3"/><rect x="8" y="31" width="32" height="10" rx="3"/></g><g fill="currentColor"><circle cx="14" cy="12" r="2"/><circle cx="14" cy="24" r="2"/><circle cx="14" cy="36" r="2"/></g></symbol>
+    <symbol id="i-mon" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="5" y="8" width="38" height="26" rx="4"/><path d="M18 42h12M24 34v8"/></g></symbol>
+    <symbol id="i-pin" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3"><path d="M24 44s14-13 14-24a14 14 0 0 0-28 0c0 11 14 24 14 24z"/><circle cx="24" cy="20" r="5"/></g></symbol>
+    <symbol id="i-sun" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="24" r="8"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l4 4M38 10l-4 4M14 34l-4 4"/></g></symbol>
+    <symbol id="i-therm" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3"><path d="M20 28V9a4 4 0 0 1 8 0v19a8 8 0 1 1-8 0z"/><path d="M24 16v15"/></g></symbol>
+    <symbol id="i-grid" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3"><rect x="6" y="6" width="36" height="36" rx="4"/><path d="M18 6v36M30 6v36M6 18h36M6 30h36"/></g></symbol>
+    <symbol id="i-wind" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 18h24a6 6 0 1 0-6-6M6 26h32a6 6 0 1 1-6 6M6 34h14"/></g></symbol>
+    <symbol id="i-clock" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="24" r="17"/><path d="M24 14v10l7 5"/></g></symbol>
+    <symbol id="i-folder" viewBox="0 0 48 48"><path d="M5 12a3 3 0 0 1 3-3h11l4 5h17a3 3 0 0 1 3 3v20a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z" fill="currentColor"/></symbol>
+    <symbol id="i-code" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14L7 24l10 10M31 14l10 10-10 10M27 10l-6 28"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="currentColor"/><path d="M15 24l6 6 12-13" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cursor" viewBox="0 0 48 48"><path d="M8 4l30 18-13 3-6 13z" fill="#28332D" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></symbol>
+    <!-- LilyGo board (ESP32 + SIM), drawn in palette -->
+    <symbol id="g-lilygo" viewBox="0 0 240 150">
+      <rect x="205" y="0" width="14" height="62" rx="7" fill="#28332D"/>
+      <rect x="4" y="44" width="232" height="102" rx="10" fill="#355C4D" stroke="#28332D" stroke-width="4"/>
+      <g fill="#DDE8DF"><circle cx="20" cy="56" r="4"/><circle cx="36" cy="56" r="4"/><circle cx="52" cy="56" r="4"/><circle cx="68" cy="56" r="4"/><circle cx="84" cy="56" r="4"/><circle cx="20" cy="134" r="4"/><circle cx="36" cy="134" r="4"/><circle cx="52" cy="134" r="4"/><circle cx="68" cy="134" r="4"/><circle cx="84" cy="134" r="4"/></g>
+      <rect x="18" y="70" width="70" height="52" rx="4" fill="#C9D6CC"/><text x="53" y="102" font-size="15" font-weight="700" fill="#355C4D" text-anchor="middle" font-family="Inter,Arial">ESP32</text>
+      <rect x="104" y="64" width="78" height="64" rx="6" fill="#F8F7F2" stroke="#7D9D86" stroke-width="3"/><text x="143" y="102" font-size="15" font-weight="700" fill="#355C4D" text-anchor="middle" font-family="Inter,Arial">SIM</text>
+      <rect x="194" y="76" width="30" height="40" rx="3" fill="#7D9D86"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ COVER ============ -->
+<section class="page cover">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="eyebrow">Video storyboard · v2 · revised from your feedback</div>
+  <h1>IoT-Based Residential Rooftop Solar Panel Placement Assessment</h1>
+  <div class="lead">Version 2 follows your 7-part outline and replaces the "slide" feel with <b>one continuous camera move through a single 2D world</b>. The camera never cuts. It follows the data: the photo leaves the camera and travels through every component into Python, and the sensor readings flow to the ESP32 and on to Blynk. A small <b>data tray</b> in the corner collects each result (location, shading, irradiance, environment) and empties into the final dashboard, so the ending ties the whole system together.</div>
+
+  <div class="meta">
+    <div><small>Duration</small><b>75 s · 7 sections</b></div>
+    <div><small>Format</small><b>1920 × 1080 · 16:9 · 30 fps</b></div>
+    <div><small>Delivery</small><b>MP4 (H.264), PowerPoint-ready</b></div>
+    <div><small>Audio</small><b>None (no narration / music)</b></div>
+  </div>
+
+  <div class="tl">
+    <div style="flex:8;background:#355C4D"><b>1</b>Device</div>
+    <div style="flex:9;background:#4A6F5F"><b>2</b>Get location</div>
+    <div style="flex:6;background:#5E8370"><b>3</b>Capture</div>
+    <div style="flex:12;background:#7D9D86"><b>4</b>Image transfer</div>
+    <div style="flex:11;background:#6A8C75"><b>5</b>Shading analysis</div>
+    <div style="flex:14;background:#557A66"><b>6</b>Sensors &amp; Blynk</div>
+    <div style="flex:15;background:#28332D"><b>7</b>Final assessment</div>
+  </div>
+  <div class="tlaxis"><span style="left:0;transform:none">0 s</span><span style="left:10.67%">8</span><span style="left:22.67%">17</span><span style="left:30.67%">23</span><span style="left:46.67%">35</span><span style="left:61.33%">46</span><span style="left:80%">60</span><span style="right:0;transform:none">75 s</span></div>
+
+  <div class="map">
+    <h3>The camera path: one world, one continuous move</h3>
+    <svg viewBox="0 0 1000 250" width="100%" style="display:block">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#355C4D"/></marker></defs>
+      <rect x="0" y="0" width="1000" height="250" fill="#F8F7F2" rx="6"/>
+      <!-- camera path (drawn first, under stations) -->
+      <g fill="none" stroke="#355C4D" stroke-width="2.4" stroke-dasharray="6 6" marker-end="url(#ar)">
+        <path d="M252 84 C272 62 282 56 300 58"/>
+        <path d="M304 120 C296 146 284 150 258 148"/>
+        <path d="M258 178 C330 186 380 150 410 124"/>
+        <path d="M448 98 C470 70 490 52 506 44"/>
+        <path d="M556 38 H588"/><path d="M646 38 H676"/><path d="M724 38 H754"/>
+        <path d="M800 114 C700 250 320 250 214 214"/>
+        <path d="M258 198 C380 196 470 182 530 172"/>
+        <path d="M596 170 C680 172 740 176 792 178"/>
+      </g>
+      <!-- stations -->
+      <image href="../assets/_superseded/old_device_render/device_render_v1.jpg" x="20" y="72" width="234" height="132" preserveAspectRatio="xMidYMid slice"/>
+      <rect x="20" y="72" width="234" height="132" fill="none" stroke="#C9D6CC" stroke-width="2"/>
+      <text x="137" y="222" font-size="11" font-weight="700" fill="#355C4D" text-anchor="middle">Device (1 · 3 · 6)</text>
+      <rect x="302" y="16" width="64" height="100" rx="9" fill="#28332D"/><image href="../assets/02_location/website_location.jpg" x="306" y="22" width="56" height="88" preserveAspectRatio="xMidYMin slice"/>
+      <text x="334" y="132" font-size="11" font-weight="700" fill="#355C4D" text-anchor="middle">Website (2)</text>
+      <svg x="406" y="88" width="56" height="35"><use href="#g-lilygo"/></svg><text x="434" y="138" font-size="10" font-weight="600" fill="#5E6E64" text-anchor="middle">LilyGo</text>
+      <g color="#355C4D"><svg x="508" y="16" width="44" height="44"><use href="#i-tower"/></svg><svg x="592" y="14" width="52" height="48"><use href="#i-cloud"/></svg><svg x="678" y="16" width="44" height="44"><use href="#i-server"/></svg></g>
+      <text x="530" y="74" font-size="10" font-weight="600" fill="#5E6E64" text-anchor="middle">Cellular</text><text x="618" y="74" font-size="10" font-weight="600" fill="#5E6E64" text-anchor="middle">ngrok</text><text x="700" y="74" font-size="10" font-weight="600" fill="#5E6E64" text-anchor="middle">Flask</text>
+      <rect x="758" y="8" width="150" height="100" rx="6" fill="#28332D"/><image href="../assets/05_shading/stage3_assessment_orange.jpg" x="764" y="14" width="138" height="88" preserveAspectRatio="xMidYMid slice"/>
+      <text x="920" y="52" font-size="11" font-weight="700" fill="#355C4D">Desktop</text><text x="920" y="66" font-size="11" font-weight="700" fill="#355C4D">+ Python</text><text x="920" y="80" font-size="11" font-weight="700" fill="#355C4D">(4 · 5)</text>
+      <rect x="538" y="136" width="52" height="72" rx="8" fill="#28332D"/><rect x="542" y="142" width="44" height="60" rx="3" fill="#DDE8DF"/><g fill="#7D9D86"><rect x="546" y="148" width="17" height="14" rx="2"/><rect x="566" y="148" width="17" height="14" rx="2"/><rect x="546" y="166" width="17" height="14" rx="2"/><rect x="566" y="166" width="17" height="14" rx="2"/><rect x="546" y="184" width="37" height="12" rx="2"/></g>
+      <text x="564" y="128" font-size="11" font-weight="700" fill="#355C4D" text-anchor="middle">Blynk (6)</text>
+      <image href="../assets/07_dashboard_report/frame_overview.jpg" x="798" y="136" width="170" height="96" preserveAspectRatio="xMidYMid slice"/><rect x="798" y="136" width="170" height="96" fill="none" stroke="#C9D6CC" stroke-width="2"/>
+      <text x="883" y="246" font-size="11" font-weight="700" fill="#355C4D" text-anchor="middle">Dashboard + report (7)</text>
+      <g font-size="12" font-weight="800" fill="#fff" text-anchor="middle">
+        <circle cx="34" cy="86" r="12" fill="#355C4D"/><text x="34" y="90">1</text>
+        <circle cx="366" cy="18" r="12" fill="#355C4D"/><text x="366" y="22">2</text>
+        <circle cx="160" cy="86" r="12" fill="#355C4D"/><text x="160" y="90">3</text>
+        <circle cx="462" cy="88" r="12" fill="#355C4D"/><text x="462" y="92">4</text>
+        <circle cx="908" cy="10" r="12" fill="#355C4D"/><text x="908" y="14">5</text>
+        <circle cx="34" cy="190" r="12" fill="#355C4D"/><text x="34" y="194">6</text>
+        <circle cx="968" cy="138" r="12" fill="#355C4D"/><text x="968" y="142">7</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="cols">
+    <div>
+      <h3>Motion style</h3>
+      <ul>
+        <li>No hard cuts or fade-to-slide. Each section ends where the next one begins, and the camera pans or pushes between them.</li>
+        <li>Data is always a visible object: the photo, location pin and reading pills physically travel.</li>
+        <li>Only a small section tag (top left) and short labels next to objects. No full-screen titles between sections.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Accuracy</h3>
+      <ul>
+        <li>Only your own images, screenshots and outputs are used. The rooftop photo is the same file from capture through to shading.</li>
+        <li>No values are invented. Missing figures show as amber placeholders until you send them.</li>
+        <li>Device, LilyGo, tower, ngrok and Flask are drawn as simple icons in your palette.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>How to review</h3>
+      <ul>
+        <li>Each section page shows keyframes <b>A → B → C</b>. Refer to them by code, e.g. "4B: slower".</li>
+        <li><span style="color:#8A5A06;font-weight:700">Amber notes</span> mark what we still need from you. They never appear in the video.</li>
+        <li>Palette as specified:</li>
+      </ul>
+      <div class="sw"><i style="background:#7D9D86"></i><i style="background:#355C4D"></i><i style="background:#DDE8DF"></i><i style="background:#F8F7F2"></i><i style="background:#28332D"></i></div>
+    </div>
+  </div>
+  <div class="footer"><span><b>TutorBin</b> · Storyboard v2 for approval · 7 Nov 2026</span><span>Page 1 / 9</span></div>
+</section>
+
+<!-- ============ 1 DEVICE ============ -->
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="sh"><span class="num">01</span><h2>Device Introduction</h2><span class="ost"><i>Tag:</i> 1 · The device</span><span class="time">0:00 – 0:08</span></div>
+  <div class="frames">
+    <div class="kf"><div class="hd"><span>1A</span><span>0.0 – 1.5 s</span></div>
+      <div class="frame"><div class="fi">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="0,0,1672,941" style="left:0;top:0;width:1920px;height:1080px"></div>
+        <div class="a" style="inset:0;background:rgba(40,51,45,.68)"></div>
+        <div class="a" style="left:0;right:0;top:360px;text-align:center;color:#F8F7F2">
+          <div style="font-size:30px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#DDE8DF">IoT-Based Residential</div>
+          <div style="font-size:84px;font-weight:800;letter-spacing:-1.5px;margin-top:10px">Rooftop Solar Assessment</div>
+          <div style="width:180px;height:8px;background:#7D9D86;border-radius:4px;margin:34px auto 0"></div>
+        </div>
+      </div></div>
+      <p>Opens straight on your complete setup, dimmed, with the project title. The title lifts away as the image brightens. No illustrated rooftop: the real device is the first thing seen.</p>
+    </div>
+    <div class="kf"><div class="hd"><span>1B</span><span>1.5 – 6.5 s</span></div>
+      <div class="frame"><div class="fi">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="0,0,1672,941" style="left:0;top:0;width:1920px;height:1080px"></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080">
+          <defs><mask id="m1b"><rect width="1920" height="1080" fill="#fff"/><rect x="960" y="505" width="370" height="310" rx="30" fill="#000"/></mask></defs>
+          <rect width="1920" height="1080" fill="#28332D" opacity=".6" mask="url(#m1b)"/>
+          <rect x="960" y="505" width="370" height="310" rx="30" fill="none" stroke="#DDE8DF" stroke-width="8"/>
+          <path d="M630 730 C700 520 820 380 900 300 C1000 420 1080 560 1140 650 C1300 480 1450 300 1556 200 C1600 320 1580 420 1550 520" fill="none" stroke="#DDE8DF" stroke-width="6" stroke-dasharray="16 14" opacity=".9"/>
+          <g font-size="34" font-weight="800" text-anchor="middle" font-family="Inter,Arial">
+            <circle cx="630" cy="730" r="30" fill="#7D9D86"/><text x="630" y="742" fill="#fff">1</text>
+            <circle cx="900" cy="300" r="30" fill="#7D9D86"/><text x="900" y="312" fill="#fff">2</text>
+            <circle cx="1140" cy="650" r="34" fill="#F8F7F2"/><text x="1140" y="662" fill="#355C4D">3</text>
+            <circle cx="1556" cy="200" r="30" fill="#355C4D" stroke="#DDE8DF" stroke-width="4"/><text x="1556" y="212" fill="#DDE8DF">4</text>
+            <circle cx="1550" cy="520" r="30" fill="#355C4D" stroke="#DDE8DF" stroke-width="4"/><text x="1550" y="532" fill="#DDE8DF">5</text>
+          </g>
+        </svg>
+        <div class="tag"><b>1</b>The device</div>
+      </div></div>
+      <p>The camera glides left to right along the setup. A spotlight stops on each part for ~1 s and its existing callout lights up: <b>1</b> electronics enclosure, <b>2</b> solar tracker + sensor head, <b>3</b> battery + fan (shown), <b>4</b> wind sensor, <b>5</b> solar panel.</p>
+    </div>
+    <div class="kf"><div class="hd"><span>1C</span><span>6.5 – 8.0 s</span></div>
+      <div class="frame"><div class="fi" style="background:#DDE8DF">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="0,0,1672,941" style="left:-820px;top:0;width:1920px;height:1080px"></div>
+        <div class="a" style="left:1360px;top:120px;width:700px;height:880px;background:#28332D;border-radius:56px;box-shadow:-20px 30px 70px rgba(40,51,45,.3)"></div>
+        <div class="crop" data-src="../assets/02_location/website_location.jpg" data-nat="1290,1361" data-box="0,0,1290,1361" style="left:1382px;top:142px;width:800px;height:836px;border-radius:36px 0 0 36px"></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080"><g stroke="#355C4D" stroke-width="7" stroke-linecap="round" opacity=".55"><path d="M1240 380h-200M1260 520h-280M1240 660h-200"/></g></svg>
+        <div class="tag"><b>1</b>The device</div>
+      </div></div>
+      <p>The spotlight releases and the camera keeps panning right, past the solar panel. A phone showing your website slides into the same world, so section 2 begins without a cut.</p>
+    </div>
+  </div>
+  <div class="notes">
+    <div><h4>Motion</h4><ol>
+      <li>0–1.5 s: title over the dimmed render; the dim fades out and the camera starts a slow drift.</li>
+      <li>1.5–6.5 s: one smooth left-to-right pan. The spotlight slides between the five stops along the dotted path (eased, never jumping).</li>
+      <li>6.5–8 s: pan continues right; the phone enters from the right edge with a slight parallax.</li>
+    </ol></div>
+    <div><h4>Assets used</h4><ul>
+      <li>Device render: 01_device/device_render.jpg</li>
+      <li>Website screenshot (entering): 02_location/website_location.jpg</li>
+    </ul>
+    <div class="trans"><b>Hand-off:</b> the pan never stops; the device stays at the left edge of the next shot so the audience knows the phone belongs to the same system.</div></div>
+    <div><h4>Notes</h4>
+      <div class="flag"><b>Optional:</b> the render has callout labels baked in, so the spotlight reveals them. A <b>clean render without labels</b> would let us animate our own labels and move parts individually (e.g. spin the wind-sensor cups).</div>
+    </div>
+  </div>
+  <div class="footer"><span><b>TutorBin</b> · Storyboard v2 for approval</span><span>Page 2 / 9</span></div>
+</section>
+
+<!-- ============ 2 LOCATION ============ -->
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="sh"><span class="num">02</span><h2>Get Location (Website)</h2><span class="ost"><i>Tag:</i> 2 · Get location</span><span class="time">0:08 – 0:17</span></div>
+  <div class="frames">
+    <div class="kf"><div class="hd"><span>2A</span><span>8 – 10.5 s</span></div>
+      <div class="frame"><div class="fi" style="background:#DDE8DF">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="0,0,1672,941" style="left:-1480px;top:0;width:1920px;height:1080px;opacity:.55"></div>
+        <div class="a" style="left:512px;top:68px;width:897px;height:944px;background:#28332D;border-radius:56px;box-shadow:0 30px 70px rgba(40,51,45,.3)"></div>
+        <img class="a" src="../assets/02_location/website_location.jpg" style="left:534px;top:90px;width:853px;height:900px;border-radius:36px">
+        <div class="a" style="left:580px;top:612px;width:761px;height:345px;background:#fff;border-radius:0 0 24px 24px"></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080"><path d="M1600 880 C1450 780 1220 640 1040 560" fill="none" stroke="#355C4D" stroke-width="6" stroke-dasharray="4 16" stroke-linecap="round"/></svg>
+        <svg class="a" style="left:1590px;top:870px" width="90" height="90"><use href="#i-cursor"/></svg>
+        <div class="tag"><b>2</b>Get location</div>
+      </div></div>
+      <p>The camera settles on the phone (the panel edge of the device is still visible at left). The result area is empty; a cursor glides to <b>Get My Location</b>.</p>
+    </div>
+    <div class="kf"><div class="hd"><span>2B</span><span>10.5 – 13.5 s</span></div>
+      <div class="frame"><div class="fi" style="background:#DDE8DF">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="0,0,1672,941" style="left:-1480px;top:0;width:1920px;height:1080px;opacity:.55"></div>
+        <div class="a" style="left:512px;top:68px;width:897px;height:944px;background:#28332D;border-radius:56px;box-shadow:0 30px 70px rgba(40,51,45,.3)"></div>
+        <img class="a" src="../assets/02_location/website_location.jpg" style="left:534px;top:90px;width:853px;height:900px;border-radius:36px">
+        <div class="a" style="left:630px;top:482px;width:661px;height:102px;background:#28332D;opacity:.25;border-radius:15px"></div>
+        <div class="a" style="left:1010px;top:720px;width:331px;height:85px;background:#fff"></div>
+        <div class="a" style="left:580px;top:805px;width:761px;height:152px;background:#fff;border-radius:0 0 24px 24px"></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080">
+          <circle cx="1000" cy="545" r="50" fill="none" stroke="#F8F7F2" stroke-width="6" opacity=".9"/>
+          <circle cx="1000" cy="545" r="88" fill="none" stroke="#F8F7F2" stroke-width="4" opacity=".45"/>
+          <rect x="1006" y="735" width="8" height="56" fill="#355C4D"/>
+        </svg>
+        <svg class="a" style="left:992px;top:536px" width="90" height="90"><use href="#i-cursor"/></svg>
+        <div class="tag"><b>2</b>Get location</div>
+      </div></div>
+      <p>Click: the button dips with a ripple, a short spinner, then "Location successfully saved!" and the latitude, longitude and accuracy <b>type in line by line</b> (latitude mid-typing shown).</p>
+    </div>
+    <div class="kf"><div class="hd"><span>2C</span><span>13.5 – 17 s</span></div>
+      <div class="frame"><div class="fi" style="background:#DDE8DF">
+        <div class="a" style="left:252px;top:68px;width:897px;height:944px;background:#28332D;border-radius:56px;box-shadow:0 30px 70px rgba(40,51,45,.3)"></div>
+        <img class="a" src="../assets/02_location/website_location.jpg" style="left:274px;top:90px;width:853px;height:900px;border-radius:36px">
+        <div class="card" style="left:1230px;top:170px;width:560px;height:330px;padding:38px;color:#355C4D">
+          <div style="display:flex;align-items:center;gap:18px"><svg width="66" height="66" style="color:#355C4D"><use href="#i-pin"/></svg><div style="font-size:30px;font-weight:600;color:#5E6E64">Site location</div>
+          <svg width="52" height="52" style="color:#7D9D86;margin-left:auto"><use href="#i-check"/></svg></div>
+          <div style="font-size:42px;font-weight:700;margin-top:18px">25.2324° N, 51.5643° E</div>
+          <div style="font-size:28px;color:#5E6E64;margin-top:8px">± 10.3 m · saved</div>
+        </div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080">
+          <path d="M1500 505 C1520 640 1360 760 1290 900" fill="none" stroke="#355C4D" stroke-width="6" stroke-dasharray="4 16" stroke-linecap="round"/>
+          <circle cx="1440" cy="700" r="44" fill="#355C4D"/><svg x="1412" y="672" width="56" height="56" style="color:#F8F7F2"><use href="#i-pin"/></svg>
+        </svg>
+        <div class="tray"><div class="slot on new"><svg><use href="#i-pin"/></svg>Location</div><div class="slot"><svg><use href="#i-grid"/></svg>Shading</div><div class="slot"><svg><use href="#i-sun"/></svg>Irradiance</div><div class="slot"><svg><use href="#i-therm"/></svg>Environment</div></div>
+        <div class="tag"><b>2</b>Get location</div>
+      </div></div>
+      <p>The phone slides left and a location card pops out with a "saved" tick. The card folds into a <b>pin token</b> that drops into the new <b>data tray</b> (first slot fills). The camera then pans back left towards the device.</p>
+    </div>
+  </div>
+  <div class="notes">
+    <div><h4>Motion</h4><ol>
+      <li>Cursor eases to the button; press scale 0.97 + ripple.</li>
+      <li>Spinner ~0.8 s; result lines type in one after another.</li>
+      <li>Card springs out; after a beat it shrinks into the pin and arcs into the tray.</li>
+      <li>The tray stays on screen for the rest of the video, filling as each result is produced.</li>
+    </ol></div>
+    <div><h4>Assets used</h4><ul>
+      <li>Website screenshot: real coordinates 25.23244, 51.56429, accuracy 10.3 m</li>
+    </ul>
+    <div class="trans"><b>Hand-off:</b> the camera whip-pans back left along the same world and pushes into the sensor head on the tracker.</div></div>
+    <div><h4>Notes</h4>
+      <ul><li>The phone is shown as the source of the location, so no GPS module appears on the device.</li></ul>
+      <div class="flag"><b>Check:</b> show the coordinates in full, or rounded (e.g. 25.23° N, 51.56° E) for privacy?</div>
+    </div>
+  </div>
+  <div class="footer"><span><b>TutorBin</b> · Storyboard v2 for approval</span><span>Page 3 / 9</span></div>
+</section>
+
+<!-- ============ 3 CAPTURE ============ -->
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="sh"><span class="num">03</span><h2>Image Capture (ESP32-CAM)</h2><span class="ost"><i>Tag:</i> 3 · Capture rooftop image</span><span class="time">0:17 – 0:23</span></div>
+  <div class="frames">
+    <div class="kf"><div class="hd"><span>3A</span><span>17 – 19 s</span></div>
+      <div class="frame"><div class="fi">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="560,130,400,225" style="left:0;top:0;width:1920px;height:1080px"></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080">
+          <g fill="none" stroke="#F8F7F2" stroke-width="10" stroke-linecap="round"><path d="M1170 330h-50v50M1422 330h50v50M1170 582h-50v-50M1422 582h50v-50"/></g>
+          <circle cx="1296" cy="456" r="10" fill="#C0392B"/>
+        </svg>
+        <div class="lbl" style="left:1520px;top:620px">ESP32-CAM<small>sensor head</small></div>
+        <div class="tray"><div class="slot on"><svg><use href="#i-pin"/></svg>Location</div><div class="slot"><svg><use href="#i-grid"/></svg>Shading</div><div class="slot"><svg><use href="#i-sun"/></svg>Irradiance</div><div class="slot"><svg><use href="#i-therm"/></svg>Environment</div></div>
+        <div class="tag"><b>3</b>Capture rooftop image</div>
+      </div></div>
+      <p>The camera arrives on the sensor head and pushes into the ESP32-CAM lens. Viewfinder brackets close in around the lens; a small red "recording" dot blinks.</p>
+    </div>
+    <div class="kf"><div class="hd"><span>3B</span><span>19 – 19.6 s</span></div>
+      <div class="frame"><div class="fi">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="560,130,400,225" style="left:0;top:0;width:1920px;height:1080px"></div>
+        <div class="a" style="inset:0;background:radial-gradient(circle at 1296px 456px,#fff 0,#fff 150px,rgba(255,255,255,.85) 260px,rgba(255,255,255,.35) 620px,rgba(255,255,255,.15) 1100px)"></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080"><g stroke="#F8F7F2" stroke-width="14" stroke-linecap="round"><path d="M1296 200v-120M1296 712v120M1040 456H920M1552 456h120M1115 275l-85-85M1477 637l85 85M1477 275l85-85M1115 637l-85 85"/></g></svg>
+        <div class="tray"><div class="slot on"><svg><use href="#i-pin"/></svg>Location</div><div class="slot"><svg><use href="#i-grid"/></svg>Shading</div><div class="slot"><svg><use href="#i-sun"/></svg>Irradiance</div><div class="slot"><svg><use href="#i-therm"/></svg>Environment</div></div>
+        <div class="tag"><b>3</b>Capture rooftop image</div>
+      </div></div>
+      <p><b>Flash:</b> a white burst and rays from the lens, with a 3-frame white-out of the whole screen, like a camera shutter.</p>
+    </div>
+    <div class="kf"><div class="hd"><span>3C</span><span>19.6 – 23 s</span></div>
+      <div class="frame"><div class="fi">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="520,90,560,315" style="left:0;top:0;width:1920px;height:1080px"></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080"><path d="M1090 450 C1180 340 1240 300 1320 300" fill="none" stroke="#F8F7F2" stroke-width="8" stroke-dasharray="4 18" stroke-linecap="round"/></svg>
+        <div class="photo" style="left:1300px;top:200px;width:500px;transform:rotate(-3deg)"><img src="../assets/03_capture/rooftop_capture.jpg"><span>img_01.jpg</span></div>
+        <div class="tray"><div class="slot on"><svg><use href="#i-pin"/></svg>Location</div><div class="slot"><svg><use href="#i-grid"/></svg>Shading</div><div class="slot"><svg><use href="#i-sun"/></svg>Irradiance</div><div class="slot"><svg><use href="#i-therm"/></svg>Environment</div></div>
+        <div class="tag"><b>3</b>Capture rooftop image</div>
+      </div></div>
+      <p>The captured photo <b>pops out of the lens</b> as a small print, spins slightly and settles beside the device as a thumbnail. It is your real rooftop image.</p>
+    </div>
+  </div>
+  <div class="notes">
+    <div><h4>Motion</h4><ol>
+      <li>Push-in from the whip-pan lands on the lens (no cut).</li>
+      <li>Brackets snap in (0.3 s), short hold, then the flash (0.6 s).</li>
+      <li>Photo scales up from the lens along an arc with a soft overshoot and settles; the camera pulls back slightly.</li>
+    </ol></div>
+    <div><h4>Assets used</h4><ul>
+      <li>Device render (sensor head close-up)</li>
+      <li>Rooftop photo: 03_capture/rooftop_capture.jpg (800×600)</li>
+    </ul>
+    <div class="trans"><b>Hand-off:</b> the photo does not disappear. It shrinks and starts moving down the tracker towards the electronics enclosure, and the camera follows it into section 4.</div></div>
+    <div><h4>Notes</h4>
+      <ul><li>One capture is shown, as in your outline. The tracker's repositioning is not shown, to keep this section short.</li></ul>
+    </div>
+  </div>
+  <div class="footer"><span><b>TutorBin</b> · Storyboard v2 for approval</span><span>Page 4 / 9</span></div>
+</section>
+
+<!-- ============ 4 TRANSFER ============ -->
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="sh"><span class="num">04</span><h2>Image Transfer: the camera follows the photo</h2><span class="ost"><i>Tag:</i> 4 · Sending the image</span><span class="time">0:23 – 0:35</span></div>
+  <div class="frames">
+    <div class="kf"><div class="hd"><span>4A</span><span>23 – 26 s</span></div>
+      <div class="frame"><div class="fi">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="300,140,1067,600" style="left:0;top:0;width:1920px;height:1080px"></div>
+        <div class="a" style="inset:0;background:rgba(40,51,45,.35)"></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080">
+          <path d="M950 160 C890 220 873 260 873 330 V640 C873 720 760 740 640 760" fill="none" stroke="#DDE8DF" stroke-width="8" stroke-dasharray="4 18" stroke-linecap="round"/>
+          <path d="M760 860 C900 860 1000 760 1150 700" fill="none" stroke="#DDE8DF" stroke-width="5" stroke-dasharray="14 12"/>
+          <circle cx="600" cy="860" r="120" fill="none" stroke="#DDE8DF" stroke-width="6"/>
+        </svg>
+        <div class="photo" style="left:780px;top:420px;width:200px;padding:7px 7px 7px;transform:rotate(-4deg)"><img src="../assets/03_capture/rooftop_capture.jpg"></div>
+        <div class="card" style="left:1150px;top:390px;width:700px;height:420px;padding:26px 30px;color:#355C4D">
+          <div style="font-size:26px;font-weight:700;color:#5E6E64">Inside the electronics enclosure</div>
+          <svg class="a" style="left:40px;top:80px" width="420" height="262"><use href="#g-lilygo"/></svg>
+          <div class="photo" style="left:480px;top:150px;width:170px;padding:6px;transform:rotate(3deg)"><img src="../assets/03_capture/rooftop_capture.jpg"></div>
+          <div class="a" style="left:30px;top:360px;font-size:28px;font-weight:700">LilyGo (ESP32 + SIM)</div>
+        </div>
+        <div class="route"><span class="d"><i></i>Camera</span><em>›</em><span class="on"><i></i>LilyGo</span><em>›</em><span><i></i>Cellular</span><em>›</em><span><i></i>ngrok</span><em>›</em><span><i></i>Flask</span><em>›</em><span><i></i>Desktop</span></div>
+        <div class="tag"><b>4</b>Sending the image</div>
+      </div></div>
+      <p>The photo slides down the tracker into the enclosure. A magnifier "x-ray" opens on the <b>LilyGo board</b>; the photo is pulled into it and the SIM chip lights up.</p>
+    </div>
+    <div class="kf"><div class="hd"><span>4B</span><span>26 – 31.5 s</span></div>
+      <div class="frame"><div class="fi" style="background:linear-gradient(#F8F7F2,#DDE8DF)">
+        <div class="a" style="left:0;top:900px;width:1920px;height:180px;background:#CAD9CE"></div>
+        <svg class="a" style="left:60px;top:560px" width="300" height="190"><use href="#g-lilygo"/></svg>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080">
+          <g fill="none" stroke="#7D9D86" stroke-width="7" stroke-linecap="round"><path d="M352 555a40 40 0 0 1 40-40M340 540a62 62 0 0 1 62-62M328 525a84 84 0 0 1 84-84"/></g>
+          <path d="M420 470 C470 360 520 330 560 330" fill="none" stroke="#355C4D" stroke-width="6" stroke-dasharray="4 16" stroke-linecap="round"/>
+          <path d="M640 330 C720 300 760 330 800 380" fill="none" stroke="#355C4D" stroke-width="6" stroke-dasharray="4 16" stroke-linecap="round"/>
+          <path d="M1290 470 C1350 470 1380 470 1440 470" fill="none" stroke="#355C4D" stroke-width="6" stroke-dasharray="4 16" stroke-linecap="round"/>
+          <!-- cloud with tunnel -->
+          <path d="M860 640h330a95 95 0 0 0 0-190 150 150 0 0 0-290-30 120 120 0 0 0-40 220z" fill="#fff" stroke="#355C4D" stroke-width="8"/>
+          <ellipse cx="910" cy="520" rx="34" ry="64" fill="#28332D"/><ellipse cx="1210" cy="520" rx="34" ry="64" fill="#28332D"/>
+          <rect x="910" y="456" width="300" height="128" fill="#28332D" opacity=".12"/>
+          <text x="1060" y="420" font-size="48" font-weight="800" fill="#355C4D" text-anchor="middle" font-family="Inter,Arial">ngrok</text>
+        </svg>
+        <svg class="a" style="left:500px;top:300px;color:#355C4D" width="200" height="600" viewBox="0 0 48 144"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M24 20L8 140M24 20l16 120M14 100h20M18 60h12M12 120h24"/><circle cx="24" cy="17" r="4"/><path d="M15 8a12 12 0 0 0 0 18M33 8a12 12 0 0 1 0 18"/></g></svg>
+        <div class="photo" style="left:990px;top:470px;width:150px;padding:6px;opacity:.95"><img src="../assets/03_capture/rooftop_capture.jpg"></div>
+        <div class="photo" style="left:720px;top:300px;width:120px;padding:5px;opacity:.25"><img src="../assets/03_capture/rooftop_capture.jpg"></div>
+        <div class="photo" style="left:440px;top:330px;width:100px;padding:4px;opacity:.12"><img src="../assets/03_capture/rooftop_capture.jpg"></div>
+        <div class="a" style="left:1450px;top:360px;width:230px;height:250px;background:#fff;border:6px solid #355C4D;border-radius:26px;color:#355C4D"><svg style="position:absolute;left:45px;top:30px" width="130" height="130"><use href="#i-server"/></svg><div style="position:absolute;left:0;right:0;top:170px;text-align:center;font-size:36px;font-weight:800">Flask</div></div>
+        <div class="lbl" style="left:110px;top:780px">LilyGo<small>SIM, 4G</small></div>
+        <div class="lbl" style="left:470px;top:780px">Cellular network</div>
+        <div class="lbl" style="left:880px;top:690px">Public tunnel</div>
+        <div class="lbl" style="left:1450px;top:640px">Server<small>receives &amp; saves</small></div>
+        <div class="route" style="left:50%;transform:translateX(-50%);bottom:40px"><span class="d"><i></i>Camera</span><em>›</em><span class="d"><i></i>LilyGo</span><em>›</em><span class="d"><i></i>Cellular</span><em>›</em><span class="on"><i></i>ngrok</span><em>›</em><span><i></i>Flask</span><em>›</em><span><i></i>Desktop</span></div>
+        <div class="tag"><b>4</b>Sending the image</div>
+      </div></div>
+      <p>The camera pans right with the photo, like a tracking shot. It rides the radio waves from the LilyGo antenna up the <b>cell tower</b>, passes <b>through the ngrok tunnel</b> (shown), and is caught by the <b>Flask server</b>. Faint copies trail behind to show speed.</p>
+    </div>
+    <div class="kf"><div class="hd"><span>4C</span><span>31.5 – 35 s</span></div>
+      <div class="frame"><div class="fi" style="background:linear-gradient(#F8F7F2,#DDE8DF)">
+        <div class="a" style="left:-60px;top:380px;width:230px;height:250px;background:#fff;border:6px solid #355C4D;border-radius:26px;color:#355C4D"><svg style="position:absolute;left:90px;top:30px" width="110" height="110"><use href="#i-server"/></svg></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080"><path d="M180 500 C260 460 320 420 400 420" fill="none" stroke="#355C4D" stroke-width="6" stroke-dasharray="4 16" stroke-linecap="round"/></svg>
+        <div class="a" style="left:400px;top:120px;width:1120px;height:700px;background:#28332D;border-radius:28px"></div>
+        <div class="a" style="left:860px;top:820px;width:200px;height:90px;background:#5E6E64"></div><div class="a" style="left:760px;top:900px;width:400px;height:26px;border-radius:13px;background:#5E6E64"></div>
+        <div class="win" style="left:440px;top:160px;width:1040px;height:620px;border-radius:12px">
+          <div class="bar"><i></i><i style="background:#C9D6CC"></i><i style="background:#C9D6CC"></i><span style="margin-left:20px">Received_Images</span></div>
+          <div class="a" style="left:60px;top:110px;color:#7D9D86"><svg width="150" height="150"><use href="#i-folder"/></svg></div>
+          <div class="photo" style="left:290px;top:110px;width:320px;padding:10px 10px 46px;box-shadow:0 0 0 8px rgba(125,157,134,.45)"><img src="../assets/03_capture/rooftop_capture.jpg"><span>img_01.jpg</span></div>
+          <div class="a" style="left:660px;top:190px;display:flex;align-items:center;gap:14px;font-size:34px;font-weight:700;color:#355C4D"><svg width="54" height="54" style="color:#7D9D86"><use href="#i-check"/></svg>Saved to desktop</div>
+        </div>
+        <div class="win" style="left:1640px;top:240px;width:520px;height:440px"><div class="bar"><svg width="34" height="34" style="color:#355C4D"><use href="#i-code"/></svg>Python</div></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080"><path d="M1110 520 C1300 600 1480 540 1620 470" fill="none" stroke="#355C4D" stroke-width="6" stroke-dasharray="4 16" stroke-linecap="round"/><path d="M1600 450l26 20-30 14" fill="none" stroke="#355C4D" stroke-width="6" stroke-linecap="round"/></svg>
+        <div class="route" style="left:50%;transform:translateX(-50%);bottom:30px"><span class="d"><i></i>Camera</span><em>›</em><span class="d"><i></i>LilyGo</span><em>›</em><span class="d"><i></i>Cellular</span><em>›</em><span class="d"><i></i>ngrok</span><em>›</em><span class="d"><i></i>Flask</span><em>›</em><span class="on"><i></i>Desktop</span></div>
+        <div class="tag"><b>4</b>Sending the image</div>
+      </div></div>
+      <p>From Flask, the photo flies into a desktop monitor and <b>drops into the Received_Images folder</b> as img_01.jpg ("Saved" tick). A Python window slides in from the right, and the file is dragged straight into it.</p>
+    </div>
+  </div>
+  <div class="notes">
+    <div><h4>Motion</h4><ol>
+      <li>One continuous rightward tracking shot; the photo stays roughly centre-screen while the world moves past it.</li>
+      <li>Each component pulses as the photo passes through it, and its step lights up in the route bar at the bottom.</li>
+      <li>Short pause inside the ngrok tunnel (photo disappears in, reappears out) so "forwarding" reads clearly.</li>
+      <li>The folder icon bounces when the file lands.</li>
+    </ol></div>
+    <div><h4>Assets used</h4><ul>
+      <li>Device render (tracker + enclosure)</li>
+      <li>Rooftop photo (the same file throughout)</li>
+      <li>Route and folder name from your transmission diagram (reference only)</li>
+    </ul>
+    <div class="trans"><b>Hand-off:</b> the camera follows the file into the Python window, which grows to fill the screen for section 5.</div></div>
+    <div><h4>Notes</h4>
+      <div class="flag"><b>Check:</b> how does the image get from the ESP32-CAM to the LilyGo? We show it travelling <b>along the cable</b> down the tracker into the enclosure. Tell us if it is wireless instead.</div>
+      <div class="flag"><b>Check:</b> LilyGo, ngrok and Flask are drawn as simple icons with their names, not official logos. OK?</div>
+    </div>
+  </div>
+  <div class="footer"><span><b>TutorBin</b> · Storyboard v2 for approval</span><span>Page 5 / 9</span></div>
+</section>
+
+<!-- ============ 5 SHADING ============ -->
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="sh"><span class="num">05</span><h2>Shading Analysis (Python)</h2><span class="ost"><i>Tag:</i> 5 · Shading analysis</span><span class="time">0:35 – 0:46</span></div>
+  <div class="frames">
+    <div class="kf"><div class="hd"><span>5A</span><span>35 – 37.5 s</span></div>
+      <div class="frame"><div class="fi" style="background:#DDE8DF">
+        <div class="win" style="left:100px;top:140px;width:1720px;height:860px">
+          <div class="bar"><svg width="36" height="36"><use href="#i-code"/></svg>Python · shading analysis<span style="margin-left:auto;font-size:24px;color:#7D9D86">● running</span></div>
+        </div>
+        <div class="a" style="left:150px;top:260px;width:560px;font-size:34px;line-height:1.35;color:#355C4D">
+          <div style="display:flex;gap:16px;align-items:center;font-weight:800"><svg width="44" height="44" style="color:#7D9D86;flex:none"><use href="#i-check"/></svg>Load image</div>
+          <div style="display:flex;gap:16px;align-items:center;margin-top:34px;color:#9AAAA0;font-weight:600"><span style="width:44px;height:44px;border:4px solid #C9D6CC;border-radius:50%;flex:none"></span>Detect roof floor</div>
+          <div style="display:flex;gap:16px;align-items:center;margin-top:34px;color:#9AAAA0;font-weight:600"><span style="width:44px;height:44px;border:4px solid #C9D6CC;border-radius:50%;flex:none"></span>Identify assessment regions</div>
+        </div>
+        <div class="crop" data-src="../assets/05_shading/stage1_original.jpg" data-nat="800,600" data-box="0,0,800,600" style="left:760px;top:240px;width:920px;height:690px;border-radius:10px"></div>
+        <div class="a" style="left:760px;top:240px;width:920px;height:690px;border:6px solid #7D9D86;border-radius:10px"></div>
+        <div class="tag"><b>5</b>Shading analysis</div>
+      </div></div>
+      <p>The Python window fills the screen. The photo drops into the image viewer; a checklist on the left ticks off <b>Load image</b>. It is the same photo that just travelled through the system.</p>
+    </div>
+    <div class="kf"><div class="hd"><span>5B</span><span>37.5 – 41.5 s</span></div>
+      <div class="frame"><div class="fi" style="background:#DDE8DF">
+        <div class="win" style="left:100px;top:140px;width:1720px;height:860px">
+          <div class="bar"><svg width="36" height="36"><use href="#i-code"/></svg>Python · shading analysis<span style="margin-left:auto;font-size:24px;color:#7D9D86">● running</span></div>
+        </div>
+        <div class="a" style="left:150px;top:260px;width:560px;font-size:34px;line-height:1.35;color:#355C4D">
+          <div style="display:flex;gap:16px;align-items:center;font-weight:800"><svg width="44" height="44" style="color:#7D9D86;flex:none"><use href="#i-check"/></svg>Load image</div>
+          <div style="display:flex;gap:16px;align-items:center;margin-top:34px;font-weight:800"><span style="width:44px;height:44px;border:6px solid #355C4D;border-right-color:#C9D6CC;border-radius:50%;flex:none"></span>Detect roof floor</div>
+          <div style="display:flex;gap:16px;align-items:center;margin-top:34px;color:#9AAAA0;font-weight:600"><span style="width:44px;height:44px;border:4px solid #C9D6CC;border-radius:50%;flex:none"></span>Identify assessment regions</div>
+        </div>
+        <div class="crop" data-src="../assets/05_shading/stage1_original.jpg" data-nat="800,600" data-box="0,0,800,600" style="left:760px;top:240px;width:920px;height:690px;border-radius:10px"></div>
+        <div class="a" style="left:760px;top:240px;width:520px;height:690px;overflow:hidden;border-radius:10px 0 0 10px">
+          <div class="crop" data-src="../assets/05_shading/stage2_roof_floor_green.jpg" data-nat="511,399" data-box="25,36,465,349" style="left:0;top:0;width:920px;height:690px"></div>
+        </div>
+        <div class="a" style="left:1272px;top:226px;width:16px;height:718px;background:#F8F7F2;box-shadow:0 0 30px 10px rgba(248,247,242,.8);border-radius:8px"></div>
+        <svg class="a" style="left:1288px;top:240px" width="80" height="690"><g fill="#F8F7F2" opacity=".7"><rect x="6" y="80" width="18" height="18"/><rect x="30" y="180" width="14" height="14"/><rect x="10" y="300" width="22" height="22"/><rect x="38" y="420" width="12" height="12"/><rect x="8" y="560" width="18" height="18"/></g></svg>
+        <div class="dp dk" style="left:790px;top:270px">Roof floor: 34% of image</div>
+        <div class="a" style="left:760px;top:240px;width:920px;height:690px;border:6px solid #7D9D86;border-radius:10px"></div>
+        <div class="tag"><b>5</b>Shading analysis</div>
+      </div></div>
+      <p>A glowing <b>scan line</b> sweeps across the photo. Behind it, the roof floor turns green (your processed image), with a pixel shimmer at the edge. The 34% figure counts up from 0 once the scan finishes.</p>
+    </div>
+    <div class="kf"><div class="hd"><span>5C</span><span>41.5 – 46 s</span></div>
+      <div class="frame"><div class="fi" style="background:#DDE8DF">
+        <div class="win" style="left:100px;top:140px;width:1720px;height:860px">
+          <div class="bar"><svg width="36" height="36"><use href="#i-code"/></svg>Python · shading analysis<span style="margin-left:auto;font-size:24px;color:#355C4D">✓ complete</span></div>
+        </div>
+        <div class="a" style="left:150px;top:260px;width:560px;font-size:34px;line-height:1.35;color:#355C4D">
+          <div style="display:flex;gap:16px;align-items:center;font-weight:800"><svg width="44" height="44" style="color:#7D9D86;flex:none"><use href="#i-check"/></svg>Load image</div>
+          <div style="display:flex;gap:16px;align-items:center;margin-top:34px;font-weight:800"><svg width="44" height="44" style="color:#7D9D86;flex:none"><use href="#i-check"/></svg>Detect roof floor</div>
+          <div style="display:flex;gap:16px;align-items:center;margin-top:34px;font-weight:800"><svg width="44" height="44" style="color:#7D9D86;flex:none"><use href="#i-check"/></svg>Identify assessment regions</div>
+        </div>
+        <div class="crop" data-src="../assets/05_shading/stage3_assessment_orange.jpg" data-nat="1486,1113" data-box="10,3,1466,1100" style="left:760px;top:240px;width:920px;height:690px;border-radius:10px"></div>
+        <div class="a" style="left:760px;top:240px;width:920px;height:690px;border:6px solid #7D9D86;border-radius:10px"></div>
+        <div class="dp" style="left:790px;top:270px;background:#D9822B">Assessment regions identified</div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080"><path d="M1500 860 C1440 900 1420 930 1420 960" fill="none" stroke="#355C4D" stroke-width="6" stroke-dasharray="4 16" stroke-linecap="round"/></svg>
+        <div class="tray"><div class="slot on"><svg><use href="#i-pin"/></svg>Location</div><div class="slot on new"><svg><use href="#i-grid"/></svg>Shading</div><div class="slot"><svg><use href="#i-sun"/></svg>Irradiance</div><div class="slot"><svg><use href="#i-therm"/></svg>Environment</div></div>
+        <div class="tag"><b>5</b>Shading analysis</div>
+      </div></div>
+      <p>A second pass: the green fades out while the <b>orange regions grow in</b> from the edges of the objects that cast them. All three steps are ticked. A copy of the result shrinks into the <b>Shading</b> slot of the tray.</p>
+    </div>
+  </div>
+  <div class="notes">
+    <div><h4>Motion</h4><ol>
+      <li>The image never swaps or cuts. Each stage is revealed <b>on top of the same photo</b> (scan-line wipe, then a mask grow), so it looks like the software is transforming it.</li>
+      <li>Checklist steps tick in sync with each stage.</li>
+      <li>Hold on the final orange result for ~1.5 s so it can be read.</li>
+    </ol></div>
+    <div><h4>Assets used</h4><ul>
+      <li>05_shading/stage1_original.jpg</li>
+      <li>05_shading/stage2_roof_floor_green.jpg (cropped to the photo; its own title text is removed and redrawn as the pill)</li>
+      <li>05_shading/stage3_assessment_orange.jpg</li>
+    </ul>
+    <div class="trans"><b>Hand-off:</b> the camera pulls back out of the monitor and pans left across the world, back to the device, for section 6.</div></div>
+    <div><h4>Notes</h4>
+      <ul><li>All three images line up exactly (same 4:3 frame), so the stages blend on the spot.</li></ul>
+      <div class="flag"><b>Check:</b> is "Assessment regions identified" the right label for the orange areas? If they mean something more specific (e.g. shaded or excluded areas), give us the wording.</div>
+    </div>
+  </div>
+  <div class="footer"><span><b>TutorBin</b> · Storyboard v2 for approval</span><span>Page 6 / 9</span></div>
+</section>
+
+<!-- ============ 6 SENSORS & BLYNK ============ -->
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="sh"><span class="num">06</span><h2>Integrated Sensors &amp; Blynk</h2><span class="ost"><i>Tag:</i> 6 · Sensors &amp; live monitoring</span><span class="time">0:46 – 1:00</span></div>
+  <div class="frames">
+    <div class="kf"><div class="hd"><span>6A</span><span>46 – 50 s</span></div>
+      <div class="frame"><div class="fi">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="0,0,1672,941" style="left:0;top:0;width:1920px;height:1080px"></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080">
+          <defs><mask id="m6a"><rect width="1920" height="1080" fill="#fff"/><rect x="780" y="150" width="240" height="170" rx="26" fill="#000"/><rect x="1440" y="100" width="240" height="220" rx="26" fill="#000"/><rect x="430" y="610" width="410" height="240" rx="26" fill="#000"/></mask></defs>
+          <rect width="1920" height="1080" fill="#28332D" opacity=".7" mask="url(#m6a)"/>
+          <g fill="none" stroke="#DDE8DF" stroke-width="6"><rect x="780" y="150" width="240" height="170" rx="26"/><rect x="1440" y="100" width="240" height="220" rx="26"/><rect x="430" y="610" width="410" height="240" rx="26"/></g>
+          
+        </svg>
+        <div class="lbl" style="left:390px;top:150px"><svg width="34" height="34" style="vertical-align:-6px;color:#7D9D86"><use href="#i-sun"/></svg> Pyranometer<small>solar irradiance</small></div>
+        <div class="lbl" style="left:420px;top:290px"><svg width="34" height="34" style="vertical-align:-6px;color:#7D9D86"><use href="#i-grid"/></svg> MLX90640<small>thermal pattern</small></div>
+        <div class="lbl" style="left:1070px;top:150px"><svg width="34" height="34" style="vertical-align:-6px;color:#7D9D86"><use href="#i-wind"/></svg> Wind sensor<small>wind speed</small></div>
+        <div class="lbl" style="left:380px;top:430px"><svg width="34" height="34" style="vertical-align:-6px;color:#7D9D86"><use href="#i-therm"/></svg> BME280<small>temp · humidity · pressure</small></div>
+        <div class="lbl" style="left:870px;top:900px"><svg width="34" height="34" style="vertical-align:-6px;color:#7D9D86"><use href="#i-clock"/></svg> RTC<small>timestamp</small></div>
+        <div class="tray"><div class="slot on"><svg><use href="#i-pin"/></svg>Location</div><div class="slot on"><svg><use href="#i-grid"/></svg>Shading</div><div class="slot"><svg><use href="#i-sun"/></svg>Irradiance</div><div class="slot"><svg><use href="#i-therm"/></svg>Environment</div></div>
+        <div class="tag"><b>6</b>Sensors &amp; live monitoring</div>
+      </div></div>
+      <p>Back on the device, everything else dims. The five sensors light up <b>one after another</b>, each with a small label: pyranometer, MLX90640 (in the sensor head), wind sensor, then BME280 and RTC (in the enclosure).</p>
+    </div>
+    <div class="kf"><div class="hd"><span>6B</span><span>50 – 55 s</span></div>
+      <div class="frame"><div class="fi">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="0,0,1672,941" style="left:0;top:0;width:1920px;height:1080px"></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080">
+          <rect width="1920" height="1080" fill="#28332D" opacity=".62"/>
+          <g fill="none" stroke="#DDE8DF" stroke-width="7" stroke-dasharray="4 18" stroke-linecap="round">
+            <path d="M890 200 C930 300 900 500 900 620 C880 700 800 720 720 730"/>
+            <path d="M1556 250 C1556 420 1560 560 1400 640 C1200 740 1000 760 820 740"/>
+          </g>
+          <circle cx="630" cy="730" r="120" fill="#7D9D86" opacity=".35"/><circle cx="630" cy="730" r="80" fill="none" stroke="#F8F7F2" stroke-width="8"/>
+        </svg>
+        <div class="dp" style="left:930px;top:300px"><svg width="30" height="30" style="vertical-align:-5px;color:#fff"><use href="#i-sun"/></svg> Irradiance · W/m²</div>
+        <div class="dp" style="left:930px;top:470px"><svg width="30" height="30" style="vertical-align:-5px;color:#fff"><use href="#i-grid"/></svg> Thermal · °C</div>
+        <div class="dp" style="left:1270px;top:560px"><svg width="30" height="30" style="vertical-align:-5px;color:#fff"><use href="#i-wind"/></svg> Wind · m/s</div>
+        <div class="dp" style="left:150px;top:540px"><svg width="30" height="30" style="vertical-align:-5px;color:#fff"><use href="#i-therm"/></svg> Temp · Humidity · Pressure</div>
+        <div class="dp" style="left:210px;top:860px"><svg width="30" height="30" style="vertical-align:-5px;color:#fff"><use href="#i-clock"/></svg> Timestamp</div>
+        <div class="lbl" style="left:520px;top:330px;font-size:34px">ESP32 collects every reading</div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080"><path d="M720 410 C700 520 660 600 640 640" fill="none" stroke="#F8F7F2" stroke-width="5"/></svg>
+        <div class="tray"><div class="slot on"><svg><use href="#i-pin"/></svg>Location</div><div class="slot on"><svg><use href="#i-grid"/></svg>Shading</div><div class="slot"><svg><use href="#i-sun"/></svg>Irradiance</div><div class="slot"><svg><use href="#i-therm"/></svg>Environment</div></div>
+        <div class="tag"><b>6</b>Sensors &amp; live monitoring</div>
+      </div></div>
+      <p>Each sensor emits <b>data pills</b> that travel along the wiring to the <b>ESP32 inside the enclosure</b>, which pulses as each one arrives. The RTC stamps the readings with the time.</p>
+    </div>
+    <div class="kf"><div class="hd"><span>6C</span><span>55 – 60 s</span></div>
+      <div class="frame"><div class="fi" style="background:linear-gradient(#F8F7F2,#DDE8DF)">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="330,480,520,293" style="left:50px;top:330px;width:620px;height:349px;border-radius:24px;box-shadow:0 14px 40px rgba(40,51,45,.2)"></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080">
+          <g fill="none" stroke="#7D9D86" stroke-width="7" stroke-linecap="round"><path d="M140 370a40 40 0 0 1 40-40M128 352a62 62 0 0 1 62-62M116 334a84 84 0 0 1 84-84"/></g>
+          <path d="M220 260 C400 160 560 180 700 240" fill="none" stroke="#355C4D" stroke-width="6" stroke-dasharray="4 16" stroke-linecap="round"/>
+          <path d="M860 250 C960 230 1060 250 1160 300" fill="none" stroke="#355C4D" stroke-width="6" stroke-dasharray="4 16" stroke-linecap="round"/>
+        </svg>
+        <svg class="a" style="left:700px;top:200px;color:#355C4D" width="160" height="480" viewBox="0 0 48 144"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M24 20L8 140M24 20l16 120M14 100h20M18 60h12M12 120h24"/><circle cx="24" cy="17" r="4"/><path d="M15 8a12 12 0 0 0 0 18M33 8a12 12 0 0 1 0 18"/></g></svg>
+        <div class="dp" style="left:380px;top:140px">W/m²</div><div class="dp dk" style="left:980px;top:190px">°C · % · hPa</div><div class="dp" style="left:520px;top:220px;opacity:.6">m/s</div>
+        <div class="a" style="left:1200px;top:100px;width:440px;height:810px;background:#28332D;border-radius:56px"></div>
+        <div class="a" style="left:1220px;top:120px;width:400px;height:770px;background:#F8F7F2;border-radius:40px;padding:34px 26px;font-size:26px;color:#355C4D">
+          <div style="font-size:34px;font-weight:800">Blynk</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+            <div style="background:#fff;border-radius:16px;padding:16px;height:150px;font-weight:600">Irradiance<div style="font-size:44px;font-weight:800;margin-top:12px">—</div></div>
+            <div style="background:#fff;border-radius:16px;padding:16px;height:150px;font-weight:600">Temp<div style="font-size:44px;font-weight:800;margin-top:12px">—</div></div>
+            <div style="background:#fff;border-radius:16px;padding:16px;height:150px;font-weight:600">Humidity<div style="font-size:44px;font-weight:800;margin-top:12px">—</div></div>
+            <div style="background:#fff;border-radius:16px;padding:16px;height:150px;font-weight:600">Pressure<div style="font-size:44px;font-weight:800;margin-top:12px">—</div></div>
+            <div style="background:#fff;border-radius:16px;padding:16px;height:150px;font-weight:600">Wind<div style="font-size:44px;font-weight:800;margin-top:12px">—</div></div>
+            <div style="background:#fff;border-radius:16px;padding:16px;height:150px;font-weight:600">Thermal<div style="font-size:44px;font-weight:800;margin-top:12px">—</div></div>
+          </div>
+        </div>
+        <div class="review" style="left:1185px;top:86px;width:470px;height:840px"><span>Placeholder: your Blynk screen</span></div>
+        <div class="lbl" style="left:90px;top:710px">LilyGo SIM</div><div class="lbl" style="left:640px;top:710px">Cellular network</div>
+        <div class="tray"><div class="slot on"><svg><use href="#i-pin"/></svg>Location</div><div class="slot on"><svg><use href="#i-grid"/></svg>Shading</div><div class="slot on new"><svg><use href="#i-sun"/></svg>Irradiance</div><div class="slot on new"><svg><use href="#i-therm"/></svg>Environment</div></div>
+        <div class="tag"><b>6</b>Sensors &amp; live monitoring</div>
+      </div></div>
+      <p>The camera follows the readings out of the antenna, over the <b>cellular network</b>, onto the <b>Blynk</b> dashboard. Each tile fills as its reading arrives. The Irradiance and Environment slots in the tray fill.</p>
+    </div>
+  </div>
+  <div class="notes">
+    <div><h4>Motion</h4><ol>
+      <li>Whip-pan from the desktop back to the device; sensors light up in sequence (~0.6 s each).</li>
+      <li>Pills move along curved paths at different speeds so the flow feels live; the ESP32 ring pulses on arrival.</li>
+      <li>Camera follows the pills out of the antenna; the same tower from section 4 reappears, so the route is recognisable.</li>
+    </ol></div>
+    <div><h4>Assets used</h4><ul>
+      <li>Device render (sensor positions from your callouts)</li>
+      <li>Blynk screen: <b>not yet received</b></li>
+    </ul>
+    <div class="trans"><b>Hand-off:</b> the four filled tray tokens lift off and fly to the centre of the screen. Section 7 starts from them.</div></div>
+    <div><h4>Notes</h4>
+      <div class="flag"><b>Needs from you:</b> a <b>screenshot or short recording of your Blynk dashboard</b>. We will animate the readings arriving on it. Until then this frame is a placeholder.</div>
+      <div class="flag"><b>Check:</b> if any readings appear on screen, Humidity 1014.80 % and Pressure 0.70 kPa in your dashboard look swapped. Please confirm the correct values.</div>
+    </div>
+  </div>
+  <div class="footer"><span><b>TutorBin</b> · Storyboard v2 for approval</span><span>Page 7 / 9</span></div>
+</section>
+
+<!-- ============ 7 FINAL ============ -->
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="sh"><span class="num">07</span><h2>Final Assessment: everything comes together</h2><span class="ost"><i>Tag:</i> 7 · Final assessment</span><span class="time">1:00 – 1:15</span></div>
+  <div class="frames">
+    <div class="kf"><div class="hd"><span>7A</span><span>60 – 64 s</span></div>
+      <div class="frame"><div class="fi" style="background:#F8F7F2">
+        <svg class="a" style="left:0;top:0" width="1920" height="1080">
+          <g fill="none" stroke="#7D9D86" stroke-width="7" stroke-dasharray="4 18" stroke-linecap="round">
+            <path d="M620 300 C760 340 820 420 860 470"/><path d="M1340 300 C1180 340 1110 420 1060 470"/>
+            <path d="M620 790 C760 740 820 660 860 610"/><path d="M1320 790 C1180 740 1110 660 1060 610"/>
+          </g>
+          <circle cx="960" cy="540" r="190" fill="#DDE8DF" opacity=".7"/>
+          <circle cx="960" cy="540" r="140" fill="#355C4D"/>
+          <circle cx="960" cy="540" r="230" fill="none" stroke="#7D9D86" stroke-width="5" stroke-dasharray="10 16"/>
+        </svg>
+        <svg class="a" style="left:900px;top:470px;color:#F8F7F2" width="120" height="120"><use href="#i-sun"/></svg>
+        <div class="card" style="left:150px;top:170px;width:480px;height:220px;padding:30px;color:#355C4D"><svg width="56" height="56"><use href="#i-pin"/></svg><div style="font-size:26px;color:#5E6E64;font-weight:600;margin-top:8px">Location</div><div style="font-size:34px;font-weight:800">25.2324° N, 51.5643° E</div></div>
+        <div class="card" style="left:1330px;top:120px;width:440px;height:330px;padding:16px;overflow:hidden"><div class="crop" data-src="../assets/05_shading/stage3_assessment_orange.jpg" data-nat="1486,1113" data-box="10,3,1466,1100" style="left:16px;top:16px;width:408px;height:240px;border-radius:12px"></div><div class="a" style="left:22px;top:270px;font-size:30px;font-weight:800;color:#355C4D">Shading analysis</div></div>
+        <div class="card" style="left:150px;top:700px;width:480px;height:190px;padding:30px;color:#355C4D;display:flex;gap:22px;align-items:center"><svg width="80" height="80" style="color:#7D9D86;flex:none"><use href="#i-sun"/></svg><div><div style="font-size:34px;font-weight:800">Irradiance</div><div style="font-size:26px;color:#5E6E64">pyranometer · W/m²</div></div></div>
+        <div class="card" style="left:1310px;top:700px;width:470px;height:190px;padding:30px;color:#355C4D;display:flex;gap:22px;align-items:center"><svg width="80" height="80" style="color:#7D9D86;flex:none"><use href="#i-therm"/></svg><div><div style="font-size:34px;font-weight:800">Environment</div><div style="font-size:26px;color:#5E6E64">temp · humidity · pressure<br>wind · thermal</div></div></div>
+        <div class="lbl" style="left:780px;top:800px;font-size:32px">Assessment software</div>
+        <div class="tag"><b>7</b>Final assessment</div>
+      </div></div>
+      <p>The four tray tokens fly out and open into cards: <b>location, shading result, irradiance, environmental data</b>. Each one streams into a central core that represents your assessment software, which spins up as the data arrives.</p>
+    </div>
+    <div class="kf"><div class="hd"><span>7B</span><span>64 – 71 s</span></div>
+      <div class="frame"><div class="fi" style="background:#DDE8DF">
+        <div class="win" style="left:70px;top:150px;width:1040px;height:690px">
+          <div class="bar"><i></i><i style="background:#C9D6CC"></i><i style="background:#C9D6CC"></i><span style="margin-left:20px">Solar Placement Assessment</span></div>
+          <div class="crop" data-src="../assets/07_dashboard_report/frame_overview.jpg" data-nat="800,480" data-box="40,30,760,440" style="left:0;top:60px;width:1040px;height:630px"></div>
+        </div>
+        <div class="a" style="left:1160px;top:150px;width:690px;display:flex;flex-direction:column;gap:20px">
+          <div class="card" style="position:relative;padding:22px 28px;color:#355C4D"><div style="font-size:24px;font-weight:600;color:#5E6E64">Recommended panel &amp; placement</div><div class="ph" style="position:relative;height:66px;margin-top:10px;font-size:26px">panel model · location on roof</div></div>
+          <div class="card" style="position:relative;padding:22px 28px;color:#355C4D"><div style="font-size:24px;font-weight:600;color:#5E6E64">Estimated annual energy</div><div class="ph" style="position:relative;height:66px;margin-top:10px;font-size:26px">___ kWh / year</div></div>
+          <div class="card" style="position:relative;padding:22px 28px;color:#355C4D"><div style="font-size:24px;font-weight:600;color:#5E6E64">Shading &amp; dust losses</div><div class="ph" style="position:relative;height:66px;margin-top:10px;font-size:26px">__ % shading · __ % dust</div></div>
+          <div class="card" style="position:relative;padding:22px 28px;color:#355C4D"><div style="font-size:24px;font-weight:600;color:#5E6E64">Cost · payback · ROI</div><div class="ph" style="position:relative;height:66px;margin-top:10px;font-size:26px">QAR ___ · __ yrs · __ %</div></div>
+        </div>
+        <div class="tag"><b>7</b>Final assessment</div>
+      </div></div>
+      <p>The core bursts open into <b>your dashboard</b>. Report cards then slide in one by one and their values count up: panel model and placement, annual energy, shading and dust losses, cost, payback and ROI.</p>
+    </div>
+    <div class="kf"><div class="hd"><span>7C</span><span>71 – 75 s</span></div>
+      <div class="frame"><div class="fi" style="background:#355C4D">
+        <div class="crop" data-src="../assets/_superseded/old_device_render/device_render_v1.jpg" data-nat="1672,941" data-box="0,0,1672,941" style="left:120px;top:250px;width:760px;height:428px;border-radius:22px;opacity:.95"></div>
+        <svg class="a" style="left:0;top:0" width="1920" height="1080"><path d="M900 464 H1010" stroke="#DDE8DF" stroke-width="7" stroke-dasharray="4 16" stroke-linecap="round"/></svg>
+        <div class="a" style="left:1030px;top:250px;width:770px;height:428px;background:#28332D;border-radius:22px"></div>
+        <div class="crop" data-src="../assets/07_dashboard_report/frame_report.jpg" data-nat="800,480" data-box="40,0,760,440" style="left:1042px;top:262px;width:746px;height:404px;border-radius:14px"></div>
+        <div class="a" style="left:120px;right:120px;top:740px;text-align:center;color:#F8F7F2">
+          <div style="font-size:64px;font-weight:800;letter-spacing:-1px">From rooftop to recommendation</div>
+          <div style="font-size:30px;color:#DDE8DF;margin-top:14px;font-weight:600">IoT-Based Residential Rooftop Solar Panel Placement Assessment</div>
+        </div>
+      </div></div>
+      <p>The camera pulls back one last time so the <b>device and the finished report sit side by side</b>, linked by the route. A closing line appears; hold on the final frame.</p>
+    </div>
+  </div>
+  <div class="notes">
+    <div><h4>Motion</h4><ol>
+      <li>Tokens arc in from the tray (staggered 0.2 s), open into cards, then stream into the core.</li>
+      <li>Core expands into the dashboard (a scale-up, no cut); report cards stack in from the right.</li>
+      <li>Final pull-back; title fades up; hold ~2 s to end.</li>
+    </ol></div>
+    <div><h4>Assets used</h4><ul>
+      <li>Dashboard recording / frames (07_dashboard_report)</li>
+      <li>Shading result, coordinates, device render</li>
+    </ul>
+    <div class="trans"><b>Closing line:</b> "From rooftop to recommendation" is a suggestion. Send your own wording if you prefer.</div></div>
+    <div><h4>Notes</h4>
+      <div class="flag"><b>Needs from you:</b> your recording shows "Pending Assessment" and blank fields. Please send the <b>final report values</b> (panel model and placement, annual kWh, shading and dust losses, installation cost, payback, ROI) or a screenshot of the completed report. We will not invent these figures.</div>
+      <div class="flag"><b>Optional:</b> university or team logo and names for the closing frame.</div>
+    </div>
+  </div>
+  <div class="footer"><span><b>TutorBin</b> · Storyboard v2 for approval</span><span>Page 8 / 9</span></div>
+</section>
+
+<!-- ============ CHANGES, ASSETS & QUESTIONS ============ -->
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="sh"><span class="num">✓</span><h2>What changed, assets &amp; open questions</h2><span class="time">Please reply with answers or files</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8mm;margin-top:5mm">
+    <div>
+      <h3 style="font-size:12px;color:var(--dark);margin:0 0 5px">Changes from v1</h3>
+      <ul style="margin:0 0 5mm;padding-left:15px;font-size:10.8px;line-height:1.5">
+        <li><b>7 sections</b> following your outline (was 9 scenes).</li>
+        <li><b>One continuous camera</b> through a single 2D world. No slide-style cuts or full-screen titles, just a small section tag.</li>
+        <li>The <b>photo physically travels</b>: Camera → LilyGo → Cellular → ngrok → Flask → Desktop folder → Python, then transforms through the three shading stages.</li>
+        <li><b>Sensor readings flow</b> from each sensor to the ESP32, then through the LilyGo to Blynk.</li>
+        <li>A <b>data tray</b> collects location, shading, irradiance and environment, then feeds the final assessment.</li>
+        <li>Opens on the <b>real device</b> (illustrated rooftop removed). The new rooftop image set replaces the earlier images.</li>
+      </ul>
+      <table>
+        <tr><th>Asset</th><th>Status</th><th>Section</th></tr>
+        <tr><td>Device render (labelled)</td><td class="ok">Received</td><td>1, 3, 4, 6, 7</td></tr>
+        <tr><td>"Get My Location" website screenshot</td><td class="ok">Received</td><td>2</td></tr>
+        <tr><td>Rooftop photo + green + orange stages</td><td class="ok">Received</td><td>3, 4, 5, 7</td></tr>
+        <tr><td>Transmission diagram</td><td class="ok">Received</td><td>4 (reference)</td></tr>
+        <tr><td>Dashboard screen recording</td><td class="ok">Received</td><td>7</td></tr>
+        <tr><td>Blynk dashboard screenshot / recording</td><td class="need">Needed</td><td>6</td></tr>
+        <tr><td>Final report values or completed report</td><td class="need">Needed</td><td>7</td></tr>
+        <tr><td>Clean device render without labels</td><td class="need">Optional</td><td>1, 6</td></tr>
+        <tr><td>Logo / team names for the closing</td><td class="need">Optional</td><td>7</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3 style="font-size:12px;color:var(--dark);margin:0 0 5px">Questions</h3>
+      <ol style="margin:0;padding-left:16px;font-size:10.8px;line-height:1.5">
+        <li style="margin-bottom:7px"><b>Blynk:</b> please send a screenshot or short screen recording of your Blynk dashboard with readings (section 6).</li>
+        <li style="margin-bottom:7px"><b>Report values:</b> please send the final figures, or confirm we should show labelled placeholders for now (section 7).</li>
+        <li style="margin-bottom:7px"><b>Live data:</b> Humidity 1014.80 % and Pressure 0.70 kPa look swapped or mis-scaled. Which values are correct?</li>
+        <li style="margin-bottom:7px"><b>Camera to LilyGo:</b> is the image sent from the ESP32-CAM to the LilyGo by cable (as drawn) or wirelessly?</li>
+        <li style="margin-bottom:7px"><b>Orange regions:</b> is "Assessment regions identified" the right on-screen wording?</li>
+        <li style="margin-bottom:7px"><b>Coordinates:</b> show full precision (25.23244, 51.56429) or rounded?</li>
+        <li style="margin-bottom:7px"><b>Icons:</b> LilyGo, ngrok, Flask and Blynk are drawn as simple named icons, not official logos. OK?</li>
+        <li style="margin-bottom:7px"><b>Closing line:</b> keep "From rooftop to recommendation" or use your own?</li>
+      </ol>
+      <div class="flag" style="margin-top:8px"><b>Next step:</b> once v2 is approved, we send an animated preview of sections 3–5 (capture → transfer → shading) to confirm the new continuous motion style, then produce the full 75-second video.</div>
+    </div>
+  </div>
+  <div class="footer"><span><b>TutorBin</b> · Storyboard v2 for approval</span><span>Page 9 / 9</span></div>
+</section>
+
+<script>
+function layout(){
+  document.querySelectorAll('.frame').forEach(f=>{
+    f.querySelector('.fi').style.transform='scale('+(f.clientWidth/1920)+')';
+  });
+  document.querySelectorAll('.crop').forEach(c=>{
+    let img=c.querySelector(':scope > img');
+    if(!img){img=document.createElement('img');img.src=c.dataset.src;c.appendChild(img);}
+    const [x,y,w,h]=c.dataset.box.split(',').map(Number);
+    const [nw,nh]=c.dataset.nat.split(',').map(Number);
+    const cw=c.offsetWidth, ch=c.offsetHeight;
+    const s=Math.max(cw/w,ch/h);
+    img.style.width=nw*s+'px'; img.style.height=nh*s+'px';
+    img.style.left=(-x*s-(w*s-cw)/2)+'px'; img.style.top=(-y*s-(h*s-ch)/2)+'px';
+  });
+}
+layout(); window.addEventListener('resize',layout);
+</script>
+</body>
+</html>

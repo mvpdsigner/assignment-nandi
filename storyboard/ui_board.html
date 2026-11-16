@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>New UI Board</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--sage:#7D9D86;--dark:#355C4D;--light:#DDE8DF;--cream:#F8F7F2;--char:#28332D;--line:#C9D6CC;--muted:#5E6E64;--orange:#D9822B;
+  --panel:rgba(40,51,45,.55);--edge:rgba(221,232,223,.22);--soft:rgba(221,232,223,.7)}
+*{box-sizing:border-box}
+html,body{margin:0;background:#E4E8E4;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:1920px 1080px;margin:0}
+.page{width:1920px;height:1080px;position:relative;overflow:hidden;break-after:page;background:var(--cream);font-family:Inter,Helvetica,Arial,sans-serif;color:var(--char)}
+@media screen{.page{margin:0 auto 20px}}
+.wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:90}
+.wm span{font-size:300px;font-weight:800;color:var(--dark);opacity:.045;transform:rotate(-20deg)}
+.foot{position:absolute;left:70px;right:70px;bottom:26px;display:flex;justify-content:space-between;font-size:16px;color:var(--muted)}
+.foot b{color:var(--dark)}
+.hd{position:absolute;left:70px;top:50px;width:1100px}
+.hd small{font-size:18px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+.hd h1{margin:8px 0 0;font-size:46px;color:var(--dark);letter-spacing:-1px}
+.hd p{margin:10px 0 0;font-size:20px;line-height:1.45;color:var(--muted)}
+.cur{position:absolute;top:44px;right:70px;display:flex;gap:16px}
+.cur figure{margin:0;width:300px}
+.cur img{width:300px;display:block;border-radius:8px;border:1px solid var(--line)}
+.cur figcaption{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:.08em;text-transform:uppercase}
+.tagnew{display:inline-block;background:var(--dark);color:var(--cream);font-size:14px;font-weight:800;letter-spacing:.1em;padding:4px 10px;border-radius:6px;margin-right:10px;vertical-align:3px}
+.cap{font-size:20px;font-weight:700;color:var(--dark);margin:0 0 10px}
+.cap span{font-weight:500;color:var(--muted)}
+.cap .tagnew{color:var(--cream);font-weight:800}
+.mono{font-family:'JetBrains Mono',Menlo,monospace}
+
+/* ---- shared dark UI parts */
+.app{background:var(--dark);color:var(--cream)}
+.panel{background:var(--panel);border:1.5px solid var(--edge);border-radius:22px}
+.lab{font-family:'JetBrains Mono',Menlo,monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.val{font-family:'JetBrains Mono',Menlo,monospace;font-weight:800;color:var(--cream)}
+.val i{font-style:normal;font-weight:500;font-size:.5em;color:var(--soft);margin-left:4px}
+.ok{display:inline-flex;align-items:center;gap:8px;background:var(--sage);color:#fff;font-weight:700;border-radius:999px}
+.live{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',Menlo,monospace;font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--light)}
+.live:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--sage);box-shadow:0 0 0 4px rgba(125,157,134,.3)}
+.dots{display:flex;gap:9px}.dots i{width:14px;height:14px;border-radius:50%;background:rgba(221,232,223,.35)}.dots i:first-child{background:var(--sage)}
+.bar{height:52px;display:flex;align-items:center;gap:16px;padding:0 20px;border-bottom:1.5px solid var(--edge);font-size:18px;font-weight:700}
+
+/* phones */
+.phone{position:absolute;width:380px;height:768px;border-radius:60px;background:var(--char);padding:14px;box-shadow:0 30px 70px rgba(40,51,45,.28)}
+.screen{width:100%;height:100%;border-radius:47px;overflow:hidden;position:relative}
+.notch{position:absolute;left:50%;top:11px;width:110px;height:28px;border-radius:15px;background:var(--char);transform:translateX(-50%);z-index:5}
+.status{height:50px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 28px 4px;font-size:15px;font-weight:700;color:var(--cream)}
+.loc .title{padding:16px 26px 0}
+.loc h3{margin:6px 0 0;font-size:27px;letter-spacing:-.4px}
+.loc p{margin:8px 0 0;font-size:14.5px;color:var(--light);opacity:.85;line-height:1.45}
+.loc .radar{position:absolute;left:50%;top:350px;transform:translate(-50%,-50%)}
+.loc .go{position:absolute;left:50%;top:350px;transform:translate(-50%,-50%);width:136px;height:136px;border-radius:50%;background:var(--cream);color:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:14px;font-weight:800;text-align:center;line-height:1.2;box-shadow:0 0 0 12px rgba(221,232,223,.16)}
+.loc .read{position:absolute;left:18px;right:18px;bottom:24px;padding:18px 20px}
+.loc .grid{display:grid;grid-template-columns:auto 1fr;gap:10px 16px;margin-top:14px;align-items:baseline}
+.loc .grid .val{font-size:22px}
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1: SYSTEM + OVERLAYS ================= -->
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="hd">
+    <small>Video UI refresh · 1 of 4</small>
+    <h1>One modern UI system for the whole video</h1>
+    <p>Built from option C, which you picked for the location screen. The world around the device stays light (the approved Clean Flat style), and every on-screen interface uses the same dark, modern look, so the apps read as real software and the data stands out.</p>
+  </div>
+
+  <div class="cur"><figure><figcaption>Current · overlays</figcaption><img src="ui_board/current_hud.jpg"></figure></div>
+  <!-- tokens -->
+  <div style="position:absolute;left:70px;top:300px;width:700px">
+    <div class="cap">Colours <span>· your palette, with a role for each</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div style="border-radius:12px;overflow:hidden;border:1px solid var(--line)"><div style="height:64px;background:#355C4D"></div><div style="padding:8px 10px;font-size:14px;background:#fff"><b>Dark green</b><br>App screens</div></div>
+      <div style="border-radius:12px;overflow:hidden;border:1px solid var(--line)"><div style="height:64px;background:#28332D"></div><div style="padding:8px 10px;font-size:14px;background:#fff"><b>Charcoal</b><br>Panels &amp; overlays</div></div>
+      <div style="border-radius:12px;overflow:hidden;border:1px solid var(--line)"><div style="height:64px;background:#F8F7F2;border-bottom:1px solid var(--line)"></div><div style="padding:8px 10px;font-size:14px;background:#fff"><b>Cream</b><br>Text on dark, world</div></div>
+      <div style="border-radius:12px;overflow:hidden;border:1px solid var(--line)"><div style="height:64px;background:#DDE8DF"></div><div style="padding:8px 10px;font-size:14px;background:#fff"><b>Light sage</b><br>Labels, borders</div></div>
+      <div style="border-radius:12px;overflow:hidden;border:1px solid var(--line)"><div style="height:64px;background:#7D9D86"></div><div style="padding:8px 10px;font-size:14px;background:#fff"><b>Sage</b><br>Success, progress</div></div>
+      <div style="border-radius:12px;overflow:hidden;border:1px solid var(--line)"><div style="height:64px;background:#D9822B"></div><div style="padding:8px 10px;font-size:14px;background:#fff"><b>Orange</b><br>Shaded areas only</div></div>
+    </div>
+
+    <div class="cap" style="margin-top:30px">Type</div>
+    <div style="display:flex;gap:30px;align-items:baseline">
+      <div><div style="font-size:34px;font-weight:800;color:var(--dark)">Inter</div><div style="font-size:15px;color:var(--muted)">titles, labels, sentences</div></div>
+      <div><div class="mono" style="font-size:34px;font-weight:800;color:var(--dark)">25.00 W/m²</div><div style="font-size:15px;color:var(--muted)">JetBrains Mono · every number and reading</div></div>
+    </div>
+
+    <div class="cap" style="margin-top:30px">Components</div>
+    <div class="app" style="border-radius:22px;padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center">
+      <div style="background:var(--cream);color:var(--dark);font-weight:800;font-size:17px;border-radius:14px;padding:14px 0;text-align:center">Primary button</div>
+      <div><span class="ok" style="font-size:15px;padding:7px 14px">✓ Location saved</span></div>
+      <div class="panel" style="padding:12px 16px;border-radius:16px"><div class="lab">Irradiance</div><div class="val" style="font-size:28px">25.00<i>W/m²</i></div></div>
+      <div>
+        <div class="lab" style="margin-bottom:8px">Progress</div>
+        <div style="height:10px;border-radius:5px;background:rgba(221,232,223,.2)"><div style="width:68%;height:100%;border-radius:5px;background:var(--sage)"></div></div>
+        <div class="live" style="margin-top:12px">LIVE</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- overlays: current vs new -->
+  <div style="position:absolute;left:840px;top:300px;width:1010px">
+    <div class="cap"><span class="tagnew">NEW</span>Overlays on the device scenes <span>· section tag, labels, data pills, route bar, data tray (shown together here)</span></div>
+    <div style="position:relative;width:1010px;height:568px;border-radius:12px;overflow:hidden;border:1px solid var(--line)">
+      <div style="position:absolute;left:0;top:0;width:1920px;height:1080px;transform:scale(.526);transform-origin:0 0">
+        <img src="../assets/01_device/device_render_clean.jpg" style="position:absolute;left:0;top:-87px;width:1920px">
+        <div style="position:absolute;inset:0;background:rgba(40,51,45,.35)"></div>
+        <!-- section tag -->
+        <div style="position:absolute;left:56px;top:46px;display:flex;align-items:center;gap:16px;background:rgba(40,51,45,.9);border:2px solid var(--edge);border-radius:20px;padding:12px 26px 12px 12px;color:var(--cream)">
+          <span class="mono" style="background:var(--sage);color:#fff;font-weight:800;font-size:24px;border-radius:12px;padding:6px 12px">06</span>
+          <span style="font-size:32px;font-weight:700">Sensors &amp; live monitoring</span>
+        </div>
+        <!-- labels with leader lines -->
+        <svg width="1920" height="1080" style="position:absolute;left:0;top:0"><g fill="none" stroke="#F8F7F2" stroke-width="3"><path d="M1090 120 H1010 L962 70"/><path d="M500 760 V650 L594 618"/></g><g fill="#28332D" stroke="#F8F7F2" stroke-width="5"><circle cx="960" cy="66" r="12"/><circle cx="594" cy="616" r="12"/></g></svg>
+        <div style="position:absolute;left:1090px;top:72px;background:rgba(40,51,45,.92);border:2px solid var(--edge);border-left:8px solid var(--sage);border-radius:16px;padding:14px 24px;color:var(--cream)">
+          <div style="font-size:30px;font-weight:700">Pyranometer</div><div class="mono" style="font-size:19px;color:var(--soft);letter-spacing:.06em">SOLAR IRRADIANCE</div>
+        </div>
+        <div style="position:absolute;left:330px;top:760px;background:rgba(40,51,45,.92);border:2px solid var(--edge);border-left:8px solid var(--sage);border-radius:16px;padding:14px 24px;color:var(--cream)">
+          <div style="font-size:30px;font-weight:700">BME280</div><div class="mono" style="font-size:19px;color:var(--soft);letter-spacing:.06em">TEMP · HUMIDITY · PRESSURE</div>
+        </div>
+        <!-- data pill -->
+        <div class="mono" style="position:absolute;left:1000px;top:330px;display:flex;align-items:center;gap:12px;background:rgba(40,51,45,.92);border:2px solid var(--sage);border-radius:999px;padding:12px 24px;color:var(--cream);font-size:28px;font-weight:800;box-shadow:0 0 30px rgba(125,157,134,.5)">
+          <span style="width:14px;height:14px;border-radius:50%;background:var(--sage);box-shadow:0 0 0 6px rgba(125,157,134,.35)"></span>25.00 W/m²
+        </div>
+        <!-- route bar -->
+        <div style="position:absolute;left:56px;bottom:46px;display:flex;align-items:center;gap:0;background:rgba(40,51,45,.92);border:2px solid var(--edge);border-radius:22px;padding:18px 30px;color:var(--cream)">
+          <div style="display:flex;align-items:center" class="mono">
+            <span style="display:flex;flex-direction:column;align-items:center;gap:8px;font-size:17px;font-weight:700;color:var(--sage)"><i style="width:20px;height:20px;border-radius:50%;background:var(--sage)"></i>CAMERA</span>
+            <i style="width:70px;height:4px;background:var(--sage);margin:0 6px 26px"></i>
+            <span style="display:flex;flex-direction:column;align-items:center;gap:8px;font-size:17px;font-weight:700;color:var(--sage)"><i style="width:20px;height:20px;border-radius:50%;background:var(--sage)"></i>LILYGO</span>
+            <i style="width:70px;height:4px;background:var(--sage);margin:0 6px 26px"></i>
+            <span style="display:flex;flex-direction:column;align-items:center;gap:8px;font-size:17px;font-weight:800;color:var(--cream)"><i style="width:20px;height:20px;border-radius:50%;background:var(--cream);box-shadow:0 0 0 7px rgba(248,247,242,.25)"></i>CELLULAR</span>
+            <i style="width:70px;height:4px;background:rgba(221,232,223,.25);margin:0 6px 26px"></i>
+            <span style="display:flex;flex-direction:column;align-items:center;gap:8px;font-size:17px;font-weight:700;color:rgba(221,232,223,.45)"><i style="width:20px;height:20px;border-radius:50%;border:3px solid rgba(221,232,223,.4)"></i>NGROK</span>
+            <i style="width:70px;height:4px;background:rgba(221,232,223,.25);margin:0 6px 26px"></i>
+            <span style="display:flex;flex-direction:column;align-items:center;gap:8px;font-size:17px;font-weight:700;color:rgba(221,232,223,.45)"><i style="width:20px;height:20px;border-radius:50%;border:3px solid rgba(221,232,223,.4)"></i>FLASK</span>
+            <i style="width:70px;height:4px;background:rgba(221,232,223,.25);margin:0 6px 26px"></i>
+            <span style="display:flex;flex-direction:column;align-items:center;gap:8px;font-size:17px;font-weight:700;color:rgba(221,232,223,.45)"><i style="width:20px;height:20px;border-radius:50%;border:3px solid rgba(221,232,223,.4)"></i>DESKTOP</span>
+          </div>
+        </div>
+        <!-- data tray -->
+        <div style="position:absolute;right:50px;bottom:40px;display:flex;gap:12px;background:rgba(40,51,45,.92);border:2px solid var(--edge);border-radius:24px;padding:14px;color:var(--cream)">
+          <div style="width:150px;height:96px;border-radius:16px;background:var(--sage);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:18px;font-weight:700"><svg width="36" height="36" viewBox="0 0 48 48"><g fill="none" stroke="#fff" stroke-width="3.5"><path d="M24 44s14-13 14-24a14 14 0 0 0-28 0c0 11 14 24 14 24z"/><circle cx="24" cy="20" r="5"/></g></svg>Location</div>
+          <div style="width:150px;height:96px;border-radius:16px;background:var(--sage);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:18px;font-weight:700"><svg width="36" height="36" viewBox="0 0 48 48"><g fill="none" stroke="#fff" stroke-width="3.5"><rect x="6" y="6" width="36" height="36" rx="4"/><path d="M18 6v36M30 6v36M6 18h36M6 30h36"/></g></svg>Shading</div>
+          <div style="width:150px;height:96px;border-radius:16px;border:2px dashed rgba(221,232,223,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:18px;font-weight:600;color:rgba(221,232,223,.55)"><svg width="36" height="36" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="24" r="8"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6"/></g></svg>Irradiance</div>
+          <div style="width:150px;height:96px;border-radius:16px;border:2px dashed rgba(221,232,223,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:18px;font-weight:600;color:rgba(221,232,223,.55)"><svg width="36" height="36" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3"><path d="M20 28V9a4 4 0 0 1 8 0v19a8 8 0 1 1-8 0z"/></g></svg>Environment</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <ul style="margin:0;padding-left:18px;font-size:17px;line-height:1.55;color:var(--char)">
+        <li>Dark glass overlays stay readable on any background.</li>
+        <li>Section number in mono, labels with leader lines to the exact part.</li>
+        <li>The route bar shows real progress along a line; the tray reads like a dock.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · Video UI refresh</span><span>1 / 4</span></div>
+</section>
+
+<!-- ================= PAGE 2: MOBILE ================= -->
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="hd">
+    <small>Video UI refresh · 2 of 4</small>
+    <h1>Phone screens: location and Blynk</h1>
+    <p>The location screen is your chosen option C, shown in its three animated states. Blynk uses the same design, with every reading in monospace.</p>
+  </div>
+  <div class="cur">
+    <figure><figcaption>Current · location</figcaption><img src="ui_board/current_location.jpg"></figure>
+    <figure><figcaption>Current · Blynk</figcaption><img src="ui_board/current_blynk.jpg"></figure>
+  </div>
+
+  <div class="cap" style="position:absolute;left:70px;top:222px"><span class="tagnew">NEW</span>Location · idle</div>
+  <div class="cap" style="position:absolute;left:510px;top:222px">Locating</div>
+  <div class="cap" style="position:absolute;left:950px;top:222px">Saved</div>
+  <div class="cap" style="position:absolute;left:1430px;top:222px"><span class="tagnew">NEW</span>Blynk · live readings</div>
+
+  <!-- location: idle -->
+  <div class="phone" style="left:70px;top:262px"><div class="screen app loc"><div class="notch"></div>
+    <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+    <div class="title"><div class="lab">Solar Tracker</div><h3>Solar Tracker Setup</h3><p>Place your phone near the solar tracker and press the button below.</p></div>
+    <svg class="radar" width="340" height="340" viewBox="0 0 340 340"><g fill="none" stroke="#DDE8DF" stroke-width="2"><circle cx="170" cy="170" r="100" opacity=".3"/><circle cx="170" cy="170" r="135" opacity=".18"/><circle cx="170" cy="170" r="166" opacity=".1"/></g></svg>
+    <div class="go"><svg width="38" height="38" viewBox="0 0 48 48"><g fill="none" stroke="#355C4D" stroke-width="3.5"><path d="M24 44s14-13 14-24a14 14 0 0 0-28 0c0 11 14 24 14 24z"/><circle cx="24" cy="20" r="5"/></g></svg>Get My<br>Location</div>
+    <div class="panel read"><span class="lab">Waiting for location</span><div class="grid"><span class="lab">LAT</span><span class="val" style="font-size:22px;opacity:.35">— — —</span><span class="lab">LONG</span><span class="val" style="font-size:22px;opacity:.35">— — —</span><span class="lab">ACC</span><span class="val" style="font-size:22px;opacity:.35">— — —</span></div></div>
+  </div></div>
+
+  <!-- location: locating -->
+  <div class="phone" style="left:510px;top:262px"><div class="screen app loc"><div class="notch"></div>
+    <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+    <div class="title"><div class="lab">Solar Tracker</div><h3>Solar Tracker Setup</h3><p>Place your phone near the solar tracker and press the button below.</p></div>
+    <svg class="radar" width="340" height="340" viewBox="0 0 340 340"><g fill="none" stroke="#DDE8DF" stroke-width="2"><circle cx="170" cy="170" r="100" opacity=".35"/><circle cx="170" cy="170" r="135" opacity=".22"/><circle cx="170" cy="170" r="166" opacity=".12"/></g><path d="M170 170 L170 35 A135 135 0 0 1 287 102 Z" fill="#7D9D86" opacity=".35"/><circle cx="235" cy="120" r="7" fill="#F8F7F2"/></svg>
+    <div class="go" style="transform:translate(-50%,-50%) scale(.95);box-shadow:0 0 0 12px rgba(221,232,223,.16),0 0 0 26px rgba(125,157,134,.25)"><svg width="38" height="38" viewBox="0 0 48 48"><g fill="none" stroke="#355C4D" stroke-width="3.5"><path d="M24 44s14-13 14-24a14 14 0 0 0-28 0c0 11 14 24 14 24z"/><circle cx="24" cy="20" r="5"/></g></svg>Locating…</div>
+    <div class="panel read"><span class="live">LOCATING</span><div class="grid"><span class="lab">LAT</span><span class="val" style="font-size:22px;opacity:.6">25.2█</span><span class="lab">LONG</span><span class="val" style="font-size:22px;opacity:.35">— — —</span><span class="lab">ACC</span><span class="val" style="font-size:22px;opacity:.35">— — —</span></div></div>
+  </div></div>
+
+  <!-- location: saved -->
+  <div class="phone" style="left:950px;top:262px"><div class="screen app loc"><div class="notch"></div>
+    <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+    <div class="title"><div class="lab">Solar Tracker</div><h3>Solar Tracker Setup</h3><p>Place your phone near the solar tracker and press the button below.</p></div>
+    <svg class="radar" width="340" height="340" viewBox="0 0 340 340"><g fill="none" stroke="#DDE8DF" stroke-width="2"><circle cx="170" cy="170" r="100" opacity=".3"/><circle cx="170" cy="170" r="135" opacity=".18"/><circle cx="170" cy="170" r="166" opacity=".1"/></g></svg>
+    <div class="go" style="background:var(--sage);color:#fff;box-shadow:0 0 0 12px rgba(125,157,134,.3)"><svg width="44" height="44" viewBox="0 0 48 48"><path d="M13 24l7 7 15-16" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Saved</div>
+    <div class="panel read"><span class="ok" style="font-size:14px;padding:6px 12px">✓ Location successfully saved</span><div class="grid"><span class="lab">LAT</span><span class="val">25.23° N</span><span class="lab">LONG</span><span class="val">51.56° E</span><span class="lab">ACC</span><span class="val">± 10.3 m</span></div></div>
+  </div></div>
+
+  <!-- blynk -->
+  <div class="phone" style="left:1430px;top:262px"><div class="screen app"><div class="notch"></div>
+    <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+    <div style="padding:14px 20px 0;display:flex;justify-content:space-between;align-items:flex-end">
+      <div><div class="lab">Blynk</div><div style="font-size:26px;font-weight:800;margin-top:4px">Solar Tracker</div></div>
+      <span class="live">ONLINE</span>
+    </div>
+    <div style="padding:14px 16px 0;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div class="panel" style="grid-column:span 2;padding:14px 16px;border-radius:18px;background:rgba(125,157,134,.28);border-color:rgba(125,157,134,.6)"><div class="lab">Solar irradiance · pyranometer</div><div class="val" style="font-size:40px;margin-top:4px">25.00<i>W/m²</i></div></div>
+      <div class="panel" style="padding:12px 14px;border-radius:16px"><div class="lab">Ambient</div><div class="val" style="font-size:26px;margin-top:4px">50.47<i>°C</i></div></div>
+      <div class="panel" style="padding:12px 14px;border-radius:16px"><div class="lab">Humidity</div><div class="val" style="font-size:26px;margin-top:4px">21.4<i>%</i></div></div>
+      <div class="panel" style="padding:12px 14px;border-radius:16px"><div class="lab">Pressure</div><div class="val" style="font-size:26px;margin-top:4px">1014.8<i>hPa</i></div></div>
+      <div class="panel" style="padding:12px 14px;border-radius:16px"><div class="lab">Wind</div><div class="val" style="font-size:26px;margin-top:4px">3.6<i>m/s</i></div></div>
+      <div class="panel" style="padding:12px 14px;border-radius:16px"><div class="lab">Thermal avg</div><div class="val" style="font-size:26px;margin-top:4px">27.41<i>°C</i></div></div>
+      <div class="panel" style="padding:12px 14px;border-radius:16px"><div class="lab">Thermal max</div><div class="val" style="font-size:26px;margin-top:4px">30.48<i>°C</i></div></div>
+      <div class="panel" style="grid-column:span 2;padding:12px 16px;border-radius:16px;display:flex;align-items:center;gap:12px"><svg width="30" height="30" viewBox="0 0 48 48"><g fill="none" stroke="#DDE8DF" stroke-width="3.5" stroke-linecap="round"><circle cx="24" cy="24" r="17"/><path d="M24 14v10l7 5"/></g></svg><div><div style="font-size:16px;font-weight:700">Time-stamped by RTC</div><div class="lab" style="font-size:11px">BME280 · MLX90640 · wind · pyranometer</div></div></div>
+    </div>
+  </div></div>
+
+  <div style="position:absolute;left:1840px;top:276px"></div>
+  <div class="foot"><span><b>TutorBin</b> · Video UI refresh</span><span>2 / 4</span></div>
+</section>
+
+<!-- ================= PAGE 3: DESKTOP ================= -->
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="hd">
+    <small>Video UI refresh · 3 of 4</small>
+    <h1>Desktop: received image and Python analysis</h1>
+    <p>The folder where Flask saves the photo, and the Python window that analyses it, in the same dark design. The three stages still morph on your real images.</p>
+  </div>
+  <div class="cur">
+    <figure><figcaption>Current · folder</figcaption><img src="ui_board/current_desktop.jpg"></figure>
+    <figure><figcaption>Current · Python</figcaption><img src="ui_board/current_python.jpg"></figure>
+  </div>
+
+  <div class="cap" style="position:absolute;left:70px;top:300px"><span class="tagnew">NEW</span>Received_Images folder</div>
+  <div class="app" style="position:absolute;left:70px;top:340px;width:860px;height:620px;border-radius:22px;overflow:hidden;box-shadow:0 30px 70px rgba(40,51,45,.28)">
+    <div class="bar"><div class="dots"><i></i><i></i><i></i></div><span class="mono" style="font-size:16px;color:var(--soft)">Desktop</span><span style="color:var(--soft)">/</span><span>Received_Images</span></div>
+    <div style="position:absolute;left:0;top:52px;bottom:0;width:220px;border-right:1.5px solid var(--edge);padding:20px 16px">
+      <div class="lab" style="margin-bottom:12px">Locations</div>
+      <div style="padding:10px 12px;border-radius:10px;font-size:16px;color:var(--soft)">Desktop</div>
+      <div style="padding:10px 12px;border-radius:10px;font-size:16px;font-weight:700;background:rgba(125,157,134,.3)">Received_Images</div>
+    </div>
+    <div style="position:absolute;left:250px;top:84px">
+      <div style="width:260px;border-radius:16px;padding:10px;background:rgba(125,157,134,.22);border:2px solid var(--sage)">
+        <img src="../assets/03_capture/rooftop_capture.jpg" style="width:100%;display:block;border-radius:8px">
+        <div class="mono" style="font-size:15px;font-weight:700;margin-top:10px;text-align:center">img_01.jpg</div>
+      </div>
+    </div>
+    <div class="panel" style="position:absolute;left:250px;right:30px;bottom:30px;padding:16px 20px;display:flex;align-items:center;gap:16px;border-radius:18px">
+      <span class="ok" style="font-size:15px;padding:7px 14px">✓ Saved</span>
+      <span style="font-size:17px">img_01.jpg received from the Flask server</span>
+      <span class="live" style="margin-left:auto">NEW</span>
+    </div>
+  </div>
+
+  <div class="cap" style="position:absolute;left:990px;top:300px"><span class="tagnew">NEW</span>Python · shading analysis</div>
+  <div class="app" style="position:absolute;left:990px;top:340px;width:860px;height:620px;border-radius:22px;overflow:hidden;box-shadow:0 30px 70px rgba(40,51,45,.28)">
+    <div class="bar"><div class="dots"><i></i><i></i><i></i></div><span>Python · Shading analysis</span><span class="ok" style="margin-left:auto;font-size:13px;padding:5px 12px">✓ COMPLETE</span></div>
+    <div style="position:absolute;left:24px;top:80px;width:280px">
+      <div class="lab" style="margin-bottom:14px">Pipeline</div>
+      <div class="panel" style="padding:12px 14px;border-radius:14px;margin-bottom:10px"><div class="lab" style="color:var(--sage)">01 · done</div><div style="font-size:17px;font-weight:700;margin-top:3px">Load image</div><div class="mono" style="font-size:12px;color:var(--soft);margin-top:3px">img_01.jpg · 800 × 600</div></div>
+      <div class="panel" style="padding:12px 14px;border-radius:14px;margin-bottom:10px"><div class="lab" style="color:var(--sage)">02 · done</div><div style="font-size:17px;font-weight:700;margin-top:3px">Detect roof floor</div><div class="mono" style="font-size:12px;color:var(--soft);margin-top:3px">34% of image</div></div>
+      <div class="panel" style="padding:12px 14px;border-radius:14px;border-color:var(--orange)"><div class="lab" style="color:var(--orange)">03 · done</div><div style="font-size:17px;font-weight:700;margin-top:3px">Detect shaded areas</div><div class="mono" style="font-size:12px;color:var(--soft);margin-top:3px">Shaded Areas Detected</div></div>
+      <div class="lab" style="margin-top:22px;margin-bottom:8px">Progress</div>
+      <div style="height:10px;border-radius:5px;background:rgba(221,232,223,.2)"><div style="width:100%;height:100%;border-radius:5px;background:var(--sage)"></div></div>
+    </div>
+    <div style="position:absolute;left:330px;top:80px;width:500px;height:375px;border-radius:14px;overflow:hidden;border:2px solid var(--edge)">
+      <img src="../assets/05_shading/stage3_assessment_orange.jpg" style="position:absolute;width:510px;left:-3px;top:-1px">
+    </div>
+    <div style="position:absolute;left:330px;top:474px;display:flex;gap:10px">
+      <span class="mono" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px;background:rgba(40,51,45,.55);border:1.5px solid var(--edge)"><i style="width:12px;height:12px;border-radius:3px;background:#3BB54A"></i>ROOF FLOOR</span>
+      <span class="mono" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px;background:rgba(40,51,45,.55);border:1.5px solid var(--orange)"><i style="width:12px;height:12px;border-radius:3px;background:var(--orange)"></i>SHADED AREAS DETECTED</span>
+    </div>
+    <div class="mono" style="position:absolute;left:330px;top:530px;font-size:13px;color:var(--soft);line-height:1.6">Scan line turns the roof green, then the shadows grow in orange,<br>on the same photo.</div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · Video UI refresh</span><span>3 / 4</span></div>
+</section>
+
+<!-- ================= PAGE 4: DASHBOARD ================= -->
+<section class="page">
+  <div class="wm"><span>TutorBin</span></div>
+  <div class="hd">
+    <small>Video UI refresh · 4 of 4</small>
+    <h1>Final assessment dashboard</h1>
+    <p>A complete report screen built from your Python results, replacing the old "Pending Assessment" screenshot. Every figure is yours, labelled as an estimate.</p>
+  </div>
+  <div class="cur">
+    <figure><figcaption>Current · report</figcaption><img src="ui_board/current_report.jpg"></figure>
+  </div>
+
+  <div class="app" style="position:absolute;left:70px;top:250px;width:1780px;height:770px;border-radius:26px;overflow:hidden;box-shadow:0 30px 70px rgba(40,51,45,.28)">
+    <div class="bar" style="height:64px;padding:0 26px">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <span style="font-size:21px">Solar Placement Assessment</span>
+      <span class="mono" style="margin-left:24px;font-size:14px;color:var(--soft);display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 48 48"><g fill="none" stroke="#DDE8DF" stroke-width="4"><path d="M24 44s14-13 14-24a14 14 0 0 0-28 0c0 11 14 24 14 24z"/><circle cx="24" cy="20" r="5"/></g></svg>25.23° N, 51.56° E</span>
+      <span class="ok" style="margin-left:auto;font-size:14px;padding:6px 14px">✓ Assessment complete</span>
+    </div>
+
+    <!-- recommended -->
+    <div class="panel" style="position:absolute;left:26px;top:90px;width:700px;height:250px;padding:24px 28px;background:rgba(125,157,134,.25);border-color:rgba(125,157,134,.6)">
+      <div class="lab">Recommended panel</div>
+      <div style="font-size:34px;font-weight:800;margin-top:8px;letter-spacing:-.5px">LONGi Hi-MO X10</div>
+      <div class="mono" style="font-size:16px;color:var(--soft);margin-top:4px">LR7-54HVD-485M · 485 W · bifacial</div>
+      <div style="display:flex;gap:10px;margin-top:22px;flex-wrap:wrap">
+        <span class="mono" style="font-size:15px;font-weight:700;padding:8px 14px;border-radius:999px;background:rgba(40,51,45,.55);border:1.5px solid var(--edge)">10 panels · 4.85 kWp</span>
+        <span class="mono" style="font-size:15px;font-weight:700;padding:8px 14px;border-radius:999px;background:rgba(40,51,45,.55);border:1.5px solid var(--edge)">South-facing</span>
+        <span class="mono" style="font-size:15px;font-weight:700;padding:8px 14px;border-radius:999px;background:rgba(40,51,45,.55);border:1.5px solid var(--edge)">25° tilt</span>
+        <span class="mono" style="font-size:15px;font-weight:700;padding:8px 14px;border-radius:999px;background:rgba(40,51,45,.55);border:1.5px solid var(--edge)">Portrait</span>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div style="position:absolute;left:750px;top:90px;width:1004px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+      <div class="panel" style="padding:20px 22px;height:250px;display:flex;flex-direction:column;justify-content:space-between"><div class="lab">Est. annual energy</div><div class="val" style="font-size:44px">10,354</div><div class="lab" style="font-size:12px">kWh / year</div></div>
+      <div class="panel" style="padding:20px 22px;height:250px;display:flex;flex-direction:column;justify-content:space-between"><div class="lab">Installation cost</div><div class="val" style="font-size:44px">23,747</div><div class="lab" style="font-size:12px">QAR</div></div>
+      <div class="panel" style="padding:20px 22px;height:250px;display:flex;flex-direction:column;justify-content:space-between"><div class="lab">Payback period</div><div class="val" style="font-size:44px">15.1</div><div class="lab" style="font-size:12px">years</div></div>
+      <div class="panel" style="padding:20px 22px;height:250px;display:flex;flex-direction:column;justify-content:space-between"><div class="lab">ROI</div><div class="val" style="font-size:44px">93%</div><div class="lab" style="font-size:12px">over 30 years</div></div>
+    </div>
+
+    <!-- chart -->
+    <div class="panel" style="position:absolute;left:26px;top:364px;width:1060px;height:380px;padding:18px 22px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:19px;font-weight:700">Annual energy by panel <span class="mono" style="font-size:13px;color:var(--soft);font-weight:500">· kWh / year</span></div><span class="mono" style="font-size:12px;color:var(--soft)">capacity → with shade → with shade + dust</span></div>
+      <div style="position:absolute;left:22px;right:22px;top:56px;bottom:18px;background:var(--cream);border-radius:14px;overflow:hidden">
+        <img src="../assets/07_dashboard_report/energy_by_panel_chart.jpg" style="position:absolute;left:38px;top:2px;width:940px">
+        <div style="position:absolute;left:784px;top:40px;width:82px;height:220px;border:4px solid var(--dark);border-radius:10px;box-shadow:0 0 0 6px rgba(125,157,134,.45)"></div>
+      </div>
+    </div>
+
+    <!-- inputs + losses -->
+    <div class="panel" style="position:absolute;left:1110px;top:364px;width:644px;height:180px;padding:18px 20px;display:flex;gap:18px">
+      <div style="width:190px;height:142px;border-radius:12px;overflow:hidden;flex:none"><img src="../assets/05_shading/stage3_assessment_orange.jpg" style="width:200px;margin:-2px 0 0 -5px"></div>
+      <div style="flex:1">
+        <div class="lab">Inputs</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin-top:10px">
+          <div><div class="lab" style="font-size:11px">Shading</div><div style="font-size:16px;font-weight:700;color:var(--orange)">Shaded areas detected</div></div>
+          <div><div class="lab" style="font-size:11px">Irradiance</div><div class="val" style="font-size:20px">25.00<i>W/m²</i></div></div>
+          <div><div class="lab" style="font-size:11px">Ambient</div><div class="val" style="font-size:20px">50.47<i>°C</i></div></div>
+          <div><div class="lab" style="font-size:11px">Wind</div><div class="val" style="font-size:20px">3.6<i>m/s</i></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" style="position:absolute;left:1110px;top:564px;width:644px;height:180px;padding:18px 20px">
+      <div class="lab">Shading &amp; dust losses</div>
+      <svg width="600" height="120" style="margin-top:8px"><rect x="10" y="10" width="90" height="100" rx="6" fill="#C6DBEF"/><rect x="120" y="32" width="90" height="78" rx="6" fill="#6BAED6"/><rect x="230" y="50" width="90" height="60" rx="6" fill="#08519C"/><g font-family="JetBrains Mono,Menlo" font-size="13" fill="#DDE8DF"><text x="350" y="40">capacity</text><text x="350" y="66">− shade</text><text x="350" y="92">− dust</text></g></svg>
+    </div>
+    <div class="mono" style="position:absolute;right:28px;bottom:6px;font-size:12px;color:var(--soft)">Estimated results from your Python analysis</div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · Video UI refresh</span><span>4 / 4</span></div>
+</section>
+</body>
+</html>
