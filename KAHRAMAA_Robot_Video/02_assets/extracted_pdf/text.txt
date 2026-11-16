@@ -1,0 +1,2589 @@
+
+--- page 1
+TEXAS A&MUNIVERSITYATQATAR
+MECHANICAL ENGINEERING
+MEEN401 | MechanicalEngineering Design I
+Design Review2
+Intelligent Automated Systemfor Reservoir Cleaning
+SponsoredbyKAHRAMAA
+AUTHORS
+Raihana Sattari, AlHouraAl-Ahen,Ayesha Khurram,Bedour Al-Qahtani, Noor Abdeen
+Consolidatingeditor: RaihanaSattari
+SPONSOR
+KAHRAMAA
+BODYWORD COUNT
+19,398 words
+DATE
+7 November 2026
+SEMESTER
+Fall2026
+Submitted for DesignReview 2
+MEEN401–MechanicalEngineering Design I
+Fall2026
+--- page 2
+ExecutiveSummary
+KAHRAMAAcurrentlycleanspotable-waterreservoirsthroughamanualprocessthatrequiresreservoir
+shutdown,draining,andhumanentry. Approximately15–20workersmayenterareservoirduringcleaning,
+and the process can take between two weeks and one month. Reservoirs vary significantly in size and
+configuration,withcapacitiesrangingfromapproximately1to70millionimperialgallonsandwaterdepths
+reaching 50 m. These conditions create challenges related to worker safety, water loss, reservoir downtime,
+cleaningconsistency, and navigationaround internal structures.
+This projectaims to developan intelligent automated reservoir-cleaning systemthatcan remove sediment,
+sludge, and debris while the reservoir remains full and in operation, eliminating the need for human
+entry during routine cleaning. The system must also protect drinking-water quality, minimize debris
+redistribution,navigateautonomouslyaroundinternalobstacles,supportremotemonitoringandmanual
+override,andallow safe recovery and practicalservicing.
+FollowingDR1, the team refined the project into 12 customer needs, 12 engineering requirements, and 22
+measurable engineering metrics. The House of Quality identified turbidity control, autonomous navigation,
+andreliablesystemoperationasimportanttechnicalpriorities. Functionalmodelingwasthenusedtodefine
+the required material, energy, and information flows. These functions were organized into four system
+modules: Power andActuation; Cleaning and DebrisHandling;Mobility, Deployment andRecovery;and
+Sensing, Controland Monitoring.
+Concepts were generated using brainstorming, 6-3-5 brainwriting, TRIZ contradiction analysis, and a
+morphological matrix. Seven complete system concepts were developed and evaluated. A Pugh matrix
+first screened the alternatives and identified Concepts C1, C2, and C4 as the strongest candidates. The
+subsequentIIAEevaluationrankedC1firstwithaweightedscoreof3556.20,followedbyC2at3357.36
+and C4at 3086.44. The differencebetween the twohighestscores exceededthe50-pointtiethreshold.
+The selected concept, C1, is a battery-powered tracked crawler using a soft rotating brush within a suction
+hood,onboardpumping,hydrocycloneseparation,polishingfiltration,andremovabledebrisstorage. Its
+trackedplatformprovidesstablemovementalongthereservoirfloor,whileonboardsensingandcontrol
+supportautonomousnavigation, monitoring, andsafe recoverywithoutroutine humanentry.
+Figure1. Selectedconcept: C1 battery-poweredtracked brush–hydrocyclone crawler.
+Thenextstagewillfocusondetailedcomponentselection,subsystemsizing,CADdevelopment,engineering
+calculations, interface refinement, and validation planning. A small-scale proof of concept will then be
+developed to evaluate the key cleaning, mobility, debris-handling, sensing, and control functions under
+representative operatingconditions.
+1
+--- page 3
+Tableof Contents
+Executive Summary 1
+Glossary 4
+1 Introduction 5
+2 Background Research 5
+3 Updated Problem Definition 7
+3.1 Solution-Neutral Problem Statement......................................................... 8
+3.2 Mission Statement....................................................................... 8
+3.3 Updated Technical Questions and Design Context.............................................. 8
+4 Customer Needs andNeedsAnalysis 9
+4.1 Customer Needs and ImportanceRatings..................................................... 10
+4.2 Needs Analysis......................................................................... 10
+4.2.1 Need in Context................................................................. 10
+4.2.2 UsageEnvironment.............................................................. 11
+4.2.3 Design Constraints............................................................... 11
+4.2.4 Design Assumptions............................................................. 11
+5 Requirements and House ofQuality 12
+5.1 Development of Engineering Requirements................................................... 12
+5.2 Engineering MetricsandTargetValues...................................................... 12
+5.2.1 Basis for TargetValues........................................................... 13
+5.3 Houseof Quality Analysis................................................................ 15
+5.3.1 Technical Correlations and Trade-offs................................................ 16
+5.4 Changes Since DR1..................................................................... 16
+6 FunctionalModeling 16
+6.1 Functional Modeling Process.............................................................. 16
+6.2 Black-BoxModel....................................................................... 17
+6.3 Correlation ofCustomer Needs to Functional Flows............................................ 17
+6.4 AggregatedFunctional Model.............................................................. 18
+6.5 Functional Model Review................................................................. 19
+7 Concept Generation 19
+7.1 Initial Brainstorming..................................................................... 19
+7.2 6-3-5 Brainwriting...................................................................... 20
+7.3 TRIZ ContradictionAnalysis.............................................................. 20
+7.3.1 Conflict 1: CleaningEffectiveness vs. Reservoir Protection............................... 21
+7.3.2 Conflict 2: CleaningProductivity vs. Water Quality..................................... 21
+7.4 Morphological Analysis.................................................................. 22
+7.5 Functional Basisfor ConceptDevelopment................................................... 22
+7.6 Development of CompleteSystem Concepts.................................................. 23
+7.7 Preliminary Engineering Analysis.......................................................... 24
+7.8 Feasibility andTrade-Off Analysis.......................................................... 24
+7.9 Concept-Generation Outcome.............................................................. 25
+8 Concept Selection 25
+8.1 Selection Criteria....................................................................... 25
+8.2 Pugh Matrix Screening................................................................... 26
+8.3 IIAE Evaluation........................................................................ 27
+8.4 50-Point Rule.......................................................................... 29
+8.5 ReconciliationandFinal Selection.......................................................... 29
+9 Concept Refinement 30
+9.1 RefinementOpportunities................................................................. 30
+9.2 RefinementOutcome..................................................................... 30
+10 ProductArchitecture and SystemIntegration 30
+10.1 From ConceptSelectionto Module Identification.............................................. 31
+10.2 Modularvs. Integral Architecture........................................................... 31
+10.3 Interface Definition...................................................................... 32
+10.4 Architecture Diagram and Integration........................................................ 33
+10.4.1 Planned IntegrationSequence...................................................... 35
+10.5 Architecture Risks....................................................................... 35
+2
+--- page 4
+11 ProjectManagement 36
+11.1 Work BreakdownStructure................................................................ 36
+11.2 Task Dependencies and Critical Path........................................................ 37
+11.3 GanttChartandScheduleMonitoring....................................................... 38
+11.4 Process Risk Assessment ................................................................. 43
+12 FinalDeliverables 45
+13 FutureWork 46
+14 Updated Conclusions 46
+15 Updated References and Appendices 48
+A Idea-Generation Evidence 51
+B Additional Concept Sketches 51
+C PreliminaryEngineeringCalculations 52
+D IIAEIndividual Evaluations andCalculations 52
+E SponsorInterview Form 53
+3
+--- page 5
+Glossary
+Term/Abbreviation Definition
+AUV Autonomous Underwater Vehicle.
+CAD Computer-Aided Design.
+DVL Doppler VelocityLog; an underwatersensor used toestimate vehicle velocity relative tothe
+surrounding water or bottom surface.
+DR1 / DR2 Design Review 1/ Design Review 2.
+HoQ House of Quality; a design tool used to relate customer needs to measurable engineering metrics.
+IIAE Individual Independent Attribute Evaluation; a weighted concept-selection method in which team
+members independentlyscoredesign alternatives.
+IMU Inertial Measurement Unit; a sensor thatmeasures motion and orientation usingaccelerometers
+and gyroscopes.
+KAHRAMAA QatarGeneral Electricity and Water Corporation; the project sponsor and operatorofQatar’s
+water reservoirs.
+MIG Million Imperial Gallons.
+MPN MostProbable Number; a microbiological measurementused toestimate bacterial concentration
+in water.
+NSF/ANSI 61 Standard addressing health effects andmaterialsuitability for componentsthatcontactdrinking
+water.
+NTU Nephelometric Turbidity Unit; a unit used to measurewater turbidityorcloudiness.
+Pugh Matrix A concept-screening method that compares alternatives against a selected datum using better (+),
+same (S), andworse (−) ratings.
+ROV Remotely Operated Vehicle.
+SLAM Simultaneous Localization and Mapping; a method usedto estimate a robot’sposition while
+building orupdating amap of its environment.
+TRIZ Theory of Inventive Problem Solving;astructured methodused to address design contradictions
+and generate concepts.
+WHO World Health Organization.
+4
+--- page 6
+1. Introduction
+KAHRAMAA,theQatarGeneralElectricityandWaterCorporation,wasestablishedin2000underLaw
+No. 10 and is the owner and operator of Qatar’s electricity and water networks[1]. Qatar’s drinking water
+is produced at desalination plants and stored in large reservoirs before distribution to homes and buildings.
+KAHRAMAAreportsapproximately2,417millionimperialgallonsofwater-storagecapacityacrossits
+reservoirnetwork[2]. Thesereservoirsalsosupportwater-supplyreliabilityduringperiodsofhighdemand
+or interruption [3]. Over time, sediment and sludge can accumulate on reservoir surfaces, while corrosion
+products and biological growth may also develop. Regular cleaning and disinfection are therefore required
+to maintain safe operatingconditions[3,4].
+KAHRAMAA currently cleans its reservoirs manually at intervals of approximately five years. Before
+cleaning, the reservoir is taken out of service and drained until approximately 20 cm of water remains.
+Accordingtotheteam’ssponsordiscussions,around15–20workersenterthereservoirtocleanthefloor
+and walls using brushes and high-pressure water jets, while an additional worker remains near the entrance
+forsafety. TheWHOseparatelyrecommendskeepinganattendantoutsidethetankaccesshatchduring
+entry[4]. Followingcleaning,thereservoirisdisinfected,flushed,refilled,andtestedbeforebeingreturned
+to service. The completeprocessmayrequire approximatelytwoweekstoonemonth.
+Thisprocesscreatesseveralchallenges. Humanentryexposespersonneltoconfined-spacehazards,slippery
+surfaces, chemicals, restricted access, and elevated temperatures [4]. Reservoir shutdown temporarily
+reducesavailablestoragecapacity,whiledrainingresultsinthelossoftreatedwaterdespiteKAHRAMAA’s
+objectiveofreducingwaterlosses[2]. Cleaningperformancealsodependsonmanualexecution,andthe
+existing process does not provide a detailed record of which areas have been cleaned. The design challenge
+isfurtherincreasedbythevariationbetweenreservoirs. Reservoirsmaybecircularorrectangular,range
+from approximately 1 to 70 million imperial gallons (MIG), reach water depths of up to 50 m, and contain
+internal columns,pipes,ladders, inlets,and outlets.
+The project originated directly from KAHRAMAA rather than through a market survey or request for
+proposals. Theteampreparedteninterviewquestionsanddiscussedthemwiththesponsorduringtheinitial
+projectmeetings. SponsormeetingsareexpectedtotakeplaceonMondays,subjecttotheavailabilityof
+the sponsor focal point and the representative assigned to the project, and meeting minutes are maintained
+to document decisions and feedback. The team also conducted a reservoir site visit on 21 September 2026,
+reviewedKAHRAMAA’sdrinking-water-qualityrequirements, andstudiedguidanceforwater-storage-tank
+cleaninganddisinfection[4,5]. Animportantclarificationfromthesponsordiscussionswasthateliminating
+human entry does not require eliminating all human involvement; an operator may still remotely supervise
+the system,intervenewhennecessary, and initiate anemergencystop.
+The project therefore aims to develop an intelligent automated system that can clean potable-water
+reservoirs while they remain full and in operation, eliminating the need for human entry during routine
+cleaning. The system must protect drinking-water quality, collect and remove sediment, sludge, and debris
+without unacceptable redistribution, operate with minimal human intervention,avoid damageto reservoir
+infrastructure, and provide monitoring of robot position and cleaning progress. The project scope is
+limited to the development and evaluation of a small-scale proof of concept under representative controlled
+conditions.
+During DR1, the team established the initial customer needs, problem definition, engineering requirements,
+and House of Quality. Since then, these elements have been refined using additional sponsor feedback,
+siteinformation,and designanalysis. The team has also completedfunctional modeling, ideageneration,
+concept refinement, concept selection, and preliminary product-architecture development. These activities
+provide the basisforthedesigndecisions andfurther developmentpresented in thisreport.
+2. BackgroundResearch
+The World Health Organization (WHO) describes a conventional process for cleaning and disinfecting
+water-storage tanks. The tank is first drained, after which internal surfaces are scrubbed using brushes,
+detergent, or high-pressure water jets. The tank is then disinfected using chlorine before being flushed,
+refilled, and returned to service [4]. The cleaning equipment, including hoses, pumps, and pipes, must also
+be cleaned to preventcontaminants frombeing reintroducedintothetank[4].
+5
+--- page 7
+Each stage of this process performs a different function. Draining provides access to the internal surfaces,
+mechanicalcleaningremovesdepositsthatcannotbeeliminatedthroughdisinfectionalone,andchlorination
+reduces remaining biological contamination. Therefore, an automated system operating while the reservoir
+remains full must still perform the required cleaning functions while avoiding contamination of the stored
+water. WHO guidance also identifies cleaning approaches that can reduce the need for direct human entry,
+supportingthe project’sobjectiveofeliminatingpersonnel entry during routinecleaning[4].
+Sediment accumulation is an important consideration because deposits in drinking-water storage tanks
+arenotuniform. Lytleetal. examinedsedimentsamplesfromdrinking-waterstoragetanksandreported
+substantial differences in particle size, density, composition, and shape between samples [6]. The deposits
+included iron and aluminum compounds, calcium-containing material, organic matter, and sand-like
+particles. Fine and lightweight particles can be easily resuspended, which increases the importance of
+capturing sediment closetothe cleaning interface rather thanallowing itto disperse intothe reservoir.
+Sediment can also reduce the effectiveness of disinfection. Liu et al. investigated chlorine penetration
+into drinking-water storage-tank sediment and showed that disinfectant penetration may be limited within
+deepersedimentlayers[7]. Thisfurthersupportsphysicallyremovingaccumulateddepositsratherthan
+relyingonlyonchemicaldisinfection. Fortheproposedsystem,thecleaningmechanismmusttherefore
+mobilize andcollectsedimentwhile limiting redistribution into thesurrounding potablewater.
+Workersafetyprovidesanothermajormotivationforautomation. Reservoirsmeetthegeneralcharacteristics
+ofconfinedspacesbecausepersonnelcanphysicallyenterthem,butaccessandexitarerestrictedandthe
+spacesarenotintendedforcontinuousoccupancy. OSHAidentifieshazardsassociatedwithconfined-space
+entry,includinghazardousatmospheresanddifficultaccessconditions[8]. Sponsor-providedoperating
+information indicatesthatwatertemperaturesmayreachapproximately 45◦C andoperating water depths
+may reach 50 m. At a depth of 50 m, the hydrostatic gauge pressure is approximately 490.5 kPa, or 4.9 bar,
+confirming that directhumanoperationin a fullreservoir isnotpractical.
+Water quality must also remain protected throughout robotic deployment. KAHRAMAA specifies physical,
+chemical, and microbiological requirements for drinking water, including limits or operating ranges for
+turbidity,residualchlorine,andmicrobiologicalindicatorssuchasE.coliandtotalcoliforms[5]. These
+requirementsmeanthatsuccessfulcleaningcannotbeevaluatedonlybyvisualremovalofsediment. The
+system must also prevent unacceptablechangesto theexistingwater conditions duringcleaning.
+Material selection is therefore important. NSF/ANSI 61 establishes health-effects requirements for
+componentsandmaterialsthatcomeintocontactwithdrinkingwater[9]. Relevantwater-contactcomponents
+may include coatings, seals, lubricants, hoses, housings, and other mechanical parts. Consequently,
+componentscannotbeselectedonlyonthebasisofstrength,corrosionresistance,ormechanicalperformance;
+their suitabilityforpotable-waterservicemustalsobe considered.
+Severalexistingroboticsystemsdemonstratethattankandreservoircleaningcanbeperformedwithout
+routine human entry. Subsea Tech’s AspiROV is a remotely operated cleaning system designed for
+drinking-watertanks. Itusessuctiontocollectsedimentfromthetankfloorthroughahoseconnectedto
+external pumpingequipment andcan operate at depths up to 100 m[10]. The published average cleaning
+rateofapproximately12.5m2/hprovidesausefulbenchmarkfortheproposedsystem. However,thesystem
+remainsexternallyconnectedandoperator controlled,which differsfrom theteam’sgoalofdeveloping a
+battery-poweredautonomous platform.
+Lee et al. developed the PIRO-U3 underwater cleaning robot for industrial reservoirs [11]. The system
+uses tracked locomotion and a submersible pump to remove accumulated material while the reservoir
+remains filled. It can follow predefined cleaning paths, demonstrating the feasibility of combining tracked
+underwatermovementwithautomatedcoverage. Thestudyalsoreportedthatheavysludgeloadingcan
+disturb the robot’s motion and require path correction, showing that cleaning load, traction, and navigation
+performance must beconsidered together[11].
+WEDA’s VR-50 provides another relevant commercial benchmark. The remote-controlled system is
+intended for drinking-water reservoir cleaning and includes a submersible pump, camera, and lighting
+system [12]. Its published pump capacity of up to 600 L/min provides an additional comparison for
+preliminary suction-system sizing, although the M3 target in Section 5 is based on AspiROV. WEDA also
+offerstheVR-600forlargedrinking-waterreservoirs;thisremote-operatedmodelisusedintheupdated
+HoQ competitive assessment [13]. Tank-cleaning applications outside the drinking-water industry provide
+6
+--- page 8
+additionalexamplesofremoteoperation. Roboticsystemsusedforcrude-oiltankcleaning,forexample,
+demonstrate how video monitoring and remote cleaning can reduce personnel exposure, although their
+operatingenvironments and cleaningprocedures differ substantially frompotable-waterreservoirs [14].
+Amongthesystemsreviewed,theprincipallimitationsrelativetothisproject’srequirementsarerelianceon
+operatorcontrolorexternalconnections,limitedautonomy,andaprimaryfocusonfloorcleaning. These
+observationsdonotimplythatnoexistingsystemcanprovideotheradvancedfunctions;rather,theyidentify
+the designopportunitiesmost relevantto the KAHRAMAAapplication.
+Because most existing reservoir-cleaning robots primarily operate on the floor, the team also reviewed
+underwater wall-cleaning technologies. Chen et al. developed an underwater ship-hull cleaning robot that
+uses crawler mechanisms to move along submerged surfaces while thrusters maintain contact with the
+hull[15]. Thesystemusessystematiccleaningpathstoimprovecoverageandreducerepeatedcleaning.
+Although a ship hull differs from a concrete potable-water reservoir, the study demonstrates possible
+methods formaintainingcontactwith submerged surfaces and managingcleaningcoverage.
+Underwater navigation presents another major design challenge because Global Positioning System
+(GPS)signalsarenotdirectlyavailableunderwater,andposition-estimationerrorsmayaccumulateasan
+autonomousvehiclemoves[16]. Camera-basednavigationmayalsobecomeunreliablewhenvisibilityis
+poor. Swimming-pool cleaningrobots have used inertial sensing,includingaccelerometer and gyroscope
+measurements, to estimate robot motion and position [17]; however, swimming pools are significantly
+smallerand generallyprovidelesscomplexoperatingenvironments thanKAHRAMAA reservoirs.
+Route planning is also closely connected to cleaning efficiency. Mahmud et al. developed a multi-objective
+route-planningmethodforanunderwatercleaningrobotoperatinginawaterreservoiranddemonstrated
+that route selection affects both cleaning time and energy consumption [18]. Acoustic positioning provides
+another possible navigation input. The Water Linked Underwater GPS G2 system reports underwater
+positioningaccuracybelow0.2%ofhorizontalrangeandupdateratesofapproximately2–4Hz[19]. These
+technologiesindicatethatlocalization,obstacledetection,routeplanning,andcleaning-coveragemonitoring
+should be treated asconnectedfunctions ratherthan independentsubsystems.
+The background research directly informed the subsequent design activities. Conventional cleaning
+practices identified the functions that the automated system must replace, while sediment and water-quality
+studies emphasized the importance of debris capture, controlled cleaning, and potable-water-safe materials.
+Existing robotic systems provided benchmarks for operating depth, cleaning rate, pumping capability,
+mobility,andoperatorinvolvement. Navigationandroute-planningresearchidentifiedmethodsthatmay
+supportautonomousmovementandcoveragetracking. Thesefindingsweresubsequentlyusedtorefine
+theengineeringrequirementsandmetricsinSection5andtogenerateandevaluatethedesignconcepts
+presented inSections 7–9.
+3. UpdatedProblemDefinition
+ThefundamentalproblemhasnotchangedsinceDR1. KAHRAMAAstillrequiresasaferandmoreeffective
+method for cleaning potable-water reservoirs while eliminating human entry, protecting drinking-water
+quality, and avoiding the reservoir shutdown and water loss associated with the current manual process.
+Sponsordiscussions,thereservoirsitevisit,water-qualityinformation,functionalmodeling,andconcept
+development have reinforced theseprioritiesrather than changingtheoriginalproblem.
+The team’s understanding of theproblem has, however, become more detailed. The reservoirenvironment
+includes large submerged areas, dense structural pillars, inlet and outlet features, varying geometries, and
+water depths reaching approximately 50 m. The team also clarified that the approximately 200 kg of
+debris reported by KAHRAMAA represents material accumulated over the historical cleaning interval of
+approximatelyfiveyears. Becausetheproposedsystemisintendedtocleanmorefrequently,thisvalueis
+no longertreated as theamount thatmust bestored orremovedduringonerobotic deployment.
+SinceDR1,theprojecthasalsoprogressedfromanopensolutionspacetoapreferredconcept. Thecurrent
+design direction is a battery-powered tracked underwater cleaning system using brush-assisted suction,
+onboarddebrisseparationand storage, autonomousnavigation,remotesupervision,andrecoverythrough
+the existing reservoir access. This selected concept is described and justified later in Sections 8 and 9; the
+problemstatementitself remainssolution-neutral.
+7
+--- page 9
+3.1 Solution-NeutralProblemStatement
+Thefinalizedsolution-neutral problem statement is:
+KAHRAMAA needs a safer and more effective way to remove sediment, sludge, and
+debris from potable-water reservoirs while protecting water quality, eliminating human
+entry intothereservoir,and minimizingreservoirdowntime and water loss.
+Thestatementremainsappropriatebecausetheunderlyingcustomerproblemhasnotchanged. Itdefines
+the required outcome without specifying a robot configuration, cleaning mechanism, mobility method,
+power source, sensing technology, or control architecture. This allowed the team to generate and compare
+multiple solutionsbeforeselectinga preferred concept.
+3.2 MissionStatement
+ThemissionstatementdevelopedinDR1wasreviewedagainsttheupdatedcustomerneeds,engineering
+requirements, and concept-development work. The main project mission remains unchanged, while several
+assumptionsarenow betterdefined.
+Table1. Updated Project Mission Statement
+Mission Statement Element Updated ProjectDefinition
+Product description An intelligent reservoir-cleaning system for KAHRAMAA that removes sediment, sludge,
+and debris while the reservoirremainsfullandin operation, with minimal human
+intervention.
+Key businessor humanitarian
+goals
+Eliminate human entry duringroutine cleaning; improve worker safety; reducereservoir
+downtime and waterloss;provide effectivedebris removal; and protectdrinking-water
+quality.
+Primarymarket KAHRAMAA, as the owner and operator ofthe reservoirs.
+Secondary market Other water utilities and organizations operating large potable-water storage reservoirs.
+Assumptions A trained operator will be available for remotesupervision; the systemwillperform
+continuous cleaning cycles, returning for servicing when its debris collection capacity is
+reached; the collected material is expected to consist mainly of fine sedimentand debris;
+and the system will use existing reservoiraccessfor deployment and recovery.
+Stakeholders Primary: KAHRAMAA,reservoir operations andcleaningpersonnel, andwater-quality
+personnel. Secondary: safety personnel, maintenancetechnicians, KAHRAMAA
+management,and contractors. Tertiary: water consumersand regulatory or public-health
+authorities.
+Avenues forcreative design Cleaning and debris-removal mechanisms; underwater mobility; navigation and mapping;
+sensing; battery and chargingapproaches; remote monitoringandcontrol; recovery
+methods; and intelligent cleaning functions.
+Scope limitations Development of a small-scaleproof ofconcept rather than a production-ready
+KAHRAMAA system; controlledtesting using representative sediment,obstacles, and
+operatingconditions rather than a full-scale reservoir.
+3.3 UpdatedTechnicalQuestions and Design Context
+ThetentechnicalquestionsaddressedinDR1were revisitedto determinewhether theteam’slaterdesign
+workchangedtheoriginal conclusions.
+1. What is theproblemreallyabout?
+Theproblemremainstheneedforasaferandmoreeffectivereservoir-cleaningprocessthatremoves
+sediment, sludge, and debris while eliminating human entry, protecting potable-water quality, and
+avoiding routine reservoirshutdown and draining.
+2. What implicitexpectations anddesires areinvolved?
+In addition to effective cleaning, KAHRAMAA expects minimal human intervention, protection of
+reservoir assets, remote monitoring, reliable recovery, practical servicing, and lower operational burden
+than the existingmanualprocess. Theseexpectations remainvalid.
+3. Are thestated customerneeds,functionalrequirements, andconstraintsappropriate?
+Yes. The updated needs and requirements continue to address cleaning effectiveness, human-entry
+elimination, operation in a full reservoir, water-quality protection, navigation, monitoring, recovery, and
+8
+--- page 10
+maintainability. Later functional and concept-development work confirmed rather than contradicted
+these needs.
+4. What avenues areopen forcreativedesign and inventive problem-solving?
+During DR1, the solution space remained open across cleaning, debris handling, mobility, sensing,
+navigation,power,monitoring,andrecovery. Thesealternativeswereexploredthroughbrainstorming,
+6-3-5brainwriting,TRIZ,andmorphologicalanalysis. Conceptselectionhasnownarrowedthesolution
+space,although subsystemdetailsremain open for refinement.
+5. What avenues arelimitedornotopenforcreativedesign? What limitsthescope?
+The design cannot require routine human entry, intentional reservoir draining, unacceptable degradation
+of drinking-water quality, or damage to reservoir structures and equipment. The project scope is
+also limited to development and controlled testing of a small-scale proof of concept rather than a
+production-readyfull-scalesystem.
+6. What characteristicsor propertiesmust the product have?
+Thesystemmustoperateunderwater,removeandcollectdebris,functionwhilethereservoirremains
+full and inoperation, navigatearound internalstructures, protect potable-water quality,support remote
+supervisionandmanualoverride, and allow saferecovery.
+7. What characteristicsor propertiesmust the product not have?
+The system must not require routine human entry, redistribute collected debris into the stored water,
+damagereservoirsurfacesorequipment,introduceunsuitablematerialsintopotablewater,ordependon
+intentionalreservoir shutdown and draining.
+8. What aspects of thedesigntaskcanand shouldbe quantifiednow?
+Theupdatedrequirementsinclude22measurableengineeringmetrics. Quantifiedconditionsinclude
+reservoir capacity of approximately 1–70 MIG, water depth up to 50 m, historical debris accumulation
+ofapproximately200kgoveraboutfiveyears,currentcleaninglaborandduration,cleaningcoverage
+and rate, water-quality parameters, navigation performance, operator intervention, monitoring, recovery,
+and maintenance.
+9. Doanybiasesexistinthechosentaskstatementorterminology? Hasthetaskbeenposedatthe
+appropriate level ofabstraction?
+Thesolution-neutralproblemstatementremainsappropriatelyabstractbecauseitdoesnotprescribea
+robottype,cleaningmechanism,mobilitymethod,powersystem,orcontrolarchitecture. Althougha
+preferredconcept hasnow been selected,the problemdefinition remains independent of thatsolution.
+10. What are the technicaland technologicalconflicts inherent in thedesigntask?
+The mainconflictsremain cleaning effectivenessversussurface andwater-qualityprotection,cleaning
+rate versus debris redistribution, autonomy versus operator control and recovery, and underwater power
+capabilityversussystemcomplexityandmaintenance. LaterTRIZandconcept-generationactivities
+explicitlyaddressedseveraloftheseconflicts.
+Revisiting the ten questions confirmed that the fundamental problem and customer priorities remain valid.
+The primary change since DR1 is not the problem itself, but the level of design maturity. The team has
+translated the original problem into measurable requirements, explored multiple solution alternatives,
+selected a preferred concept, and defined the major system architecture. The remaining work therefore
+shifts from problemclarification toward detailed design,component selection, engineering analysis, CAD
+development, andvalidation.
+4. CustomerNeedsand Needs Analysis
+ThecustomerneedsweredevelopedfromdirectengagementwithKAHRAMAAthroughsponsormeetings,
+thereservoirsitevisit,andreviewofthecurrentcleaningprocess. Theteampreparedaninterviewquestion
+bank before the sponsor discussions to address the current cleaning method, reservoir geometry, operating
+conditions, autonomy, water quality, power, monitoring, recovery, and success criteria. A copy of the
+interviewformisprovidedinAppendixE.
+Sponsor statements were interpreted into concise, solution-neutral needs that describe what the system
+must accomplish without prescribing how it should be designed. For example, the sponsor’s goal of
+removing workers from the cleaning process was translated into the need to eliminate human entry, while
+the requirement to operate in a full reservoir became a separate need for in-service cleaning. Twelve
+9
+--- page 11
+finalized customerneeds wereidentified.
+4.1 CustomerNeeds andImportance Ratings
+Each customer need was assigned an importance rating from 1 to 5, where 5 represents the highest priority.
+The ratingswerebasedon the prioritiesexpressed during sponsor discussionsand on the consequenceof
+failing to satisfy each need. Needs related directly to personnel safety, effective debris removal, continuous
+reservoiroperation,anddrinking-waterprotection receivedthe highest ratings.
+Table2. Customer Needs andImportanceRatings
+Need Category Project Need Importance
+N1 Personnel Safety Eliminate the need forhuman entryinto the reservoir. 5
+N2 Cleaning Performance Cleanrequired reservoirwater-contactsurfaces and structures while
+collecting andremoving sediment, sludge, and debriswithout
+redistributingit into the stored water.
+5
+N3 Reservoir Operation Cleanwhile the reservoir remains full of waterandin operation. 5
+N4 Water Quality Maintain required drinking-water quality throughout therobot’s full
+deployment process.
+5
+N5 Operational Efficiency Reduce reservoir downtime, water loss, and operating costs. 4
+N6 Automation Operate with minimal human intervention. 4
+N7 Navigation Navigate autonomously and avoid internal obstacles. 4
+N8 Safetyand Control Allowmanual override and emergencystopping. 4
+N9 Infrastructure Protection Avoid damagetoreservoir structures,equipment, and instrumentation. 3
+N10 Recovery Allowreliable recoveryif the system loses power, mobility, or
+communication.
+3
+N11 Monitoring Allowremote monitoring, mapping,robot-location tracking, and
+cleaning-progressmonitoring.
+3
+N12 Maintenance Requireminimal maintenanceandallowpractical servicing. 2
+NeedsN1–N4receivedthehighestimportanceratingof5becausetheyaddressthefundamentalpurposeof
+theproject. N1directlyaddressesthesponsor’spriorityofeliminatingpersonnelentry. N2requiresthe
+systemnotonlytoloosendepositsbuttocollectandremovethemfromthereservoir. N3preservesreservoir
+availabilitybyrequiringcleaningwhilethereservoirremainsfullandoperational,whileN4ensuresthat
+this benefit isnotachievedattheexpenseofdrinking-waterquality.
+Needs N5–N8 were assigned an importance rating of 4 because they strongly influence the operational
+value and safety ofthe system. Reduced downtime, water loss, and operating cost improve the practicality
+of the proposed system, while autonomous operation must be supported by obstacle avoidance, manual
+override,andemergencystopping.
+NeedsN9–N11receivedaratingof3. Damageprevention,recovery, andmonitoringremainimportantto
+safeoperation,buttheysupporttheprimarycleaningandwater-qualityobjectivesratherthandefinethe
+central purpose of the project. N12 received a rating of 2 because practical servicing and low maintenance
+aredesirable,buttheyhavelowerprioritythansafety,cleaningeffectiveness,andcontinuityofreservoir
+operation.
+The needs are also interdependent. For example, higher cleaning effectiveness is not acceptable if the
+cleaningmechanismredistributessedimentordegradeswaterquality. Likewise,autonomousoperationdoes
+not remove the need for remote monitoring, emergency control, and reliable recovery. These relationships
+were laterconsidered when developing theengineering requirements andHouseofQuality.
+4.2 NeedsAnalysis
+Theneedsanalysisdefineswhatasuccessfulsystemmustachieveandthecircumstancesunderwhichitmust
+operate. Theanalysisconsiderstheprojectmission,operatingenvironment,constraints,andassumptions
+thatguidethetransitionfromcustomer needs to engineeringrequirements.
+4.2.1 Need inContext
+The updated project mission is defined in Section 3.2. In the context of the customer needs, success means
+providing KAHRAMAA with a system capable of removing accumulated sediment, sludge, and debris
+whilethereservoir remains fullandoperational and withoutrequiring routine human entry.
+10
+--- page 12
+KAHRAMAA is the primary customer and system owner. Primary stakeholders also include reservoir
+operationsandcleaningpersonnelandwater-qualitypersonnelbecausetheyaredirectlyinvolvedinreservoir
+operationanddrinking-waterprotection. Secondarystakeholdersincludemaintenancetechnicians,safety
+personnel, KAHRAMAA management, and contractors. Water consumers and relevant regulatory or
+public-health authorities are tertiary stakeholders because they are affected by system performance and
+waterquality eventhough theydo notdirectlyoperatethesystem.
+4.2.2 Usage Environment
+ThesystemisintendedtooperateinsideKAHRAMAApotable-waterreservoirswhiletheyremainfilled
+and in service. Reservoirs vary significantly in geometry and size and may be circular or rectangular, with
+capacitiesrangingfrom approximately1 to70MIGand water depthsreachingapproximately 50m.
+The underwater environment contains structural pillars, walls, inlet and outlet features, ladders, instru-
+mentation,andotherobstaclesthatcanrestrictmovementandaffectcleaningcoverage. Therobotmust
+thereforeoperateinasubmergedenvironmentwithlimited direct visibility whilenavigating around fixed
+structures withoutdamaging thereservoir.
+The stored water must remain suitable for potable-water service throughout deployment. Water-contact
+materials, cleaning methods, debris handling, and returned water must therefore be compatible with
+applicable drinking-water-quality requirements[5, 9].
+The proposed operating approach also differs from the historical manual cleaning process. Instead of
+allowing sediment to accumulate for approximately five years before a major cleaning event, the automated
+systemisintendedtosupportmuchmorefrequentroutinecleaning. Consequently,thequantityofdebris
+collected during an individual deployment is expected to be substantially lower than the approximately
+200kg historicallyreportedfora five-yearcleaning interval.
+4.2.3 DesignConstraints
+Thecustomer needsandoperatingenvironmentestablish several constraints thatthe design must satisfy:
+• Routinecleaningshallnotrequirehuman entry into the reservoir.
+• Cleaningshallbeperformedwhilethereservoirremainsfullandinoperationwithoutintentionaldraining.
+• The system shalloperateatwaterdepthsup to approximately 50m.
+• Cleaningshallcollectandremovesediment,sludge, anddebrisratherthanintentionallyredistributethem
+intothe storedwater.
+• Water-contact componentsandmaterials shall be suitable for potable-water service.
+• The systemshall avoiddamage to reservoir structures, equipment, andinstrumentation.
+• Autonomousoperationshall retain manual override and emergency-stop capability.
+• The systemshall provideamethodofrecovery following loss ofpower,mobility,or communication.
+• The design shall remain compatible with existing reservoir access and shall avoid requiring major
+permanent modificationsto reservoirstructures.
+• The MEEN 401–402 scope is limited to development and controlled evaluation of a small-scale proof of
+conceptratherthanaproduction-readyfull-scale system.
+4.2.4 Design Assumptions
+The followingassumptionswereused during preliminary design development:
+• A trained operator willbe availablefor remote supervision.
+• Thesystemwillperformcontinuouscleaningcycles,returningforservicingwhenitsdebriscollection
+capacity isreachedbeforeresuming cleaning.
+• The collected material is expected toconsistmainly of finesedimentand debris.
+• The systemwilluseexisting reservoiraccessfor deploymentand recovery.
+Theseassumptionswillbereviewedasadditionalinformationbecomesavailable. Togetherwiththecustomer
+needs and design constraints, they provide the basis for the engineering requirements and measurable
+metricsdeveloped inSection5.
+11
+--- page 13
+5. Requirements and House ofQuality
+The twelve customer needs in Section 4 were translated into engineering requirements and measurable
+targets. To develop these, the team used four sources: KAHRAMAA’s requests, the House of Quality
+(HoQ),applicablecodesandstandards,andtheengineeringrequirementschecklist. Whilethesponsor’s
+priorities define the operating conditions and the outcomes that the robot must achieve, benchmarking
+helpedestablishnumericaltargetsagainst which the designcan laterbe tested.
+5.1 DevelopmentofEngineeringRequirements
+KAHRAMAA requires cleaning without routine human entry or reservoir shutdown. At the same time,
+the robot must collect sediment while minimizing its redistribution into the surrounding water, protect
+drinking-water quality, and avoid damaging internal structures. The sponsor also specified a maximum
+operatingwaterdepthof50m. Together,theseconditionsformthefinalizedengineeringrequirementsin
+Table 3.
+Applicableguidancewasusedwhereitdirectlyaffectsthedesign. NSF/ANSI61addresseshealtheffects
+associated with drinking-water-contact materials and components [9]. KAHRAMAA’s water-quality
+requirements establish the conditions that must be maintained [5], while WHO cleaning guidance supports
+pre-deploymentsanitationandcontaminationcontrol[4]. Therequirementschecklistwasusedtoreview
+the engineering requirements across relevant categories, including geometry, energy, materials, safety,
+operation,andmaintenance. Thishelpedensurethatimportantdesignconstraintswereconsideredalongside
+the performance requirements. The HoQ then helped prioritize the associated performance measures.
+Theseconditions remainpart of R4, R5, R8, R10, andR12.
+Table3. Final Engineering Requirements
+Req. Need Engineering Requirement
+R1 N1 Thesystem shall complete routinecleaning without personnel entering the reservoir.
+R2 N2 Thesystem shall clean required reservoir water-contact surfaces while collecting and removing
+sediment, sludge, anddebris withoutunacceptable redistribution into the stored water.
+R3 N3 Thesystem shalloperatewhile submergedin afulland operationalreservoirat waterdepthsupto
+50 m.
+R4 N4 Thesystem shall preserve drinking-water quality throughout deploymentthrough suitable
+water-contact materials,pre-entry sanitization, and compliancewith applicable requirements.
+R5 N5 The system shall perform routine cleaning without reservoir shutdown or intentional draining while
+minimizing water loss.
+R6 N6 Thesystem shall perform routine cleaning withminimal operator intervention while allowing
+remote supervision.
+R7 N7 Thesystem shall navigate autonomously and avoid internalreservoir obstacles.
+R8 N8 Thesystem shall provide manual override and emergency-stop capability with rapid propulsion
+shutdown.
+R9 N9 Thesystem shall operate without damaging reservoir surfaces, structures, equipment, or
+instrumentation.
+R10 N10 Thesystem shall provide safe recovery following loss of power,mobility, or communication.
+R11 N11 Thesystem shall provide remote monitoring, robot-positiontracking, reservoir mapping, and
+cleaning-progress reporting.
+R12 N12 The system shall minimize unplanned maintenance and allow practical servicing between cleaning
+operations.
+5.2 EngineeringMetricsandTarget Values
+The requirements were expressed through 22 metrics, linked to their corresponding requirements and
+customer needs in Table 4. Importance ratings range from 1 (lowest) to 5 (highest). Marginal values
+describeacceptableperformance,whileidealvaluesrepresentthepreferredlevelofperformance. Ademand
+(D)mustbemet,whereasawish(W)isdesirablebutnotmandatory. Sourcesforpublishedbenchmarksare
+citedinthetarget-justificationparagraphsfollowingthetable. Wherethecomparisonconcernsasubsystem,
+another application, or a planning reference rather than a tested reservoir-cleaning robot, that distinction is
+explainedbelow.
+12
+--- page 14
+Table4. EngineeringMetrics,Marginal and Ideal Targets
+ID Req./Need Metric Imp. Existing /
+Benchmark
+Marginal Ideal Units D/W
+M1 R1/N1 Personnel enteringreservoir
+during cleaning
+5 0 0 0 persons/cycle D
+M2 R2/N2 Cleaning rate 5 12.5 ≥25 50 m2/h W
+M3 R2/N2 Suction flow rate 5 30 ≥30 40 m3/h W
+M4 R2/N2 Usable onboard sediment/debris
+storage volume
+5 4 ≥4 5 L D
+M5 R2/N2 Required surface cleaning
+coverage
+5 94.5 ≥95 100 % D
+M6 R3/N3 Maximum operating depth 5 100 ≥50 60 m D
+M7 R4/N4 Maximum increase in turbidity
+during cleaning
+5 0.5 ≤0.5 0 NTU D
+M8 R5/N5 Net water loss during cleaning 4 9 ≤2.1 0.5 L/kg dry sediment W
+M9 R6/N6 Operatorsrequiredduringroutine
+cleaning
+4 1 ≤2 1 persons/cycle W
+M10 R7/N7 Autonomous obstacle-avoidance
+successrate
+4 94 ≥95 100 % successful trials D
+M11 R7/N7 Minimum reliable
+obstacle-detection range
+4 1.5 ≥0.5 1 m D
+M12 R8/N8 Emergency-stop response time 4 5 ≤2 1 s D
+M13 R8/N8 Manual-override response time 4 0.2 ≤2 1 s D
+M14 R9/N9 Reservoir damage incidents 3 0 0 0 incidents/cycle D
+M15 R10/N10 Battery reservewhen recovery is
+initiated
+3 15 ≥20 25 % battery capacity D
+M16 R10/N10 Fail-safe activationtime after
+communication loss
+3 5 ≤10 5 s D
+M17 R11/N11 Robot-position tracking error 3 1 ≤1 0.25 m D
+M18 R11/N11 Remote-monitoring availability 3 96 ≥95 100 % cycle time D
+M19 R11/N11 Reservoir mappingcoverage 3 97 ≥95 100 % designated area D
+M20 R11/N11 Cleaning-progress estimation
+error
+3 4.68 ≤5 0 percentage points D
+M21 R12/N12 Unplanned maintenance
+interventions duringcleaning
+2 0 ≤1 0 interventions/cycle W
+M22 R12/N12 Routine servicing time 2 5 ≤60 30 min/service W
+5.2.1 BasisforTargetValues
+Cleaning performance and debris handling (M2–M5). KAHRAMAA’s floor-plan drawing gives
+an internal diameter of 125 m, corresponding to a gross floor area of approximately 12,271.85 m2
+[20]. For a 30-day cleaning period with 20 active hours available per day, the minimum average rate
+is 12,271.85/(30 ×20)= 20.45 m2/h. The marginal 25 m2/h target is approximately 22% above this
+minimumandtwiceAspiROV’sreported12.5m2/h[10]. Theidealof50m2/hisfourtimesthatbenchmark
+andwouldreducegross-area cleaningtime toapproximately 245hours, excludingadditionaloperational
+delays. This remainsapreferredproductivitygoal rather thanademonstratedcapability.
+AspiROV’spublishedsuctionrateof30m3/h[10]establishestheM3marginalcomparison;the40m3/h
+ideal is approximately 33% higher. For onboard storage (M4), the Dolphin EON 120d’s 4 L debris basket
+[21]givesasubsystemstoragecomparison. The5Lidealprovides25%moreusablevolume. Huetal.’s
+reported94.5%cleaningcoverage[22]supportsthe95%marginaltargetforM5. The100%idealapplies
+to the designatedaccessiblecleaningarea.
+Operatingconditions,waterquality,andwaterloss(M1,M6–M8,M14). Zeroroutinehumanentryand
+zerorobot-inducedreservoirdamagearenon-negotiablesponsorrequirements,whichformthebasisforthe
+zero values in M1 and M14. AspiROV illustrates underwater cleaning without routine tank entry and has a
+reporteddepthratingof100m[10]. Thesponsorrequiresoperationtoatleast50m,so60mwaschosen
+as the preferred target to provide a 20% depth margin. Because the reservoir remains in service during
+cleaning, M7 measures the maximum increase in turbidity relative to the pre-cleaning baseline rather than
+absolute turbidity. Watertight Robotics reported turbidity generation of no more than 0.5 NTU for the
+13
+--- page 15
+D-Bot V2 [23]. The marginal target matches this related manufacturer-reported figure, while the ideal is no
+measurable increase within the sensor’s resolution. The robot must still satisfy the applicable absolute
+drinking-water-quality limits under R4. The sponsor’s measured 0.36 NTU is an initial water-quality
+reading, not arobot performancemeasurement[24].
+M8 is the volume of water removed with the recovered sediment divided by its dry solids mass; filtered
+water returned to the reservoir does not count as loss. The 9 L/kg comparison corresponds to 10% dry
+solids by mass and is consistent with published external filter-bag dewatering performance [25]. The
+marginal target of 2.1 L/kg corresponds to approximately 32% dry solids, a concentration reported for
+water-treatment sludge using a tubular filter press [26]. The 0.5 L/kg ideal corresponds to about 67%
+dry solids and is a preferred low-water-loss goal; it would require dewatering performance beyond that
+demonstrated by the cited filter-press study and may require additional hardware. The 4–5 L storage target
+applies per collection load. Water loss will be assessed by measuring the water removed with collected
+sedimentrelativetoitsdrymassunderrepresentativetestconditions.
+Autonomyandcontrol(M9–M13). AspiROV’ssingle-operatorarrangement[10]supportsthepreferred
+staffinglevelofone;themarginalallowanceoftwoprovidesforsupervisionandsupport. Zhangetal.’s
+94% obstacle-avoidance result [27] supports 95% as the marginal trial-success target and 100% as the
+ideal over the defined test set. Avoidance successalso depends on detecting obstacles early enough. At an
+assumedtravelspeedof0.2m/s,themarginaldetectiondistanceof0.5mprovides2.5softravelbefore
+reachinganobstacle,whilethe1midealprovides5s. Thefinaldetectiondistancewillbeevaluatedagainst
+sensing delays and the robot’s stopping distance to ensure sufficient clearance. The 1.5-m reference is
+indicative, while the published commercial sonar range is only a subsystem specification, not installed
+obstacle-avoidanceperformance[28]. Theseautonomousfunctionsmustalsoallowtheoperatortointervene
+quickly. ForM12,responsetimewillbemeasuredfromanoperatoremergency-stopcommandtopropulsion
+shutdown; for M13, from manual-override input to control handover. The 2-s marginal and 1-s ideal
+valuesareinternalresponsebudgetstobecheckedinintegratedtests. TheMATEfive-secondreference
+concerns power disconnection [29], while PIRO-U3 reports a 0.2 s control response [11], providing a
+relevantcomparisonforM13.
+Recovery, mapping, and monitoring (M15–M20). Because recovery depends on having enough battery
+energyforthereturnroute,itmustbeginwithatleast20%capacityremaining. The25%idealaddsfive
+percentage points for uncertainty in power consumption and the return route. ArduPilot Sub identifies
+20% as an example low-battery failsafe setting [30], but this percentage alone cannot prove recovery is
+possible. Thereturn-pathenergyrequirement,includingpropulsion,controls,sensing,andacontingency
+allowance, must remain below the available battery energy when recovery starts. The 15% comparison is a
+planningreferenceratherthananexperimentallyverifiedreturnreserve. Ifcommunicationislost,the robot
+must enter its defined safe state within 10 s marginally and 5 s ideally. ArduSub documents a related 2.5-s
+ground-stationheartbeattimeout,notthefullresponsetocommunicationloss[31]. Becausethissystem
+operates autonomously, onboard obstacle avoidance and emergency protection must remain active during a
+linkinterruption,andthecommunication-lossresponsemustbetestedseparatelyfromthetimerequiredfor
+retrieval.
+Position error is limited to 1 m marginally and 0.25 m ideally so the robot can distinguish visited areas
+and navigate around internal structures. Water Linked reports positioning accuracy better than 0.2% of
+horizontalrange[19],providingarelevantsubsystemcomparison. The0.25midealremainsasystem-level
+targetthatwillrequireverificationunderrepresentativereservoirconditions. Alongsidepositiontracking,
+remote monitoring must be available for at least 95% of each cleaning run, allowing up to three minutes of
+cumulativeinterruptionperhour,withcontinuousavailabilitypreferred. The96%comparisonisaplanning
+reference, while any loss of communication must still invoke the M16 protective response. Mapping
+coverage of at least 95% matches the marginal cleaning-coverage objective, and 100% is preferred. Preston
+etal. observedupto97%coverageinconfined-spaceunderwatermappingtrials[32]. Cleaning-progress
+estimation erroris limited to five percentagepoints sothat discrepancies of the same order as the allowed
+5%coveragegapcanbeidentified;zeroerroristheideal. The4.68-percentage-pointcomparisoncomes
+from indoor map-completeness estimation, not cleaning-progress testing [33]. Mapping and progress
+accuracywillbe checkedagainstindependently recorded test coverage.
+Maintenanceandservicing(M21–M22). M21allowsatmostoneunplannedinterventionpercleaning
+14
+--- page 16
+cycle, while zero is the ideal. This is a reliability allowance, not a measured failure frequency. Planned
+servicing activities do not count as unplanned interventions. Servicing time is measured separately: M22
+allocates60minutesmarginallyand30minutesideallyforthecompletebetween-runserviceprocedure,
+including retrieval, debris removal, inspection, and preparation for redeployment. The five-minute
+comparison concerns basic checks of a pool cleaner [34], not complete reservoir-robot servicing. A timed,
+step-by-stepservice trialwilldetermine whether the proposed30- and60-minutebudgets can be met.
+5.3 House ofQuality Analysis
+TheupdatedHoQinFigure2showshowthetwelvecustomerneedsrelatetothe22engineeringmetrics.
+Each relationship was scored as strong (9), moderate (3), or weak (1). Blank intersections indicate no
+meaningful direct relationship. Absolute importance was calculated by multiplying the need importance by
+eachrelationshipscoreandsummingacrossneeds;relativeimportancewascalculatedagainsttheoverall
+total. Technicaldifficulty was scoredseparatelyon a 1–5scale.
+Figure2. UpdatedHouse of Quality, including the four competitivecomparisons, ranked engineering metrics,and
+thetechnical correlation roof.
+Thetotalabsoluteimportanceis1,013. M7,themaximumturbidityincreaseduringcleaning,ranksfirst
+at 90 (8.88%). This result reflects the strong relationship between collecting sediment effectively and
+protectingthewaterthatremainsindistribution. M10(obstacleavoidance),M11(detectionrange),and
+M17(positionerror)followat57each(5.63%). M16 (communication-lossfail-safe)has56(5.53%),M5
+(surface coverage) has 54 (5.33%), and M8 (net water loss) has 51 (5.03%). Together, these rankings place
+particular emphasisonlimiting sedimentdisturbancewhilenavigatingreliablyaround columns andother
+internal structures.
+Navigationperformancealsocarrieshighimplementationdifficulty. BothM10andM17wereassigned
+difficulty ratings of 5. These measures will therefore need focused development and testing rather than
+relying on nominal sensor specifications. The competitive assessment uses AspiROV [10], PIRO-U3 [11],
+andWEDAVR-600[13]asbenchmarks. Thethreeroboticsystemsdemonstratetheadvantagesofreducing
+personnel entry and reservoir downtime. WEDA VR-600 is a particularly relevant large-reservoir example,
+but its operation is remotely controlled; it does not establish that autonomous navigation and full coverage
+15
+--- page 17
+logging have beenachieved.
+5.3.1 TechnicalCorrelationsand Trade-offs
+The correlation roof records whether improving one metric supports another or introduces a conflict.
+Positiverelationshipsincludeobstacle-detectionrangewithavoidancesuccess,andpositioningaccuracy
+withreservoirmappingandprogressreporting. Ashorterresponsetimealsosupportssaferstoppingnear
+internal structures. Blank roof cells arereserved for metricpairs without a meaningful directinteraction.
+Theroofalsoshowswhereimprovingonemetriccannegativelyaffectanother,particularlycleaningrate,
+sediment collection, and energy consumption. Increasingcleaning speedmay improveproductivity but
+could also disturb sediment faster than it can be collected. Improving sediment collection could help limit
+this disturbance, although it may also increase energy demand and reduce operating endurance. Additional
+cleaningpassesalsorequireenergythatmustbeconsideredwhenplanningrecovery. Thesecorrelationsare
+important because maximizingonemetricindependently couldcompromise ahigher-priorityrequirement.
+5.4 ChangesSinceDR1
+The twelve customer needs remain the same, but the metrics increased from 17 in DR1 to 22 in DR2 as the
+systembecamemoreclearlydefined. TheearliersedimentmasspercleaningcyclewasreplacedbyM4,
+usableonboardstoragevolume,becausetheapproximately200kgreportedbyKAHRAMAArepresents
+sedimentaccumulatedoverfiveyearsratherthantheamounthandledduringonecleaningoperation. M7
+was changed from absolute water turbidity to the increase caused by cleaning, making it a more direct
+measure of sediment redistribution. M8 now expresses net water removed with collected sediment per
+kilogramof drysolids.
+Similarly,theobstacle-heightmeasurewasreplacedbyobstacle-avoidancesuccessandreliabledetection
+range because these metrics provide a more direct assessment of the robot’s ability to navigate around
+different obstacles. Recovery, override, position tracking, mapping, and progress reporting were separated
+so that each function can be tested independently. The cleaning-rate targets were also refined using the
+official KAHRAMAA reservoir floor plan. The marginal target is now 25 m2/h for the referenced reservoir,
+based on its calculated floor area and the assumed cleaning period, while 50 m2/h remains the ideal. These
+changes update the way the team’s design will be evaluated without changing KAHRAMAA’s original
+problem.
+6. Functional Modeling
+Functional modeling was used to translate the customer needs and engineering requirements into the
+operations that the reservoir-cleaning system must perform. The purpose of this stage was to describe what
+thesystemmustdobeforecommittingtospecificphysical componentsortechnologies. Material, energy,
+and information flows were identified and then decomposed into connected sub-functions. This provided a
+solution-neutral basis for conceptgeneration and laterproduct-architecturedevelopment.
+6.1 Functional ModelingProcess
+The functional model was developed using the five-step process applied during the MEEN 401 functional-
+modeling activities:
+1. Develop the black-box model. The overall system function was defined as “Clean Reservoir,” and the
+material, energy, andinformationflows entering and leavingthe system boundary wereidentified.
+2. Correlatecustomerneedstotheflows. Eachfinalizedcustomerneedwasconnectedtooneormore
+material, energy,orinformationflows. This stepensuredthat thefunctionalmodelremained traceable
+to the needs establishedin Section4.
+3. Develop function chains. The overall function was decomposed into smaller verb–noun sub-functions
+and arranged into sequential or parallel chains for cleaning, energy conversion, robot operation, sensing,
+control,and recovery.
+4. Aggregatethefunctionchains. Theindividualchainswerecombinedintoasinglefunctionalmodel
+showinghowmaterial,energy,andinformationare exchangedbetween therequired operations.
+5. Checkthecustomerneeds. Thecompletedmodelwasreviewedagainstalltwelvecustomerneedsto
+verifythateachneedwas representedby at least one required functionorfunctionalchain.
+16
+--- page 18
+This process kept the functional model independent of specific solution choices. For example, the function
+“Moverobot”doesnotrequiretracks,wheels,orthrusters,and“Separatedepositsfromwater”doesnot
+specify a hydrocyclone, filter, or settling chamber. These alternatives were considered later during concept
+generation.
+6.2 Black-BoxModel
+Theblack-boxmodeldefinesthesystemboundaryandidentifiestherequiredinputsandoutputswithout
+describingtheinternaldesign. Themainfunctionisrepresentedas“CleanReservoir,”asshowninFigure3.
+Figure 3. Black-box model fortheautomated reservoir-cleaning system.
+Threeprincipal flowtypescrossthe systemboundary:
+Material flow. Water containing accumulated sediment, sludge, and debris enters the cleaning process.
+The desired outputs are returned water and collected deposits removed from the cleaning region. The
+material flow therefore captures the central requirement that deposits must be collected rather than simply
+loosened and redistributed.
+Energyflow. Electricalenergyentersthesystemandisconvertedortransmittedasrequiredtoproduce
+mechanical action for robot movement and cleaning. Undesired energy outputs such as heat and noise may
+also occur and mustbe consideredduring laterdesign development.
+Information flow. Operator commands and sensed information enter the control process. Outputs include
+robot status, position, cleaning progress, monitoring information, and fault or recovery information needed
+for remote supervisionandsafeoperation.
+The black-box model establishes the system boundary while avoiding assumptions about the final robot
+configuration, power architecture,cleaning mechanism,or controlhardware.
+6.3 Correlation of CustomerNeedstoFunctional Flows
+The customer needs were then related to the black-box flows and associated sub-functions. This step
+was used to confirm that the functional decomposition addressed the purpose of the system rather than
+developing functionsindependently ofthecustomerrequirements.
+17
+--- page 19
+Table5. RelationshipBetween Customer Needs and FunctionalFlows
+Need Associated Flow(s) PrincipalFunctional Response
+N1 Information Receiveoperator input, process information, control robot operation,and provide
+monitoring information.
+N2 Material, Energy Collect the debris–water mixture, separate deposits from water, contain and export deposits,
+and return water.
+N3 Material, Energy Submerge and operate the robot while managing the cleaning and water-return flows within
+afullreservoir.
+N4 Material, Information Sanitize therobot, separate and contain deposits,return water, and monitor relevant water
+conditions.
+N5 Material, Information Return water,monitor cleaning progress,andsupport cleaning without routine drainingor
+shutdown.
+N6 Energy, Information Supply energy, process sensor information, generate commands,andoperate with remote
+supervision.
+N7 Energy, Information Sense robot position and obstacle proximity,process the information, and commandrobot
+movement.
+N8 Information Sense operator input, processmanualcommands,andissue movement or stop commands.
+N9 Energy, Information Sense obstacles and robot state,control movement, and prevent unsafe contact with
+reservoir assets.
+N10 Energy, Information Sense system state, detect abnormal conditions,generate recovery commands,and recover
+therobot.
+N11 Information Sense robot position and cleaning coverage,processthe data,and provide mapping and
+monitoring information.
+N12 Energy, Information Sense system and power status and provide information needed for inspection and practical
+servicing.
+The correlation showed that most customer needs depend on more than one flow type. For example,
+autonomous navigation requires both mechanical energy for movement and information from position and
+obstaclesensing. Similarly,effectivedebrisremovaldependsonmaterialhandlingaswellasthemechanical
+energyrequiredto collect themixture.
+6.4 AggregatedFunctionalModel
+Aftertheindividualfunctionchainsweredeveloped,theywerecombinedintotheaggregatedfunctional
+modelshowninFigure4. Solidarrowsrepresentmaterialorenergytransfer,whiledashedarrowsrepresent
+information andcommandsignals.
+Figure 4. Aggregated functional model showingthe material, energy,robot,and information flows ofthe
+reservoir-cleaning system.
+18
+--- page 20
+The aggregatedmodel contains four closely connectedfunctional chains.
+Cleaningandmaterial flow. The debris–watermixturefirstenterstheCollectmixturefunction andthen
+passes to Separate deposits from water. After separation, the material flow divides into two paths. Water is
+directedthroughGuidewater andReturnwater,whiletheseparateddepositspassthroughContaindeposits
+and Export deposits. This chain represents the requirement to collect and remove unwanted material while
+returningwatertothe reservoirratherthan intentionally draining it.
+Robot deployment and movement. The robot passes sequentially through Sanitize robot, Submerge robot,
+Moverobot,andRecoverrobot. Sanitizationwasincludedbecausethedevicewillenterpotablewater,while
+submergingandrecoveryweremodeledexplicitlybecausethesystemmustenterandleavethereservoir
+without requiringpersonneltoenterit.
+Energy flow. Electrical energy passes through Receive electrical energy, Supply electrical energy, and
+Convert electrical to mechanical energy. The resulting mechanical energy supports powered cleaning
+androbotmovement. Thefunctionalmodelintentionallydoesnotspecifywhethertheelectricalenergy
+comesfrom anonboard battery,tetheredsupply,or anothersource becausepowerarchitecture remaineda
+concept-generationdecisionatthisstage.
+Sensing and control flow. The model includes Sense robot position, Sense obstacle proximity, Sense
+water turbidity, Sense power status, Sense operator input, and Sense cleaning coverage. These information
+streams are processed by the central control/trigger function, which generates the required deployment,
+movement,stopping,cleaning,andrecoverycommands. Monitoringinformationisalsotransmittedoutward
+for operatorsupervision.
+The model therefore shows several important functional dependencies. Movement depends on both
+mechanical energy and control commands. Cleaning depends on energy as well as the material collection
+path. Recovery depends on system-state information and a recovery command. Navigation depends on
+position andobstacle informationratherthan movement alone.
+6.5 Functional ModelReview
+Thecompletedfunctionalmodelwasreviewedforcorrectnessbeforeitwasusedforconceptgeneration.
+First, the functions were written using solution-neutral verb–noun terminology such as Collect mixture,
+Moverobot,Senseobstacleproximity,andReturnwater. Thisreducedtheriskofembeddingapreferred
+physicalsolutionintothe model.
+Second,thematerialflowswerecheckedforcontinuity. Thecollectedmixtureenterstheseparationfunction,
+afterwhichboththewateranddepositsfollowdefinedpathstosystemoutputs. Similarly,therobothasa
+continuousdeploymentpath fromsanitizationthrough submerging,movement,andrecovery.
+Lastly, the energy and information connections were checked to ensure that active functions receive the
+required energy or commands and that sensed information reaches the control process. The model was also
+comparedwith alltwelvecustomerneeds. The reviewconfirmedthat eachneed isrepresented byatleast
+one function or functionalchain.
+7. Concept Generation
+The team used multiple concept-generation methods to develop a broad solution space before selecting
+a preferred reservoir-cleaning concept. The process began with individual brainstorming, followed by
+6-3-5brainwritingtodevelopandcombineideasacrosstheteam. TRIZcontradictionanalysiswasthen
+used to address importanttechnical conflicts thatcould notbe resolvedbysimply maximizingone design
+characteristic. Finally,thegeneratedalternativeswereorganizedinamorphologicalmatrixbasedonthe
+majorfunctions identified inSection6 andcombined into completesystemconcepts.
+BackgroundresearchandcommercialbenchmarksfromSection2werealsousedthroughoutthisprocessto
+judge whether the generated ideas were technically realistic. However, benchmarking was used to support
+conceptgenerationrather thanrestrictit toexisting commercial solutions.
+7.1 Initial Brainstorming
+The team began the in-class concept-generation activity by brainstorming ideas individually from the
+customer needs, engineering requirements, and functional model. Ideas were recorded using short
+descriptions and tables, with the goal of generating variety before evaluating or selecting a preferred
+19
+--- page 21
+configuration. Alternativesincludedwheeled,tracked,andthruster-basedrobots;directsuction,rotating
+brushes, brush-and-suction combinations, and water jets; as well as different debris-handling, sensing, and
+navigationapproaches.
+Brainstorming was useful because it created a broad initial solution space and provided the ideas later
+developed through6-3-5brainwriting. The sessionnotesareincluded inAppendix A.
+7.2 6-3-5Brainwriting
+The team used 6-3-5 brainwriting during the studio session to develop ideas collaboratively while reducing
+fixation on the first concept proposed. Because the team has fivemembers, the methodwas adapted to the
+available group size. Members first generated ideas independently and then passed their work to others
+for modification, combination, and further development. The numberand format of ideas varied between
+members, includingsketches,tables,andwrittendescriptions.
+The activity produced alternatives for mobility, cleaning, debris handling, localization, water-quality moni-
+toring, control, deployment, and recovery. Examples included wheels, tracks, and thrusters; direct suction,
+rotatingbrushes,waterjets,andbrush-and-suctionsystems;anddifferentpumps,filters,hydrocyclones,
+and debris-storagearrangements.
+Figure 5 shows arepresentativeexample fromthe6-3-5brainwriting activity.
+Figure 5. Representativeideas developedduring the 6-3-5 brainwriting activity.
+The method was particularly useful because features originally proposed in separate concepts could be
+combined into stronger system alternatives. For example, tracked mobility could be combined with a
+soft rotating brush, suction hood, hydrocyclone separation, removable debris storage, and autonomous
+navigation. These combinationslater supportedthemorphologicalanalysisand development ofcomplete
+system concepts. Thecompletebrainwriting sheets andsessionnotes are provided in Appendix A.
+7.3 TRIZContradictionAnalysis
+TRIZ wasused toaddressdesign situationsin which improving one characteristic could negativelyaffect
+another. Rather than accepting these conflicts as unavoidable trade-offs, the team translated them into
+generalized TRIZ engineering parameters and used the contradiction approach to generate alternative
+solutions.
+Two contradictions were selected because they directly affect the success of the reservoir-cleaning system:
+cleaning effectiveness versus reservoir protection,andcleaning productivity versus waterquality. Table6
+presents the correspondingTRIZ parameters.
+20
+--- page 22
+Table6. TRIZ Contradiction Analysis
+Conflict Desired Improvement Negative Effect Improving
+Parameter
+Worsening
+Parameter
+Cleaning Effectiveness
+vs. Reservoir Protection
+Increase cleaning
+force/intensitytoremove
+sediment effectively.
+Excessive cleaning force
+maydamage reservoir
+surfaces, pillars, coatings,
+or internal assets.
+10 – Force 30 – Harmful actions
+affecting the design
+object
+Cleaning Productivity
+vs. Water Quality
+Increase cleaning rate and
+remove debris faster.
+Faster or more aggressive
+cleaning may suspend
+debris and increase
+turbidity.
+39 – Productivity 31 – Harmful actions
+generatedby the
+design object
+7.3.1 Conflict1: CleaningEffectiveness vs. Reservoir Protection
+Thefirstcontradictionexaminedtheneedtoincreasecleaningeffectivenesswithoutincreasingthelikelihood
+of damage to reservoir surfaces and internal structures. The TRIZ contradiction analysis produced the
+principlessummarized inTable7.
+Table7. TRIZ Design Applications–Conflict1
+TRIZ Principle Applicationto the Reservoir-CleaningSystem
+1 – Segmentation Usemultiple smaller soft cleaning sections insteadof one largerigidcleaninghead to
+reduce concentrated contact force.
+35 – Parameter Changes Make brush speed, suctionlevel, androbot speed adjustableso cleaning intensity can be
+reduced near sensitive structures.
+40 – Composite Materials Usea rigid structural cleaninghead with a soft elastomeror rubber contact layerto
+protect reservoir surfaces.
+18 – MechanicalVibration Usecontrolled low-amplitude vibration to loosen sediment whilereducingthe need for
+high continuous contact force.
+Theseprinciplesproducedideassuchasasoftcleaninginterfaceandadjustablecleaningintensity. Both
+concepts remained relevant during later concept development because they improve debris removal without
+relying solely onhigher mechanical force.
+7.3.2 Conflict2: CleaningProductivity vs. Water Quality
+Thesecondcontradictionexaminedhowthesystemcouldincreasecleaningproductivitywithoutincreasing
+debris redistribution or degrading water quality. The resulting principles and their applications are
+summarized in Table8.
+Table8. TRIZ Design Applications–Conflict2
+TRIZ Principle Applicationto the Reservoir-CleaningSystem
+35 – Parameter Changes Adjust suction,cleaning intensity, and robot speedaccording to debris concentration or
+measured turbidity.
+22 – Blessing in Disguise Useincreased turbidity as feedback to increaselocal suction or reducerobotspeed until
+conditions improve.
+18 – MechanicalVibration Uselocalized low-amplitude vibration near the suctionintaketo loosen debris without
+aggressivelydispersing it.
+39 – InertAtmosphere Use a localized shroud or hood around the cleaning head to contain disturbed debris near
+thesuction intake.
+The second TRIZ analysis emphasized localized cleaning and containment rather than increasing cleaning
+intensitywithoutcontrol. Theshroudedcleaningzone,turbidity-basedadjustment,andcoordinatedsuction
+and robotspeed became particularly useful ideasbecause they directly address thewater-qualitypriorities
+identified in theHouseofQuality.
+TRIZ was useful for this project because it forced the team to address both sides of important design
+conflicts. Instead of simply accepting that stronger or faster cleaning must cause more damage or turbidity,
+the method generated designfeatures that couldreducetheseeffects.
+21
+--- page 23
+7.4 MorphologicalAnalysis
+Afterthebrainstorming,6-3-5,andTRIZactivities,theteamorganizedthegeneratedalternativesusing
+a morphological matrix. The matrix was developed directly from the major functions identified in the
+functionalmodelin Section6.
+For each function, the team identified several realistic ways in which the function could be achieved.
+Repeatedalternativesandideasthatwerenotpracticalforthereservoirenvironmentwereremoved. This
+separated what thesystemmust accomplish from how eachfunction couldbe physicallyimplemented.
+Thefinalmorphologicalmatrixispresented in Table 9.
+Table9. MorphologicalMatrixfortheReservoir-Cleaning System
+Function Alternative 1 Alternative 2 Alternative 3
+Function A: Supply
+ElectricalEnergy
+A1Fixed sealed rechargeable
+battery pack
+A2 Swappable battery
+modules
+A3 Dual-batterysystem with
+emergency reserve
+FunctionB:SanitizeRobot B1 Disinfectant spray/rinse B2 Full-body sanitization bath B3 Hatch-side spray + internal
+flow-path flush
+Function C: Submerge
+Robot
+C1 Portablewinch/lifting line
+through existing hatch
+C2 Thruster-controlled
+descent
+C3 Ballast-assisted descent
+Function D: MoveRobot D1Wheeled skid-steer drive D2 Continuoustracks D3 Thruster/propeller
+free-swimming
+Function E:Mobilize &
+CaptureDebris
+E1 Directsuction hood E2 Soft rotating brush inside
+suctionhood
+E3 Shrouded low-pressure
+water jet+ suction
+Function F:Transport
+Debris-Water Mixture
+F1 Onboard centrifugal slurry
+pump
+F2 Onboard vortex/slurry
+pump
+F3 Venturi/ejectorsuction
+system
+Function G: Separate
+Debris From Water
+G1Replaceable filter
+bag/cartridge
+G2 Hydrocyclone + polishing
+filter
+G3 Settling/dewatering
+chamber + finalfilter
+Function H: Store
+Collected Debris
+H1Removable sealed debris
+cartridge
+H2 Replaceable filter
+bag/basket
+H3 Dewatered-solidshopper /
+compacted cartridge
+FunctionI:RemoveDebris
+From Reservoir
+I1Return to hatch →retrieve
+robot →empty cartridge
+above water
+I2 Return to hatch →
+automatically ejectsealed
+cartridge to topside receiver
+I3 Return to hatch →
+temporary service head
+transfers concentrated solids
+to surface container
+Function J:Localize&
+Map Reservoir
+J1Acoustic positioning +
+imaging sonar
+J2 SonarSLAM + IMU +
+depth sensor
+J3 DVL + IMU + depth sensor
++forward-looking sonar
+Function K: Monitor
+WaterCondition
+K1Turbidity sensor K2 Multiparameter
+water-qualityprobe
+–
+Function L:Process
+Information & Commands
+L1 Centralized onboard
+computer/controller
+L2 Onboard controller +
+surface supervisory station
+L3 Distributed subsystem
+controllers
+Function M:Recover
+Robot
+M1 Self-deployedretrieval
+buoy/lineat hatch
+M2 Portable recovery cage
+loweredthroughexistinghatch
+M3 Backup
+battery/propulsion for
+autonomous return-to-hatch
+Themorphologicalmatrixforcedtheteamtoconsiderthecompleteoperatingsequenceratherthanfocusing
+only on the cleaning head. For example, a method for mobilizing debris also requires a compatible method
+for transporting the debris–water mixture, separating the debris, storing it, and ultimately removing it from
+the reservoir.
+The matrix also revealed dependencies between apparently separate functions. Mobility affects localization
+and energy demand; debris-storage capacity affects how frequently the robot must return to the hatch; and
+the selectedrecoverymethod affectsthepower andcontrol architecture.
+Astheteam’sunderstandingoftheoperatingenvironmentimproved,repeatedorimpracticalideaswere
+removedandthealternativeswereorganizedintotechnicallydistinctoptions. Themorphologicalmatrix
+therefore provided a structured basis for combining compatible alternatives into complete system concepts.
+7.5 Functional Basis forConceptDevelopment
+The thirteen morphological-matrix functions provided the structure for assembling each complete concept.
+The functions are interdependent, so alternatives were combined based on compatibility rather than treated
+independently.
+For example, selection of a brush-assisted suction head also requires a compatible pump, separation device,
+22
+--- page 24
+storage method, power source, and debris-removal strategy. Similarly, a free-swimming robot requires
+different localization,propulsion,andcontrol arrangements fromatrackedfloor crawler.
+Themainrolesconsidered whencombining alternatives were:
+• Power and sanitization: provide electrical energy and prepare all relevant wetted surfaces before
+deployment.
+• Deploymentandmobility: movethesystemthroughtheexistingreservoiraccessandprovidecontrolled
+movementunderwater.
+• Cleaning and capture: mobilize sediment while collecting thedisturbed debris–water mixture close to
+the cleaninginterface.
+• Debris transport and separation: move the captured mixture through the robot and separate solids
+fromwater.
+• Storageandremoval: temporarilycontaincollectedsolidsandprovideamethodforultimatelyremoving
+themfromthe reservoir.
+• Localization and monitoring: determine robot position, detect the surrounding environment, and
+monitorrelevantwaterconditions.
+• Control and recovery: process information, generate commands, support operator supervision, and
+provide a safe recoverymethod.
+These functions ensured that each concept represented a complete cleaning system rather than only a
+mobilityplatformorcleaningmechanism.
+7.6 DevelopmentofCompleteSystemConcepts
+The morphological matrix in Section 7 generated many possible combinations of sub-function alternatives,
+butnoteverycombinationrepresentedacompleteorpracticalreservoir-cleaningsystem. Theteamtherefore
+combined compatible alternatives into seven distinct concepts covering power, deployment, mobility,
+cleaning, debris handling, sensing, control, and recovery. Table 10 summarizes each concept and its main
+operatingprinciple.
+Table10. CompleteSystem Concepts from Morphological Analysis
+Concept Morphological Combination Operating Principle
+C1 – Battery Tracked
+Brush–Hydrocyclone
+Crawler
+A2–B3–C1–D2–E2–F2–G2–
+H1–I1–J2–K2–L2–M1
+Tracked mobility provides stable floor contact. A soft rotating
+brush and suction hood mobilize and capture sediment, which
+is pumpedthrough ahydrocyclone and filter intoa removable
+sealed cartridge. SonarSLAM,IMU, depth sensing, and
+surface supervisionsupportautonomous operation and
+recovery.
+C2 – SimpleBattery
+SuctionRover
+A2–B1–C1–D1–E1–F1–G1–
+H1–I1–J1–K1–L1–M1
+A wheeledbattery-powered roveruses directsuction and a
+centrifugal pump to collect sediment intoafilteredsealed
+cartridge. Acousticpositioning, imagingsonar, and turbidity
+sensing provide basic navigation and monitoring with
+relatively low systemcomplexity.
+C3 – Advanced
+Automatic Cartridge
+Crawler
+A3–B3–C1–D2–E2–F2–G2–
+H1–I2–J2–K2–L2–M3
+A tracked brush-and-suctioncrawler uses hydrocyclone
+separation and automatically transfersorejects its sealed
+debris cartridge at the hatch. Dual batteries and backup
+recovery functions reduce routine operator handling.
+C4 – Battery
+Dewatering Crawler
+A3–B1–C1–D2–E2–F1–G3–
+H3–I1–J2–K2–L2–M1
+Atrackedbrush-and-suctioncrawlerusesasettling/dewatering
+chamber and final filtration to reduce the water storedwith
+collected sediment before retaining the concentrated solids
+onboard.
+C5 – Battery Water-Jet
+CleaningCrawler
+A2–B3–C1–D2–E3–F2–G2–
+H1–I1–J3–K2–L2–M1
+A tracked crawler uses ashroudedlow-pressure waterjetto
+loosen deposits while suction captures thedisturbedmaterial.
+A hydrocyclone and polishing filterseparate thecollected
+mixture.
+C6 – Free-Swimming
+AutonomousCleaner
+A3–B2–C2–D3–E1–F1–G2–
+H1–I1–J3–K2–L1–M3
+Thrustersprovide three-dimensionalmovement whiledirect
+suctioncollectssediment. DVL, IMU, depth sensing, and
+forward-looking sonar support localizationand obstacle
+avoidance without relying on floor traction.
+23
+--- page 25
+Table 10 continued
+Concept Morphological Combination Operating Principle
+C7 – Long-Endurance
+Dock-Service Crawler
+A3–B3–C1–D2–E2–F2–G3–
+H3–I3–J2–K2–L2–M3
+A tracked brush-and-suctioncrawler uses dewateringand
+larger onboard solids storage. It returnstothe hatch and
+transfers concentrated debris to a surface container through a
+temporary service interface.
+The concepts were kept intentionally distinct. C2 emphasizes simplicity, C3 automated servicing, C4
+dewatering,C5water-jetcleaning,C6free-swimmingmobility,andC7longeroperatingendurance. C1
+combines active mechanical cleaning, stable tracked movement, and onboard separation without the
+additionalservicing complexityof C3andC7.
+Sketches for C2–C7 are provided in Appendix B. A sketch of the concept selected after screening is shown
+later in Section8.
+7.7 PreliminaryEngineeringAnalysis
+Beforeformalscreening,theteamperformedpreliminaryengineeringcalculationstoestablishthescale
+oftheoperatingconditionsandcheckconstraintscommontothecandidateconcepts. Thesecalculations
+informed the feasibility review rather than directly ranking the concepts, because detailed component
+performance datawerenot yet available. The calculations areprovidedinAppendix C.
+Table11. SummaryofPreliminary Engineering Analysis
+Design Consideration PreliminaryResult DesignImplication
+Hydrostatic pressure At themaximum operating depthof 50m,
+𝑝=𝜌𝑔ℎgives approximately 490.5 kPa
+gaugepressure.
+Pressure-sensitive enclosures, seals, batteries, sensors,
+and electrical connections must eventually be
+qualified for approximately 0.49 MPa gauge pressure.
+Cleaning productivity Thepreferred full-scale cleaning-rate
+target is 50m2/h. For cleaning area 𝐴,
+𝑡 = 𝐴/50 hours before delaysor servicing.
+Cleaning-headwidth,travelspeed,obstacleavoidance,
+power endurance, and debris servicing will determine
+whether the effective rate canreachthe target.
+Suction-flow scale Theproposed 40 m3/h suction-flow target
+is equivalent toapproximately 11.1 L/s.
+The pump, suction hood, piping, separationdevice,
+filter, and water-return path must be treated as one
+hydraulic systemrather thansizedindependently.
+Debris accumulation If the historical200 kg accumulationover
+approximately fiveyears is averaged
+uniformly, the equivalent rate is
+approximately 40 kg/year, 0.11 kg/day,or
+0.77kg/week.
+Continuous cleaning with debris servicing when
+collection capacity is reached changes the storage
+problem. The system does not need to carry the
+historical200 kg in one collectionload,soa smaller
+serviceable cartridge or hopper may be practical.
+The sediment estimate is an order-of-magnitude calculation rather than a final debris-storage requirement.
+Actual accumulation may vary by reservoir, location, operating condition, and servicing interval. Final
+cartridge or hopper capacity will therefore depend on observed sediment loading, available system volume,
+payloadcapacity, andthe intendedservicing approach.
+Batterycapacity,drivetorque,pumppower,separatorsizing,anddetailedstoragevolumerequirecomponent
+and geometryinformationthatwillbedefined afterconcept selection.
+7.8 FeasibilityandTrade-Off Analysis
+Each concept was reviewed against the major requirements for underwater cleaning, debris capture,
+eliminationofroutinehumanentry,obstaclenavigation,monitoring,andsaferecovery. Thecomparison
+focusedonwhethereacharrangementwastechnicallyfeasibleandwhetheritsaddedcomplexityprovideda
+useful operational benefit.
+24
+--- page 26
+Table12. Preliminary FeasibilityAssessment
+Concept Advantages Limitations / Risks Feasibility
+C1 –
+Brush–Hydrocyclone
+Crawler
+Stable tracked movement; active
+brush cleaning; localized
+suction;onboard separation and
+removable storage.
+Requires coordinated hydraulic,
+mechanical,sensing, and control
+integration.
+Feasible. Provides a
+complete debris path with
+strong cleaning capability
+and practical servicing.
+C2 – Simple Suction
+Rover
+Lowest complexity;simple
+control; potentially lower cost,
+energyuse, and maintenance.
+Direct suction may not remove
+adhereddeposits;wheelsmayprovide
+lower traction; filters may clog.
+Feasible. Simple and
+practical,but potentially
+weaker cleaning
+performance.
+C3 – Automatic
+Cartridge Crawler
+Strong cleaning system;
+automatedcartridge servicing;
+backup recovery capability.
+Automatic transfer requires reliable
+docking, alignment, sealing, and
+additionalmechanisms.
+Feasible in principle, but
+servicing automation
+adds substantial
+development complexity.
+C4 – Dewatering
+Crawler
+Reduces stored water and may
+increase effective debris
+capacity while retaining tracked
+brush cleaning.
+Dewatering requiresadditional
+volume and may introduce clogging
+or solids-handling problems.
+Feasible. Attractive if
+storage capacity becomes
+a major constraint.
+C5 – Water-Jet
+Crawler
+Reduces continuous mechanical
+contact andcan loosen deposits
+while tracks stabilize the
+cleaning head.
+Jet flowmay increase turbidity and
+requires additional hydraulic power
+and effective containment.
+Feasible if testing
+confirms that suction
+captures disturbed
+sediment before
+dispersion.
+C6 – Free-Swimming
+Cleaner
+High maneuverability andno
+dependence on floor traction.
+Thruster wash may disturb sediment;
+higher power demand; difficult
+suction-head positioning and more
+complex navigation.
+Feasible, but less suited
+to routine floor-sediment
+cleaning.
+C7 – Long-Endurance
+Dock-Service Crawler
+Highersolidscapacityandfewer
+full-robotretrievals during long
+cleaning cycles.
+Requires docking, debris transfer,
+larger storage, and additional
+interfaces.
+Feasible in principle, but
+more complex than
+necessary forthe initial
+proof of concept.
+All seven concepts were considered sufficiently plausible to proceed to formal screening. The preliminary
+calculationsestablishcommonoperatingconditionsanddonotestablishmeasuredperformancedifferences
+between concepts. The maintrade-off was between simplicityandadditional capability: simplerconcepts
+reduced cost and development effort, while more advanced concepts improved cleaning, servicing, or
+endurance at the expense of additional interfaces and failure modes. These differences were examined
+further throughtheconcept-selectionmethods in Section 8.
+7.9 Concept-Generation Outcome
+Brainstorming, brainwriting, TRIZ, and morphological analysis provided alternative solutions for the
+requiredsystemfunctions. Thecompatibilityreviewandpreliminaryfeasibilityassessmentthenestablished
+sevencompleteconceptsforscreeninginSection8. Theirmaindifferencesconcernedcleaningmethod,
+mobility,debris handling,operational complexity,and servicing.
+8. Concept Selection
+The team used two complementary methods to select the concept for continued development: a Pugh
+matrixforinitialqualitativescreeningandanIndividualIndependentAttributeEvaluation(IIAE)matrix
+for quantitative comparison. The Pugh matrix was used to evaluate all seven complete concepts generated
+inSection7,whiletheIIAEmethodwasappliedtothethreeconceptsthatadvancedfromthescreening
+stage. Theresultsofbothmethodswere then reconciledbeforethefinal conceptwasselected.
+8.1 SelectionCriteria
+The team developed eleven selection criteria from the customer needs, engineering requirements, House of
+Quality, and project-development considerations. Although the report guidance recommends five to seven
+criteria, the eleven criteria were retained with instructor approval because they represent distinct technical
+andproject-developmentconsiderationsandhadalreadybeenusedconsistentlyduringtheconcept-selection
+activities.
+25
+--- page 27
+Thecriteriaincludecustomer-performanceattributessuchascleaningcoverageandwater-qualityprotection,
+operationalconsiderationssuchasrecoveryandmaintenance,andstrategicfactorssuchascost,development
+risk, technicaldifficulty, and development duration.
+Table13. Concept-Selection Criteria
+SelectionCriterion Preference Measure / Unit Reason for Selection
+Cleaningcoverage Maximize %of required accessible
+surface cleaned
+Measures whether the system cancleanthe
+required reservoir surfaces effectively.
+Cleaningrate Maximize m2/h Higher effective cleaning rates reduce the time
+required tocomplete routine cleaning.
+Water-quality
+disturbance
+Minimize Turbidity change during
+cleaning,NTU
+Cleaning must limitsediment redistributionand
+protect drinking-water quality.
+Navigation safety Minimize Collision events/cycle The robot mustnavigate safely around pillars,
+walls, inlet/outlet features, and other internal
+structures.
+Humanintervention Minimize Active operators/cycle Routine operation should require minimal
+operator involvement whileretainingremote
+supervision.
+Recoverytime after
+failure
+Minimize min/failure The system should be recoverable after power,
+mobility, or communication failure with minimal
+interruption.
+Maintenance
+requirement
+Minimize Unplanned interventions/cycle KAHRAMAA requires asystem that can be
+practically serviced with limited maintenance.
+Life-cycle cost Minimize Relative 1–5 score Provides a consistent relativecomparison of
+expected system cost throughout itsservice life.
+Developmentrisk Minimize Likelihood ×consequence
+score
+Concepts that dependon uncertain,
+difficult-to-integrate, or difficult-to-source
+technologies creategreater project risk.
+Technical difficulty Minimize Relative 1–5 score Represents the difficultyof integrating the
+mechanical,electrical, cleaning, sensing,and
+control functions.
+Developmentduration Minimize Estimateddevelopment time Concepts requiring less development and
+integration effort are more likelytoremain
+compatible with the project schedule.
+Thecriteriawerereviewedagainsttheattribute-selectionguidanceusedinthecourse. Theyapplytoall
+sevenconceptswithoutprescribingaparticularphysicalsolution,distinguishbetweenimportantdesign
+characteristics, and can be measured quantitatively or evaluated using a consistent relative scale. No
+criterion wasintentionallydefinedtofavortheconcept thatwasultimatelyselected.
+8.2 PughMatrixScreening
+The Pugh matrix was used as the first concept-screening method because detailed quantitative performance
+data were not yet available for every alternative. Each concept was compared against a common datum and
+rated as better (+),similar(S), or worse (−) foreach of the eleven criteria.
+C5, the Battery Water-Jet Cleaning Crawler, was selected as the datum. It represented a reasonable
+middle reference rather than the expected best or worst concept. It also shared the battery-powered tracked
+arrangement used by several alternatives while using a different cleaning mechanism, which made it useful
+asa neutral comparisonpoint.
+26
+--- page 28
+Table14. Pugh Concept-ScreeningMatrix
+Selection Criterion Preference C1 C2 C3 C4 C5 C6 C7
+Cleaning coverage Max S− S S Datum + S
+Cleaning rate Max− − S S Datum− S
+Water-qualitydisturbance Min + S + + Datum− S
+Navigation safety Min S S S S Datum− S
+Human intervention Min S− + + Datum S +
+Recoverytime Min S S + S Datum− +
+Maintenancerequirement Min + S− S Datum S−
+Life-cycle cost Min S + − S Datum− −
+Development risk Min + + − S Datum− −
+Technical difficulty Min + + − − Datum− −
+Development duration Min S + − S Datum− −
++ Count – 4 4 3 2 – 1 2
+−Count – 1 3 5 1 – 7 5
+S Count – 6 4 3 8 – 3 4
+NetScore – +3 +1−2 +1 0−6−3
+The Pugh net score was calculated by subtracting the number of negative ratings from the number of
+positive ratings,while similarity ratingscontributed zero. For example, C1 received four positive and one
+negativerating,resultinginanetscoreof+3. C2andC4eachreceivedanetscoreof+1,althoughtheir
+individualstrengthsandweaknessesdiffered. BecausethePughmethodassignsequalimportancetoall
+criteria, these results were usedto identify promising alternativesrather than determinethefinal selection.
+The Pugh screening ranked C1 first with a net score of +3. C2 and C4 each achieved a net score of +1 and
+were therefore retained with C1 for further evaluation. C3, C6, and C7 produced negative scores, while C5
+remained atzero becauseitwasthe datum.
+The distribution of ratings also helped explain the result. C1 received only one negative rating and was
+similar to or better than C5 for ten of the eleven criteria. Its advantages were associated primarily with
+water-qualityprotection,maintenance,developmentrisk,andtechnicaldifficulty. Itsonlynegativerating
+was cleaning raterelativetothe water-jet datum.
+C2 showed advantages inlife-cycle cost,development risk, technical difficulty, anddevelopmentduration
+because of its relatively simple architecture. However, its direct-suction arrangement and wheeled mobility
+resulted in weakerratingsforcleaning coverage, cleaningrate, andhuman intervention.
+C4 received only one negative rating and eight similarity ratings. Its dewatering arrangement provided
+benefits for water-quality protection and human intervention, but the increased subsystem complexity
+reduced itstechnical-difficultyrating.
+ThePughmethodwasusefulforscreeningallsevenconceptswhenlimitedquantitativeinformationwas
+available. Its primary limitation is that each criterion contributes equally to the final plus/minus count
+regardlessofitsrelativeimportance. Theresultcanalsobeinfluencedbytheselecteddatum. Theteam
+therefore usedthePughmatrixas ascreening method ratherthanasthe finalselectiontool.
+8.3 IIAEEvaluation
+The three concepts with positive Pugh scores—C1, C2, and C4—were evaluated using the Individual
+IndependentAttribute Evaluation(IIAE)method.
+Eachofthefiveteammembersindependentlyassignedrelativeimportanceweightstotheelevencriteria,
+witheachindividual’sweightssummingto100. EachmemberthenindependentlyevaluatedC1,C2,and
+C4usingarelative0–100scoringapproach. Foreachcriterion,100pointsweredistributedamongthethree
+concepts based on their expected relative performance, with higher scores indicating stronger performance.
+Thesescores representedpreliminary engineering judgments ratherthan experimentallymeasured results.
+Theindividualcriterionweightsandconceptscoreswereaveragedacrossthefiveteammemberstodevelop
+the teammatrixshownin Table15. Theindividualevaluations,including eachteam member’s name, are
+providedinAppendixD.
+27
+--- page 29
+Table15. Team-AverageIIAE Scoring
+Criterion Team Weight C1 C2 C4
+Cleaning coverage 15.0 38.0 27.0 35.0
+Cleaning rate 10.0 38.0 29.0 33.0
+Water-quality disturbance 15.2 37.0 35.0 28.0
+Navigationsafety 12.0 38.0 30.0 32.0
+Humanintervention 12.2 33.0 27.0 40.0
+Recovery afterfailure 8.0 36.0 33.0 31.0
+Maintenance requirement 8.2 32.0 41.0 27.0
+Life-cyclecost 5.2 31.0 44.0 25.0
+Development risk 5.0 34.0 41.8 24.2
+Technical difficulty 4.8 33.0 43.8 23.2
+Development duration 4.4 33.0 43.8 23.2
+Total Weight 100.0– – –
+For each concept,the weightedcontributionof a criterion wascalculated as
+𝑆𝑖 𝑗 =𝑤𝑖𝑟𝑖 𝑗
+where 𝑤𝑖 istheteam-averageimportanceweightforcriterion𝑖,and𝑟𝑖 𝑗 istheteam-averagescoreofconcept
+𝑗 for that criterion.
+Thetotal scoreforeachconcept was thencalculated as
+𝑆𝑗 =
+11
+∑︁
+𝑤𝑖𝑟𝑖 𝑗.
+𝑖=1
+For example,thecleaning-coveragecontribution for C1 was calculated as
+𝑆C1,coverage =15.0 ×38.0=570.00.
+ThecompleteweightedcalculationsareprovidedinAppendixD.Theresultingteamscoresaresummarized
+in Table 16.
+Table16. Final TeamIIAE Results
+Concept Weighted Total Normalized Result Rank
+C1 – Brush–Hydrocyclone
+Crawler
+3556.20 35.56% 1
+C2 – SimpleSuction Rover 3357.36 33.57% 2
+C4 – Dewatering Crawler 3086.44 30.86% 3
+Thenormalized resultswere calculatedbydividingeachconcept’sweightedtotalbythesumofthethree
+weighted totals (10,000 points) and expressing the result as a percentage. These percentages therefore
+representeachconcept’srelativeshareofthecombinedscores,ratherthanthepercentageofengineering
+requirementssatisfied or experimentallyverifiedsystem performance.
+TheIIAEevaluationrankedC1first,followedbyC2andC4. C1performedparticularlystronglyincleaning
+coverage,cleaningrate,water-qualityprotection,navigationsafety,andrecovery. Thesecriteriacollectively
+received a largeportion of thetotalteam weighting.
+C2performedstronglyinmaintenancerequirement,life-cyclecost,developmentrisk,technicaldifficulty,
+and development duration because it uses the simplest architecture of the three shortlisted concepts. These
+advantagesexplain why C2remained relativelyclosetoC1despite weaker cleaning-relatedscores.
+C4 received the highest score for minimizing human intervention but scored lower in maintenance,
+cost,developmentrisk,andtechnicaldifficultybecauseitsdewateringandconcentrated-solidshandling
+arrangement introducesadditional hardware andintegrationrequirements.
+The mainadvantage ofthe IIAEmethod isthat it accountsfor bothcriterion importanceand independent
+28
+--- page 30
+judgments from each team member. Independent scoring reduces the influence of a single person’s
+preference,whiletheweightspreventlow-priorityattributesfromaffectingthefinalresultasstronglyas
+critical project requirements. However, the resultsremaindependentonthe team’spreliminaryengineering
+judgmentsandshould bereassessedwhenquantitative performancedatabecome available.
+8.4 50-PointRule
+The course selection method requires the two highest IIAE scores to be checked using the 50-point rule. If
+the difference between the top two concepts is less than 50 points, the result is treated as a tie rather than a
+definitive selection.
+The 50-point threshold was applied to the original weighted IIAE totals rather than the normalized
+percentages.
+For C1 andC2,
+Δ𝑆=3556.20−3357.36=198.84.
+Because
+198.84 >50,
+C1 andC2arenotconsideredtied. No additional tie-breaking procedure wasthereforerequired.
+8.5 ReconciliationandFinal Selection
+ThefinalstepwastocomparetheconclusionsproducedbythePughandIIAEmethodsratherthanselecting
+whichever result was preferred by the team. The two methods produced consistent results at the top of the
+ranking.
+Table17. ComparisonofConcept-Selection Results
+Method 1st 2nd 3rd
+Pugh C1 C2 = C4 C2 = C4
+IIAE C1 C2 C4
+BothmethodsidentifiedC1asthestrongestconcept. ThePughmatrixcouldnotdistinguishbetweenC2
+and C4 because both concepts received a net score of +1. The IIAE evaluation resolved this difference
+byconsideringcriterionimportance. C2’sadvantagesinmaintenance,life-cyclecost,developmentrisk,
+technical difficulty, and development duration outweighed C4’s advantage in reducing human intervention.
+The team therefore selected C1 – Battery Tracked Brush–Hydrocyclone Crawler for continued develop-
+ment.
+TheIIAEevaluationdrovethefinalselectionbecauseitconsideredcriterionweightingandindependent
+evaluationsfromall fiveteammembers.
+Figure 6 shows the high-levelconcept sketch of the selected C1arrangement.
+29
+--- page 31
+Figure6. High-levelconceptsketchof C1,the BatteryTracked Brush–Hydrocyclone Crawler.
+9. Concept Refinement
+After selecting C1 in Section 8, the team considered whether its arrangement could be improved before
+detaileddesign. This stage focuses on potential modifications tothe preferred concept rather than repeating
+the screeningresults ordevelopinganothersetof alternatives.
+9.1 RefinementOpportunities
+C2’s simpler architecture suggests opportunities to reduce components and interfaces in C1, provided that
+cleaningeffectivenessandnavigationcapabilityaremaintained. C4’sdewateringarrangementcouldreduce
+the water retained with collected sediment, but would add hardware and solids-handling complexity. It
+shouldthereforebeconsideredonlyifstoragecapacityorwaterlossbecomesasignificantconstraintduring
+testing. Neitherchange hasbeen adoptedor demonstratedatthis stage.
+Anadditionalissueistherequiredcleaningscope. C1currentlydescribesfloorcleaning,whereasCustomer
+Need N2 includes required reservoir water-contact surfaces and structures. Its ability to address walls
+and internal structures remains unresolved and mustbe evaluated during the next design stage rather than
+presented as an established capability.
+9.2 RefinementOutcome
+C1remainstheselectedconceptwithoutachangetothescreeningresults. Therefinementreviewidentified
+possible simplification, a conditional debris-handling improvement, and the need to clarify cleaning
+coverage. Thedetaileddesignstagewill determinewhetheranychangesarejustifiedwhileconsidering
+continuouscleaningcycles,cartridgeservicing,water-qualityprotection,andsaferecovery. Thesedecisions
+willbe developed withthecomponent sizing andsystem interfacesin Section10.
+10. Product ArchitectureandSystemIntegration
+Following concept selection, the selected C1 Battery Tracked Brush–Hydrocyclone Crawler was translated
+from a system concept into a preliminary product architecture. The purpose of this stage was to determine
+how the functions identified in Section 6 should be grouped into physical modules and how those modules
+must interact.
+Thearchitecturewasdevelopedfromtheselectedconceptratherthandirectlyfromtheoriginalsolution-
+neutral functional model. This allowed the module boundaries and preliminary physical components
+to reflect the actual tracked, battery-powered, brush-and-suction architecture selected in Section 8 and
+subsequently reviewedin Section 9.
+30
+--- page 32
+10.1 FromConceptSelection to ModuleIdentification
+The sub-functions from the functional model were clustered into four modules according to their functional
+relationships, physical roles, service requirements, and interfaces. The same four-module structure is used
+throughout thearchitecture diagramsandinterfaceanalysis.
+Table18. FunctionalClustering, PhysicalRoles, and ModuleBoundaries
+Module Sub-functions from Functional
+Model
+Preliminary Physical Role Excluded Functions /
+Boundary
+Module 1– Power &
+Actuation
+Receiveelectrical energy; Supply
+electrical energy;Convert electrical
+energyto mechanical energy; Sense
+power status.
+Battery pack,electrical power
+distribution, motor-drive and
+actuation hardware,and
+power-status monitoring.
+Does not perform
+cleaning,debris
+separation, navigation
+decisions, or
+environmental sensing
+beyond power-status
+monitoring.
+Module 2– Cleaning
+& DebrisHandling
+Collect mixture; Separate deposits
+fromwater; Guidewater; Return
+water; Contain deposits;Export
+deposits.
+Brush/suction head, intakepump,
+hydrocyclone separator,filtration,
+temporary debris storage, and
+water-return outlet.
+Does not propel, deploy,
+or recover the robot;
+distributesystemelectrical
+power; or generate
+navigation andcontrol
+commands.
+Module 3– Mobility/
+Deployment /
+Recovery
+Sanitize robot; Submerge robot;
+Move robot; Recoverrobot.
+Chassis, tracks, drive motorsand
+gearboxes, retrievalattachments,
+and deployment/recovery
+provisions.
+Does not collect or
+separate deposits,
+distributeelectricalpower,
+or generate navigation and
+control decisions.
+Module 4– Sensing,
+Control &
+Monitoring
+Sense robot position; Sense obstacle
+proximity;Sense water turbidity;
+Senseoperatorinput;Sensecleaning
+coverage; Trigger Tool(system
+control and command generation).
+Position and obstacle sensors,
+turbidity monitoring,controller,
+communicationlink,andoperator
+interface.
+Does not physicallymove
+the robot, perform
+cleaning or separation, or
+provide primary electrical
+power to the other
+modules.
+Module1containstheelectricalenergystorage,distribution,andactuationsupportfunctionsrequiredby
+the other modules. Module 2 contains the complete debris-handling path from collection to separation,
+storage, and water return. Module 3 contains the physical robot platform and the functions required to
+place,move,andrecovertherobot. Module4processesinformationandcoordinatesthesystemthrough
+sensing,monitoring, and control.
+The boundaries were intentionally defined so that each module has a clear primary responsibility. For
+example, the drive motors and tracks physically belong to Module 3, while the electrical power distribution
+and motor-drive electronics that energize them belong to Module 1. Similarly, the cleaning hardware
+belongs toModule2,whilethe commands thatactivateand regulatecleaning originateinModule4.
+10.2 Modularvs. IntegralArchitecture
+Theteamevaluatedwhethertheselectedsystemshoulduseapredominantlymodularorintegralarchitecture.
+A modular arrangement allows major subsystems to be independently developed, serviced, replaced, or
+upgraded. Thisisparticularlyusefulforthebattery,debriscartridge,sensors,cleaningcomponents,and
+track assemblies,which mayrequireregularservicing.
+Anintegral architecture couldprovideadvantages incompactness, efficiency, andreduced interface count.
+Forexample,combininghydrauliccomponentsintoatightlyintegratedflowpathcouldreducepressure
+lossesandpackagingvolume. However,excessiveintegrationwouldmakeindividualcomponentsmore
+difficulttoaccessorreplaceandcouldrequirelargerportionsoftherobottobedisassembledfollowinga
+single component failure.
+Themodular and integral opportunities foreach moduleare summarized in Table 19.
+31
+--- page 33
+Table19. Module-Level Modularvs. IntegralAssessment
+Module Modular Opportunity Integral Opportunity Decision
+Module 1– Power &
+Actuation
+Battery pack, electrical distribution, and
+motor-drive hardware can be serviced or
+replaced independently.
+Power conditioning, distribution,and
+actuation electronics can be packaged
+together to reduce connections and
+improve efficiency.
+Modular
+Module 2– Cleaning &
+Debris Handling
+Brush/suction head, separator/filter, and
+debris cartridgecanberemoved or
+serviced separately.
+Pump, suction flow, hydrocyclone,
+filtration, andwater-return pathrequire
+coordinated hydraulic designfor
+effectivecleaning.
+Mostly
+Modular
+Module 3– Mobility/
+Deployment / Recovery
+Track assemblies,drive units, and
+retrievalequipmentcan be
+independently replaced orserviced.
+Motors,gearboxes, and tracks can be
+tightly integrated within each drive
+assembly,while deployment and
+recovery interfaces mustmatchthe
+chassis geometry.
+Modular
+Module 4– Sensing,
+Control &Monitoring
+Position,obstacle, andturbidity sensors
+can be independently replacedor
+upgraded using standardized
+connections.
+Sensor fusion, onboard processing,
+monitoring, and communication
+functions can be integrated intoa
+centralized control system.
+Modular
+A weighted scoring matrix was also used to compare the two architectural approaches. Each criterion was
+scored from1 to5,where5representsthemore favorable condition.
+Table20. Modularvs. Integral Architecture Scoring Matrix
+Criterion Weight Modular Integral
+Ease of reconfiguration 15% 5 2
+Ease of maintenance/service 25% 5 2
+Ease of design/management 15% 5 3
+System performance/efficiency 20% 3 5
+Fewer interfaces/potential failures 15% 3 5
+Ease of component replacement/upgrading 10% 5 2
+WeightedScore 100% 4.30 / 5 3.20 / 5
+The modular architecture received a weighted score of 4.30/5 compared with 3.20/5 for the integral
+alternative. The higher modular score was driven primarily by maintenance, serviceability, component
+replacement,anddesignmanagement. Thesecharacteristicsareimportantbecausetheproposedsystemwill
+require battery servicing, debris removal, filter maintenance, sensor replacement, and access to underwater
+components.
+Theteamthereforeselectedamostlymodulararchitecture. Thisdoesnotrequireeveryindividualcomponent
+toremainseparate. Localintegrationisstillappropriatewhereitimprovessealing,efficiency,packaging,or
+performance. Forexample,themotor–gearbox–trackassembliescanbeinternallyintegratedwithinModule
+3,and the hydrauliccomponentsof Module2must be designedas a coordinatedflowpath.
+10.3 InterfaceDefinition
+After defining the four modules, the team identified the six possible pairwise inter-module interfaces. Each
+interface was classified as energy, information, or physical according to the type of interaction crossing the
+module boundary. Where morethanoneinteraction occurs,multipleinterface types are listed.
+Table 21 summarizes theseinterfacesand thepreliminary verificationrequirements.
+32
+--- page 34
+Table21. Inter-Module Interfaces andPreliminaryRequirements
+Modules Interface Type Interface Description andPreliminary VerificationRequirements
+Module 1 ↔
+Module 2
+Energy; Physical Module 1 supplieselectrical power tothe brush andsuction-pumphardwarein
+M2. Electrical connectors, protection devices, and mounting arrangements must
+be compatible. Submerged electricalconnections and sealsmustwithstandthe
+pressure associated with the 50 m requiredoperating depth(M6),with 60mas
+theideal target.
+Module 1 ↔
+Module 3
+Energy; Physical Module 1 supplieselectrical power tothe mobilitydrive systemin Module 3.
+Motor-drive connections, mechanical packaging, and electrical compatibility
+with the track-drive assemblies mustbeverified. Power delivery must support
+controlled movement and emergency propulsion shutdown.
+Module 1 ↔
+M4
+Energy; Information Module1supplieselectricalpowertothesensors,controller,andcommunication
+hardware in Module 4. Module 4receives battery and power-status information
+to monitor energy availability and initiate recovery. Recovery must begin with at
+least 20% battery capacity remaining (marginal),with 25%preferred (M15).
+Power-status communication and the recoverytriggermustbeverified.
+Module 2 ↔
+Module 3
+Physical The cleaning and debris-handling equipment in Module 2 is physically mounted
+to the mobile chassis in Module3. Mounting strength, component clearances,
+stability,and cleaning-headpositioningmust be verified. Cleaningand
+movement commands are coordinated through Module 4rather thanthrougha
+direct information interface between Module2 and Module3.
+Module 2 ↔
+Module 4
+Information Module 4 sends cleaning commands to Module 2 and receives
+cleaning-subsystem status information. Module 4alsouses turbidity and
+cleaning-progressmeasurements to monitor cleaning performance. Integrated
+testing must verify commandreliabilityand feedback accuracy. Maximum
+cleaning-induced turbidity increase is ≤0.5 NTU (marginal), with no
+measurable increase preferred (M7). Cleaning-progress estimation error must be
+≤5 percentage points (M20).
+Module 3 ↔
+Module 4
+Information; Physical Module 4 sends movement, stopping, andrecovery commands toModule3and
+receives robot-position and obstacle information. Sensor placement and
+mountingmustsupportreliablenavigation. Minimumobstacle-detectionrangeis
+≥0.5 m(marginal),with≥1 mpreferred(M11). Emergency-stopresponsemust
+be ≤2 s (marginal), with ≤1 s preferred (M12).
+Inadditiontointer-moduleinterfaces,thecompletesystemmustinterfacewiththereservoirandtheoperator.
+Module 3 must allow deployment and recovery through the existing reservoir access without requiring
+personnelto enter thereservoir. Module 2 must return separated water without unacceptable disturbance.
+Module4mustmaintaincommunicationwiththeoperatorandprovidemonitoring,manualoverride,and
+emergency-stopcapability.
+The system is intended to operate at water depths up to 50 m. Pressure-sensitive connectors, housings, and
+seals therefore require qualification for the associated underwater pressure. The ideal suction-flow target of
+40m3/halso creates an importantinternal hydraulicinterface within Module 2: thecleaning hood,pump,
+hydrocyclone,filter,storagearrangement,andwater-returnpathmustoperateasacoordinatedhydraulic
+system rather than as independentlysized components.
+Theinterfacespecificationslistedhereremaindesigntargetsratherthandemonstratedcapabilities. Detailed
+connectorratings,mountingloads,hydrauliclosses,communicationperformance,andpackagingclearances
+willbe determinedduring embodimentdesignandcomponentselection.
+10.4 ArchitectureDiagramand Integration
+Figure 7 shows how the functional-model sub-functions were clustered into the four selected modules. The
+diagram preserves the main material, energy, and information flows while establishing clear functional
+boundaries. Itillustratestheelectrical-powerdistribution,debriscollectionandseparation,robotdeployment
+and recovery, and thesensing andcommand functionscoordinated through the Trigger Tool. Thedetailed
+interactions and verification requirementsbetweenmodules are definedinTable 21.
+33
+--- page 35
+Figure 7. Functional-model sub-functions clustered into the fourselected product-architecturemodules.
+Module 1 provides electrical power and actuation support to the cleaning and mobility hardware. Module
+2containsthecompletecleaninganddebris-handlingpath. Module3providesthemechanicalplatform,
+movement,deployment,andrecoveryfunctions. Module4receivessensorandoperatorinformationand
+generatesthecommandsrequiredtocoordinatethe other modules.
+Theproduct-architecturehierarchyinFigure8translatesthesefunctionalmodulesintopreliminaryphysical
+components.
+34
+--- page 36
+Figure8. Productarchitecturehierarchyfrom theselected system concept tomodulesand preliminary physical
+components.
+At the current levelof development, thepreliminary physicalmappingis:
+• Module 1 – Power & Actuation: battery modules, power-distribution hardware, motor-drive electronics,
+and power monitoring.
+• Module2–Cleaning&DebrisHandling: softrotatingbrush,suctionhood,intakepump,hydrocyclone,
+polishing filter, removabledebriscartridge, andwater-returnoutlet.
+• Module3–Mobility/Deployment/Recovery: chassis,leftandrighttrackassemblies,drivemotors
+and gearboxes,sanitizationand deploymentprovisions, andretrieval/recoveryinterface.
+• Module4–Sensing,Control&Monitoring: positionandobstaclesensors,IMU/depthsensing,turbidity
+orwater-qualitymonitoring, onboard controller,communication hardware, andoperatorinterface.
+ThearchitecturediagramsdonotrepresentfinalCADgeometry. Theirpurposeistoestablishfunctional
+and physical ownership of the major components and to identify where interfaces must be managed before
+detailed packagingbegins.
+10.4.1 PlannedIntegration Sequence
+Themodular architecturealsoprovides a logical sequencefor systemintegration.
+First, Module 3 will establish the physical platform, including chassis packaging, track operation, stability,
+deployment,andrecoveryaccess. Module2willthenbeintegratedwiththechassissothatthecleaning
+head, pump, separation system, storage, and water-return path can be tested as a complete debris-handling
+chain.
+Module1willsubsequentlyprovidetheelectricalpowerandactuationrequiredbythemobilityandcleaning
+modules. Module 4 will then integrate the position, obstacle, water-condition, control, and monitoring
+functions withthepoweredmechanicalsystem.
+Thefinalintegrationstagewillevaluatecoordinatedrobotmovement,debriscollection,sensing,operator
+monitoring,emergencystopping,andrecovery. Integratingthemodulesprogressivelyshouldmakeinterface
+problems easier toidentifybeforecombined underwatertesting.
+10.5 ArchitectureRisks
+Theselectedmostlymodulararchitectureimprovesserviceabilityand componentreplacement,butitalso
+createsinterfacesthatcanbecomefailurepoints. Theprincipalarchitecture-relatedrisksidentifiedatthis
+stage are summarizedin Table22.
+35
+--- page 37
+Table22. Architecture Risks and Planned Mitigation Actions
+Architecture Risk Potential Consequence Planned Mitigation / Verification
+Seals or electrical
+connectors leak
+Electrical failure or contamination of
+storedwater.
+Use potable-water-suitable components where
+applicable and pressure- and leak-test submerged joints
+and housings.
+Pump–separatormismatch
+orhydraulic blockage
+Poor debris pickup, excessive
+pressure loss, or recirculation of
+sediment.
+Size the cleaning head, pump, hydrocyclone, filter, and
+return path as one hydraulic systemand testflow,
+collection, and turbidity performance.
+Poorpackaging or excessive
+systemmass
+Hatch-access interference, reduced
+stability, or excessive mobility load.
+Check component dimensions, massdistribution,
+clearance, and stability duringCADpackagingand
+prototype development.
+Sensor orcommunication
+failure
+Loss of navigationinformation,
+collisionrisk, or uncontrolled
+operation.
+Verify sensor placement, communication reliability,
+manual override, fault detection,andsafe-stoplogic.
+Powerormobility failure Robot cannotautonomouslyreturn to
+therecovery location.
+Provide an independent retrieval attachment and verify
+recoveryfollowinglossofpropulsionorprimarypower.
+Thearchitecturethereforeconvertstheselectedconceptintodefinedphysicalresponsibilities,interfaces,
+andintegrationrisksthatcanguideembodimentdesign. Thenextstagewillrefinecomponentsizesand
+ratings, develop detailed CAD packaging, quantify the critical interfaces, and experimentally verify the
+cleaning, mobility, power,sensing,andrecovery subsystems before fullsystemintegration.
+11. Project Management
+ProjectmanagementtoolswereusedtocoordinatetheremainingMEEN401work,identifytaskdependencies,
+monitorscheduleperformance,andreducethelikelihoodthattechnicalorschedulingrisksdelaytheproject.
+The project-management framework includes a Work Breakdown Structure (WBS), Task Dependency
+Diagram (TDD), Ganttchart,critical-pathanalysis, andprocessrisk assessment.
+TheWBSisorganizedaroundtheengineeringactivitiesanddeliverablescompletedbytheteamratherthan
+simplyreproducingthecoursecalendar. ThedetailedPDManagerschedulecontainsthecorresponding
+activities,whiletherelationshipbetweenscheduledtasks,WBSworkpackages,andassignedteammembers
+isdocumented inTable24.
+11.1 WorkBreakdownStructure
+The MEEN 401 work was decomposed into six major work packages. Each package contains related
+engineeringactivities anddeliverablesrequiredto progressfrom requirementsdevelopmentthrough final
+CAD anddesigndocumentation.
+36
+--- page 38
+Table23. Work BreakdownStructure forMEEN 401
+WBS Work Package Main Tasks / Deliverables
+1.0 Engineering Design
+Development
+Develop customer needs, engineering requirements, functional models, concepts,
+product architecture, embodiment work, cost estimates, validation plans, and
+design-risk analyses. LA01–LA19 support these engineeringactivities.
+1.1 Requirements and Concept
+Development
+Customer needs, requirements, functional modeling, idea generation, concept
+refinement, concept selection, and product architecture.
+1.2 Embodiment Design Develop preliminary layouts, component alternatives, subsystem specifications,
+and embodiment-design decisions.
+1.3 Cost, Validation, and Risk
+Analysis
+Develop cost estimates, validationplanning, manufacturing considerations,
+FMECA, and fault-tree analysis.
+2.0 Collaborative Design
+Development
+Develop and refineteamdesign outputs throughthe studio activities and
+progressive engineering decision-making.
+2.1 Requirements and Concept
+Development
+Project planning, stakeholder analysis, requirements, functional modeling,
+concept generation, and concept selection.
+2.2 ArchitectureandEmbodiment Define product architecture, subsystem interfaces, component arrangements, and
+preliminary specifications.
+2.3 Cost, Validation, and Risk
+Planning
+Develop cost modeling, validationstrategy, FMECA,and fault-tree analysis.
+3.0 DesignReviews Prepare,submit, revise, and present theformal MEEN401design-review
+deliverables, including DR1, DR2,andDR3.
+4.0 Sponsor Coordination Maintaincommunicationwith KAHRAMAA through sponsor meetings,the
+reservoir site visit, design-progress reviews,and the closing sponsor meeting.
+Sponsor meetings areplanned for Mondays subject to sponsor focal-point
+availability.
+5.0 Prototype and CAD Design Refine subsystem designsandengineering calculations,prepare therevised
+prototype/CAD plan, develop the integrated SolidWorksmodel,andsubmitthe
+final CAD design.
+6.0 Risk Managementand
+Mitigation
+Monitor design and schedule risks, with focused mitigation activities for
+water-quality disturbance, underwater positioning, system integration, and other
+high-priority risks.
+6.1 R2–Water-QualityProtection Define debris-containment and localized cleaning provisions and turbidity
+verification criteria.
+6.2 R5 –UnderwaterPositioning Define navigation, sensor calibration, obstacle detection, and positioning-failure
+provisions.
+6.3 R11 – Integration Readiness Review subsystem interfaces, identifyCAD integration difficulties, andplan
+corrective actions.
+6.4 Risk Monitoring Update risk assessments,track mitigation completion, andreview outstanding
+risksthroughout design development.
+The WBS provides the basis for the task dependencies and Gantt schedule. The detailed schedule contains
+the individual activities associated with these work packages, while the WBS provides the higher-level
+structure needed totrack designprogresswithout treating the coursecalendaritselfastheproject plan.
+11.2 TaskDependenciesand CriticalPath
+The Task Dependency Diagram (TDD) identifies the sequence in which major engineering activities must
+be completed and highlights tasks that can delay subsequent milestones. The project progresses from
+requirements and concept development through concept selection, product architecture, DR2, detailed
+subsystem development,revisedCADplanning, andfinal CAD completion.
+Figure9summarizesthemajortaskdependenciesfromtheupdatedPDManagerschedule. Arrowsindicate
+the required sequence between activities, while red-outlined boxes identify critical-path tasks. Related
+early-stageactivitiesaregroupedtoimprovereadability. The completescheduleandits dependenciesare
+maintainedinPDManager.
+37
+--- page 39
+Figure9. TaskDependencyDiagramshowing the MEEN401 taskrelationshipsandcriticalpath.
+Thecurrentscheduleidentifiesa17-taskcriticalpathspanning56days,withMEEN401projectcompletion
+scheduledforDecember6,2026. Tasksonthispathhavelittleornoavailablescheduleflexibility,sodelays
+can propagatedirectlyto latermilestones.
+ThetransitionfromDR2intoCADdevelopmentisparticularlyimportant. FollowingDR2GroupReport
+Submission, Revised CAD Plan Preparation and the R11 Integration Readiness Review proceed as parallel
+activities. BothmustbecompletedbeforeRevisedCADPlanSubmission,whichisfollowedbySolidWorks
+CAD Development. Delaysin interface verification or packaging decisions could therefore affect the later
+CAD milestones.
+Forthisreason,interfacedefinition,engineeringcalculations,componentselection,andCAD-readiness
+checks are treated as schedule-sensitive activities ratherthanindependenttechnicaltasks.
+11.3 GanttChartand Schedule Monitoring
+TheGanttchartpresentsthecompleteMEEN401schedule,includingtaskdates,dependencies,milestones,
+andcritical-pathactivities. ItalsoincludesblockedperiodssuchasFallBreaksothattheavailableworking
+timeis represented realistically.
+The schedule identifies October 11–15, 2026 as Fall Break and treats this period as a no-project-work
+interval. This prevents the schedule from assuming progress during a period when the team was not
+expectedtowork. Figures10,11,and12presentthethreepartsoftheupdatedPDManagerGanttchartata
+readablescale.
+38
+--- page 40
+Figure10. MEEN 401 Gantt chartshowingscheduledtasks,dependencies,milestones,critical-pathactivities,and
+Fall Break (part 1 of 3).
+39
+--- page 41
+Figure 11. MEEN401Gantt chart (part 2 of 3).
+40
+--- page 42
+Figure 12. MEEN401Gantt chart (part 3 of 3).
+41
+--- page 43
+Because the PD Manager Gantt chart export truncates some task names and does not display assigned team
+members,Table24providesthefulltasknames,scheduledstartandduedates,assignedteammembers,
+andcorrespondingWBSworkpackages. Together,Figures10,11,12andTable24documenttheproject
+schedule,responsibilities, andalignmentwith theWBS presented in Table 23.
+TheGanttchartisusedasaworkingscheduleratherthanonlyasarecordofplanneddates. Completed
+activitiescanbecomparedwiththeirplannedtiming,whiledelaysincriticalactivitiescanbeidentified
+beforetheyaffectlaterdeliverables.
+The most schedule-sensitive work after DR2 is the transition into detailed subsystem development,
+engineeringcalculations,integration-readinessreview,andCADdevelopment. Becausetheseactivities
+aredependentontheselectedconceptandmoduleinterfacesestablishedinSections9and10,delaysin
+resolving technical interfacesmaydirectly affect the final CADschedule.
+SponsormeetingsareexpectedtooccuronMondays,subjecttotheavailabilityofthesponsorfocalpoint
+and the representative assigned to the project. As a result, sponsor feedback is incorporated into the
+schedulebut isnot assumed tooccur everyweekwithoutexception.
+Table24. GanttChart Task Responsibilities,Scheduled Dates, andWBS Alignment
+WBS ScheduledTask / Activity Dates (2026) Assigned Member(s)
+1.0 Project Scope and Design Process 23–25 Aug Team
+1.0 WBS, Dependencies and Gantt Planning 27 Sep Team
+1.1 Customer and Stakeholder Identification 24–25 Aug Team
+1.1 Customer Interviews 1 Sep Team
+1.1 EngineeringRequirements 5–6 Sep Team
+1.1 Houseof Quality 8 Sep Team
+1.1 Black-Box Functional Modeling 13 Sep Team
+1.1 Functional Decomposition and Flows 15 Sep Team
+1.1 TRIZ Concept Generation 22 Sep Team
+1.1 Initial Concept Generation 23 Sep Team
+1.1 Pugh Concept Screening 29 Sep Team
+1.1 IIAE ConceptEvaluation 4 Oct Team
+1.1 ModuleIdentification and Clustering 6 Oct Team
+1.2 PreliminaryEmbodimentLayouts 18–20 Oct Team
+1.2 Embodiment DesignRefinement 23–25 Oct Team
+1.3 PreliminaryCostandBudgetEstimation 30 Oct–1 Nov Team
+1.3 PreliminaryVerification and Validation Planning 1–3 Nov Team
+1.3 Design for Manufacturing 6–8 Nov Team
+1.3 FMECA and FTA 13–15 Nov Team
+2.1 Project Planning and Design Strategy 23 Aug Team
+2.1 Stakeholder Analysis and Need Identification 30 Aug Team
+2.1 Requirements Developmentand MetricsDefinition 6 Sep Team
+2.1 Functional ModelingandSystem Architecture 20 Sep Team
+2.1 ConceptGenerationandCreative Problem Solving 27 Sep Team
+2.1 ConceptSelection and Decision Analysis 4 Oct Team
+2.2 ProductArchitecture and System Integration 18 Oct Team
+2.2 Embodiment DesignandComponent Specification 25 Oct Team
+2.3 CostModeling and Project Planning 8 Nov Team
+2.3 Validation Planning and Test Strategy 15 Nov Team
+2.3 Risk Analysis, FMECA and Fault TreeAnalysis 22 Nov Team
+3.0 DR1 Writingand House ofQuality 13 Sep Team
+3.0 DR1 – Report Preparation 15–21 Sep Team
+3.0 DR1 – Initial Individual Submission 22 Sep Team
+3.0 DR1 – Feedback Review and Revisions 30 Sep–7Oct Team
+3.0 DR1 – Individual ReportResubmission 8 Oct Team
+3.0 DR2 – Group ReportPreparation 25–31 Oct Team
+3.0 DR2 – Group ReportSubmission 1 Nov Team
+3.0 DR2 – Presentation 1 Nov Team
+3.0 DR3 – Final Report Preparation 25 Nov–5 Dec Team
+42
+--- page 44
+Table 24 continued
+WBS ScheduledTask / Activity Dates (2026) Assigned Member(s)
+3.0 DR3 – Presentation 1 Dec Team
+3.0 DR3 – Final Report Submission 6 Dec Team
+4.0 KAHRAMAA Sponsor Meeting 1 – Project Scope&Initial
+Requirements
+9 Sep Team
+4.0 KAHRAMAA Sponsor Meeting 2 – Technical Requirements
+& Design Clarifications
+14 Sep Team
+4.0 KAHRAMAA Site Visit– Reservoir Inspection &Design
+Requirements
+21 Sep Team
+4.0 KAHRAMAA Sponsor Meeting 3 – DesignProgress Update
+& Concept Review
+5 Oct Team
+4.0 KAHRAMAA Sponsor Meeting 4 26 Oct Team
+4.0 KAHRAMAA Sponsor Meeting 5 2 Nov Team
+4.0 KAHRAMAA Sponsor Meeting 6 9 Nov Team
+4.0 KAHRAMAA Sponsor Meeting 7 16 Nov Team
+4.0 KAHRAMAA Sponsor Meeting 8 23 Nov Team
+4.0 ClosingSponsorMeeting 30 Nov Team
+5.0 Prototype and CAD Design – Revised PlanPreparation 3–14 Nov Team
+5.0 Prototype and CAD Design – Revised PlanSubmission 15 Nov Team
+5.0 SolidWorks CAD ModelDevelopment 16 Nov–5 Dec Team
+5.0 Final SolidWorks CAD Model Submission 6 Dec Team
+6.1 R2 – Water-Quality Protection and Turbidity Mitigation 20–24 Oct Ayesha Khurram
+6.2 R5 – UnderwaterPositioning and Navigation Risk Mitigation 20–24 Oct Raihana Sattari
+6.3 R11– CADInterface and Integration Readiness Review 3–14 Nov AlHoura Al-Ahen
+Note: “Team”denotesRaihanaSattari,NoorAbdeen,AyeshaKhurram,AlHouraAl-Ahen,andBedour
+Al-Qahtani. Tasks and assignments are taken from updates in PD Manager; the WBS grouping follows
+Table 23. Fall Break is a blocked period rather than an assigned task. WBS 6.4 represents ongoing risk
+monitoring rather thanaseparatelyscheduled PD Managertask.
+11.4 ProcessRiskAssessment
+A process risk assessment was used to evaluate technical and project-management risks that could prevent
+theteamfromcompletingtheMEEN401designprocesssuccessfully. Likelihoodandimpactwereeach
+rated from 1 to 5,and therisk scorewas calculated as
+𝑅=𝐿×𝐼
+where 𝐿is thelikelihood ofoccurrenceand 𝐼is the impact iftherisk occurs.
+Therisklevelswereclassified asfollows:
+Table25. ProjectRisk-Level Classification
+Risk Score Risk Level
+1–4 Low
+5–9 Medium
+10–15 High
+16–25 Critical
+ThecompleteprocessriskassessmentispresentedinTable26. Theassessmentconsidersbothtechnical
+risks and schedule-related risks, including those that could affect the critical path. The risk IDs used in
+this assessment refer to project risks and are independent of the engineering requirement IDs presented in
+Section 5.
+43
+--- page 45
+Table26. MEEN 401 Process RiskAssessment
+ID Risk / Main Cause L I Score Level Mitigation / Verification
+R1 Robot becomes stuck or
+cannotbe recovered because
+of mobilityfailure, obstacle
+entrapment, orlossof
+propulsion.
+3 5 15 High Includeanindependentrecoveryattachment,
+monitor mobility status, and define recovery
+procedures before underwater testing.
+R2 Cleaning increases turbidity
+or redistributes debris
+because disturbed sediment is
+not captured quickly enough.
+4 5 20 Critical Use controlled suction, localized cleaning,
+debris containment, adjustable cleaning
+intensity, and turbidity monitoring. Address
+through WBS 6.1andlater cleaning
+validation.
+R3 Collision damages reservoir
+structures because of
+inadequate obstacle detection,
+excessivespeed, ornavigation
+error.
+3 5 15 High Use obstacle sensing, controlledmovement,
+emergency stopping,protective contact
+surfaces, and representative obstacle testing.
+R4 Suctionor debrispath
+becomes clogged because of
+undersized flowpassages,
+filter loading, orunsuitable
+debris-handlinggeometry.
+3 4 12 High Size the hydraulic path appropriately,
+provide accessible separation and filtration,
+and test with representative debris.
+R5 Underwater positioning is
+inaccurate because ofsensor
+error,drift, poor calibration,
+or insufficient localization
+information.
+4 4 16 Critical Use sensor fusion, calibration,obstacle
+detection, mapping, and safenavigation
+responses. Addressdirectly throughWBS
+6.2.
+R6 Poweror communication is
+lost underwaterbecauseof
+battery depletion, electrical
+failure,or communication
+interruption.
+3 5 15 High Use battery monitoring, faultdetection,
+safe-stop logic, communication-loss
+handling,andanindependent recovery
+strategy.
+R7 Waterenters electronics
+because of enclosure,
+connector, or seal failure.
+3 5 15 High Specify suitable underwater enclosuresand
+seals and perform pressure and leaktesting
+before integratedunderwater operation.
+R8 Components cannot
+withstand required depth
+because their pressure ratings
+areinsufficient for the
+operating environment.
+3 5 15 High Verify manufacturer pressure ratingsand
+complete hydrostatic-pressure calculations
+before finalcomponent selection.
+R9 Materialsor components are
+unsuitable for potable-water
+contact or sanitization.
+2 5 10 High Select potable-water-suitable wetted
+materials and review theircompatibility
+with the required sanitization process.
+R10 Purchasedcomponents are
+delayed or unavailable
+because of supplier lead time
+or limitedavailability.
+3 4 12 High Identify suppliers and alternative
+componentsearly, review lead times,and
+prioritize components thatare available
+withinthe projectschedule.
+R11 System integration takes
+longer thanplanned because
+subsystemdimensions,
+electrical interfaces,
+hydraulic connections, or
+control interfaces are
+incompatible.
+4 4 16 Critical Define interfaces before detailedCAD,
+conduct the integration-readinessreview
+under WBS 6.3, and identifypackaging
+conflicts beforefinal CAD development.
+R12 Prototype or subsystem
+performance does notmeet
+key engineering metrics
+because assumptions or
+component selections are
+inaccurate.
+3 4 12 High Define measurable acceptance criteria and a
+validation plan so performance problems
+can be identified before final system testing.
+The three critical risks are R2 – water-quality disturbance with a score of 20, R5 – underwater-positioning
+error witha scoreof16,andR11–integrationdelaywith ascore of16.
+44
+--- page 46
+R2 is critical because failure to contain disturbed sediment would conflict directly with the highest-priority
+water-quality requirements and could invalidate an otherwise effective cleaning concept. R5 is critical
+because autonomous cleaning depends on reliable localization, obstacle avoidance, and cleaning-coverage
+tracking.
+R11isparticularlyimportantfromaproject-managementperspectivebecauseintegrationandCADactivities
+lie on the later portion of the critical path. Incompatible subsystem geometry or interfaces could delay the
+revisedCADplan and propagatedirectly tofinal designmilestones. Forthis reason,interface verification
+and integration-readiness review are scheduled before full CAD integration rather than after packaging
+problems occur.
+Highriskssuchascomponentavailability,sealing,pressurecapability,recovery,andhydraulicblockage
+willalso continuetobemonitoredbecausetheycould become schedule-critical ifmitigationis delayed.
+The WBS, dependency analysis, Gantt schedule, task responsibility table, and process risk assessment
+thereforeworktogether. TheWBSdefinestheengineeringwork,theTDDidentifiessequencingandcritical
+dependencies,theGanttestablishestiming,Table24linksscheduledactivitiestotheirWBSworkpackages
+and responsible team members, and the risk assessment identifies conditions most likely to disrupt the
+projectplan.
+12. FinalDeliverables
+By the end of MEEN 402, the team expects to deliver a small-scale proof-of-concept prototype of the
+selected C1 Battery Tracked Brush–Hydrocyclone Crawler. The prototype will be used to demonstrate the
+principalfunctionsoftheproposedreservoir-cleaningsystemundercontrolledrepresentativeconditions
+rather than reproduce a full-scaleKAHRAMAAreservoirinstallation.
+Theplannedprototypewilldemonstrate,totheextentpracticalattheselectedscale,trackedunderwater
+mobility, sediment mobilization using a soft rotating brush, localized suction and debris collection,
+separation and temporary debris storage, basic sensing and control, remote monitoring, and recovery. The
+prototypewillalsobeusedtoevaluatewhetherthecleaningprocesscancollectrepresentativesediment
+without causingunacceptableredistribution into the surrounding water.
+Thefinalproject deliverables areexpectedto include:
+• a functional or partially functional proof-of-concept prototype of the selected reservoir-cleaning system;
+• an integratedSolidWorks CADmodeland supporting engineering drawings;
+• engineeringcalculationssupportingmajorcomponentandsubsystemdecisions,includingpower,mobility,
+hydraulic performance,pressure capability, stability, and debris handling;
+• a bill of materialsandpreliminary systemcostassessment;
+• controlled test resultsforthe functions that canbe experimentallyevaluatedat prototype scale;
+• comparison of measured or calculated performance against the applicable engineering requirements and
+metrics;
+• feasibility analysisforfunctionsthat cannot bedemonstrated directlyat prototypescale;
+• computational or analyticalvalidation where physical testingis not practical;
+• operating, servicing, sanitization, and recovery procedures for the prototype; and
+• the final technical report and presentation documenting the complete design-development and validation
+process.
+Theproofofconceptwillnotrepresentareservoir-readyproductionsystem. Full-scaleimplementation
+would require additional pressure-qualified hardware, long-duration reliability testing, potable-water
+certificationofallwettedcomponents,full-scalenavigationandcommunicationvalidation,andapprovalby
+KAHRAMAA.Full-scalecleaningofreservoirwallsandinternalstructuresremainsoutsidethescopeof
+theinitialfloor-crawlingproofofconceptandwillrequirefurtherdesigndevelopmentandvalidationto
+fullyaddresscustomerneedN2. ThefinalMEEN402deliverablesarethereforeintendedtodemonstrate
+technical feasibility and identifytheremaining developmentrequiredbeforefieldimplementation.
+45
+--- page 47
+13. Future Work
+TheremainingMEEN401workwilldeveloptheselectedconceptfromapreliminaryarchitectureintoa
+technically supported designthat canproceed toprototypedevelopment in MEEN 402.
+Thenextstagewillfocusonembodimentdesignandcomponentselection. Theteamwillrefinethephysical
+arrangement of the four modules, develop the integrated SolidWorks model, and determine the preliminary
+dimensions,massdistribution,andpackagingoftheselectedcomponents. Particularattentionwillbegiven
+to ensuring that the cleaning and debris-handling equipment can be integrated with the tracked chassis
+whilemaintainingpracticaldeployment, servicing, andrecovery.
+Engineeringcalculationswillthenbeexpandedtosupportfinalcomponentselection. Thesecalculations
+will include battery capacity and operating duration, motor and drive requirements, pump power and
+hydraulic losses, hydrocyclone and filtration performance, debris-storage capacity, structural and pressure
+requirements, system stability, and expected cleaning performance. The preliminary 50 m2/h cleaning-rate
+and40m3/hsuction-flowtargetswillalsorequirefurtherevaluationagainstpowerdemandandwater-quality
+protection.
+Theteamwill subsequentlydevelopthebillofmaterialsandcostmodel, reviewcomponent availability
+andmanufacturingmethods,andpreparethevalidationstrategyforMEEN402. Thevalidationplanwill
+identifythe measurements, equipment, representativesediment, testconditions, and acceptance criteria
+requiredtoevaluatetheprototypeagainstthe engineeringmetrics.
+Reliability and safety analysis will also continue. The critical risks identified in Section 11—water-
+quality disturbance, underwater-positioning error, and integration delay—willreceive particular attention.
+Additional work will address sealing, pressure resistance, debris-path blockage, recovery following loss of
+powerormobility, and compatibilityofwetted materialswith potable-waterservice.
+BeforeDR3, theteamintendstoconsolidatethedetailedCADmodel, engineeringcalculations, component
+specifications, budget,validationplan,manufacturingapproach,andupdatedriskassessment. Remaining
+technicaluncertaintieswillbereviewedwithKAHRAMAAasthedesignprogresses. BytheendofMEEN
+401, the goal is to have a sufficiently defined and justified design to support prototype fabrication and
+experimentaltesting inMEEN 402.
+14. UpdatedConclusions
+DR2 advanced the project from problem clarification and requirement development to the selection
+andpreliminaryarchitectureofacompletereservoir-cleaningconcept. ThefundamentalKAHRAMAA
+problemidentified inDR1remains unchanged: reservoircleaningshouldeliminatehumanentry,protect
+drinking-water quality, avoid routine shutdown and draining, and provide effective removal of accumulated
+sediment, sludge, and debris. The work completed since DR1 has provided a more detailed understanding
+ofhowthose objectivescan be translated intoanengineering system.
+The customer analysis resulted in twelve finalized needs supported by twelve engineering requirements
+and 22 measurable metrics. The updated House of Quality showed that turbidity control, underwater
+navigation, and fail-safe operation are among the most influential technical priorities. Functional modeling
+then established the material, energy, and information flows required to perform the cleaning process
+without prematurely prescribing aphysicalsolution.
+Brainstorming, 6-3-5 brainwriting, TRIZ, and morphological analysis produced a broad solution space
+thatwasrefinedintosevencompletesystemconcepts. ThePughscreeningidentifiedC1,C2,andC4as
+thestrongestcandidates,withC1receivingthehighestnetscoreof+3. ThesubsequentIIAEevaluation
+ranked C1 first with a weighted score of 3556.20, compared with 3357.36 for C2 and 3086.44 for C4. The
+198.84-point separation between C1 and C2 exceededthe 50-point tie threshold.
+Based on these results, the team selected C1 – Battery Tracked Brush–Hydrocyclone Crawler for continued
+development. The selected concept combines stable tracked mobility, a soft rotating brush within a
+suctionhood,onboardpumping,hydrocycloneseparation,polishingfiltration,removabledebrisstorage,
+autonomoussensingandcontrol,remotesupervision,andrecoveryprovisions. Theconceptwasselected
+becauseitprovidesthestrongestbalanceofcleaningcapability,water-qualityprotection,navigationstability,
+serviceability,anddevelopmentfeasibility among the alternatives considered.
+Theselectedconceptwassubsequentlyorganizedintofourmodules: Power&Actuation;Cleaning&Debris
+46
+--- page 48
+Handling; Mobility / Deployment / Recovery; and Sensing, Control & Monitoring. A mostly modular
+architecture was selected because it supports maintenance, component replacement, testing, and future
+upgradeswhilestillallowingtighterintegrationwherehydraulic,mechanical,orelectricalperformance
+requires it.
+Severalimportanttechnicaluncertaintiesremain. Theseincludefinalbatteryandmotorsizing,hydraulic
+lossesandpumprequirements,hydrocycloneandfiltrationperformance,debris-storagecapacity,underwater
+localization accuracy, pressure-resistant component selection, packaging, and the ability to clean efficiently
+withoutincreasingturbidity. Theseuncertaintieshavebeenincorporatedintotheremainingengineering
+workand risk-management plan.
+Theworkcompletedin DR2 therefore establishesajustifiedsystem conceptandarchitecturerather thana
+finished product. The next phase will move into detailed embodiment design, engineering calculations,
+CADdevelopment,componentselection,validationplanning,andpreparationforprototypedevelopmentin
+MEEN 402.
+47
+--- page 49
+15. UpdatedReferences andAppendices
+The references used in this report are listed below. The appendices provide the supporting idea-generation
+records, concept sketches, engineering calculations, IIAE evaluations, and interview form cited in the main
+text.
+References
+[1] Qatar General Electricity and Water Corporation (KAHRAMAA), “Corporate statement,” Of-
+ficial corporate website, accessed November 3, 2026. https://www.km.com.qa/AboutUs/Pages/
+CorporateStatement.aspx.
+[2] ——,“Watersector,”Officialwater-sectorwebpage,accessedNovember3,2026.https://www.km.
+com.qa/AboutUs/Pages/WaterSector.aspx.
+[3] World Health Organization, “Sanitary inspection package (drinking-water): Piped distribution –
+storage tank,” World Health Organization, Geneva, Switzerland, Tech. Rep., 2026, published July 22,
+2026. https://www.who.int/publications/m/item/sanitary-inspection-package-%28drinking-water%
+29--piped-distribution---storage-tank.
+[4] S. Godfrey and B. Reed, “Cleaning and disinfecting water storage tanks and
+tankers,” World Health Organization and Water, Engineering and Development Centre
+(WEDC), Geneva, Switzerland, Technical Notes on Drinking-Water, Sanitation and Hy-
+giene in Emergencies 3, 2013, https://cdn.who.int/media/docs/default-source/wash-documents/
+who-tn-03-cleaning-and-disinfecting-water-storage-tanks-and-tankers.pdf.
+[5] Qatar General Electricity and Water Corporation (KAHRAMAA), “Overview on: KAHRAMAA
+drinkingwaterqualityrequirements,”KAHRAMAA,Health,SafetyandEnvironmentDepartment,
+Doha,Qatar,Tech.Rep.,2014,https://www.km.com.qa/MediaCenter/Publications/KAHRAMAA%
+20Drinking%20Water%20Quality%20Requirment.pdf.
+[6] D.A.Lytle,C.Muhlen,S.H.Lippitt,E.Crockett,andR.Achtemeier,“Physicalandcompositional
+characteristicsofdrinkingwaterstoragetanksediment,”AWWAWaterScience,vol.6,no.3,p.e1371,
+2024, https://doi.org/10.1002/aws2.1371.
+[7] H. Liu, D. G. Wahman, and J. G. Pressman, “Evaluation of monochloramine and free chlorine
+penetration in a drinking water storage tank sediment using microelectrodes,” Environmental Science
+& Technology, vol. 53,no.16,pp. 9352–9360,2019, https://doi.org/10.1021/acs.est.9b01189.
+[8] Occupational Safety andHealthAdministration(OSHA), “Permit-requiredconfinedspaces,29CFR
+1910.146,” U.S. Department of Labor, Code of Federal Regulations, accessed November 3, 2026.
+https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.146.
+[9] NSF International, NSF/ANSI 61–2016: Drinking Water System Components – Health Effects,
+NSF International, Ann Arbor, Michigan, 2016, 2016 edition supplied to the project team. https:
+//www.nsf.org/newsroom_pdf/NSF-ANSI_61_watemarked.pdf.
+[10] Subsea Tech, “AspiROV: Inspection and cleaning robot for tanks without draining,” Product page and
+technical specifications, accessedNovember 3, 2026. https://www.subsea-tech.com/aspirov/.
+[11] M. Lee, J. W. Park, S. H. Park, J. Lee, S. Park, J. G. Kim, Y. Hong, J. Suh, and Y. J. Lee, “An
+underwater cleaning robot for industrial reservoirs,” in 2012 IEEE International Conference on
+Automation Science and Engineering (CASE). IEEE, 2012, pp. 1168–1172, https://doi.org/10.1109/
+CoASE.2012.6386421.
+[12] WEDARobotics,“VR-50: Safe,remotecleaningforsmallerreservoirs,”Producttechnicalinformation,
+accessedNovember 3,2026.https://wedarobotics.com/vr-50/.
+[13] ——,“VR-600: Largereservoircleaning,nodiversrequired,”Manufacturerproductspecifications,
+accessedNovember 4,2026.https://wedarobotics.com/vr-600/.
+48
+--- page 50
+[14] InspenetTV,“Robotsforcleaningcrudeoiltankswithouthumanintervention,”InspenetTV,December
+19,2025,https://inspenet.com/en/inspenet-tv/robots-for-cleaning-crude-oil-tanks/.
+[15] L. Chen, R. Cui, W. Yan, H. Xu, H. Zhao, and H. Li, “Design and climbing control of an
+underwater robot for ship hull cleaning,” Ocean Engineering, vol. 274, p. 114024, 2023, https:
+//doi.org/10.1016/j.oceaneng.2023.114024.
+[16] B. Zhang, D. Ji, S. Liu, X. Zhu, and W. Xu, “Autonomous underwater vehicle navigation: A review,”
+Ocean Engineering, vol. 273,p. 113861, 2023, https://doi.org/10.1016/j.oceaneng.2023.113861.
+[17] L. Cardona Rendón, P. A. Ortiz Valencia, and J. S. Botero Valencia, “Navigation system for
+a swimming-pool cleaner robot (sistema de navegación para un robot limpiador de piscinas),”
+Tecnura, vol. 18, no. 39, pp. 22–33, 2014, published online December 20, 2013, in the 2014 issue.
+https://doi.org/10.14483/udistrital.jour.tecnura.2014.1.a02.
+[18] M. S. A. Mahmud, M. S. Zainal Abidin, S. Buyamin, A. A. Emmanuel, and H. S. Hasan, “Multi-
+objective route planning for underwater cleaning robot in water reservoir tank,” Journal of Intelligent
+& Robotic Systems, vol. 101, no. 1, p. 9, 2021, published online December 10, 2020. https:
+//doi.org/10.1007/s10846-020-01291-0.
+[19] WaterLinked,“UnderwaterGPSG2standardkit,”Manufacturertechnicalspecifications,accessed
+November3, 2026.https://www.waterlinked.com/shop/underwater-gps-g2-standard-kit-132.
+[20] KAHRAMAA, “Reservoir 2 floor plan, proposed Al Wukair RPS and associated pipelines,” sponsor-
+providedunpublished engineeringdrawing,2026.
+[21] Maytronics, “What makes the EON 120d filtration system more advanced?” Dolphin Support,
+EON 120d filtration specifications, updated June 1, 2026; accessed November 4, 2026. https:
+//www.roboticpool.com/support/faq/what-makes-the-eon-120d-filtration-system-more-advanced/.
+[22] J. Hu, W. Jiang, Y. Yan, W. Chen, and H. Li, “Research on trajectory prediction and tracking methods
+for underwater cleaning robots based on PA-MDP,” Transactions of the Institute of Measurement and
+Control, OnlineFirst,2026, first published online August 3, 2026, doi:10.1177/01423312261466335.
+https://doi.org/10.1177/01423312261466335.
+[23] AustralianWaterAssociation,“Awatertight approachtotank-cleaningrobotics,” Industryinterview
+with Watertight Robotics on the D-Bot V2, accessed November 4, 2026. https://www.awa.asn.au/
+resources/latest-news/a-watertight-approach-to-tank-cleaning-robotics.
+[24] KAHRAMAA Water Quality Laboratory Section, “Laboratory analysis report, WQS-January.26-
+000063,” 2026,unpublishedlaboratoryanalysisreport suppliedbythe projectsponsor.
+[25] Salher, “Sludge treatments: Sludge dewatering by filter bags (FILSA),” Manufacturer technical
+description,accessedNovember4,2026. https://www.salher.com/en/products/sludge-treatments/.
+[26] K. Treffry-Goatley, M. I. Buchan, G. E. Rencken, W. J. Vortman, and C. A. Buckley, “The
+dewatering of sludges using a tubular filter press,” Desalination, vol. 67, pp. 467–479, 1987,
+https://doi.org/10.1016/0011-9164(87)90263-3.
+[27] S.Zhang,L.Zhang,andY.Chen,“Sim-to-realpipelinefortrainingautonomousobstacleavoidance
+ofunderwaterrobotsbasedonhigh-fidelitymodel,”Robotica,vol.43,no.8,pp.2952–2974,2025,
+https://doi.org/10.1017/S0263574725101999.
+[28] BlueRobotics,“PingSonaraltimeterandechosounderfordistancemeasurement,”Manufacturerprod-
+uctspecifications,accessedNovember3,2026.https://bluerobotics.com/store/sonars/echosounders/
+ping-sonar-r2-rp/.
+[29] MATE ROV Competition, 2025 RANGER Class Competition Manual, MATE ROV Competition,
+2025,sec.3.5,ELEC-020R.https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2025%
+20RANGER%20Manual_withCover_11_27.pdf.
+49
+--- page 51
+[30] ArduPilot Development Team, “Battery failsafe — sub documentation,” ArduPilot official online
+documentation,accessedNovember3, 2026. https://ardupilot.org/sub/docs/failsafe-battery.html.
+[31] BlueRobotics, “ArduSub: Safetysetuppage(failsafes),”ArduSubdocumentation,archivedversion,
+accessedNovember 3,2026.https://www.ardusub.com/reference/ardusub/safety-setup-page.html.
+[32] V. Preston, T. Salumäe, and M. Kruusmaa, “Underwater confined space mapping by resource-
+constrained autonomous vehicle,” Journal of Field Robotics, vol. 35, no. 7, pp. 1122–1148, 2018,
+https://doi.org/10.1002/rob.21806.
+[33] M. Luperto, M. M. Ferrara, M. Princisgh, G. Boracchi, and F. Amigoni, “Estimating map com-
+pleteness in robot exploration,” Autonomous Robots, vol. 50, no. 6, 2026, https://doi.org/10.1007/
+s10514-025-10221-8.
+[34] Dreame Yard Care, “Pool robot cleaner maintenance: 5-minute daily checks for busy owners,”
+Manufacturer maintenance guidance, accessed November 4, 2026. https://yardcare.dreametech.com/
+blogs/pool-maintenance/pool-robot-cleaner-maintenance-5-minute-daily-checks-for-busy-owners.
+50
+--- page 52
+A. Idea-GenerationEvidence
+The additional brainstorming and 6-3-5 materials referenced in Section 7 are shown below. Team
+members used sketches,tables, and written notes, then passedand refined the ideas beforedeveloping the
+morphologicalmatrix.
+(a) Idea-generation sheet 2 (b) Idea-generation sheet 3
+(c) Idea-generation sheet 4 (d) Idea-generation sheet 5
+Figure 13. Additionalbrainstorming and 6-3-5idea-generationevidence.
+B. AdditionalConcept Sketches
+C1 is showninSection 8. Theremainingsixhigh-levelsketchesarecombinedbelow.
+51
+--- page 53
+(a) C2 – Simple Battery Suction Rover (b) C3 – Automatic Cartridge Crawler
+(c) C4 – Battery Dewatering Crawler (d) C5 – Battery Water-Jet Cleaning Crawler
+(e) C6 – Free-Swimming Autonomous Cleaner (f) C7– Long-EnduranceDock-Service Crawler
+Figure 14. Additionalconceptsketches developed during conceptgeneration.
+C. Preliminary EngineeringCalculations
+ThecalculationsreferencedinSection7.7aresummarizedbelow. Theyestablishdesignscaleonly; final
+sizing willfollow componentselection.
+Table27. Preliminary Engineering Calculations
+Calculation Calculation / Result Design Use
+Hydrostatic pressure 𝑝=𝜌𝑔ℎ=(1000)(9.81)(50)=490.5 kPa
+gauge
+Pressure-sensitive submerged components must
+ultimately be qualified for approximately 0.49 MPa
+gauge.
+Cleaningtime For 50 m2/h,𝑡 = 𝐴/50 h. Idealcleaning time forarea 𝐴beforeobstacle
+avoidance, servicing, orbattery/debris handling.
+Suctionflow 40 m3/h ×1000/3600=11.1 L/s. The hood, piping, pump, separator, filtration, and
+return path must accommodateapproximately
+11.1 L/s.
+Sediment loading 200/5=40 kg/yr; 40/365=0.110 kg/day;
+with 25% allowance, 0.138 ≈0.14 kg/day.
+Order-of-magnitude daily allowance;not the final
+cartridge capacity.
+D. IIAE Individual EvaluationsandCalculations
+The individual matrices are condensed for traceability. Each member independently assigned criterion
+weightstotaling 100andscoredC1,C2,andC4. Eachconcept-score entry isC1/C2/C4.
+52
+--- page 54
+Table28. IndividualIIAECriterionWeights
+Criterion Raihana Noor AlHoura Ayesha Bedour Team Avg.
+Cleaning coverage 16 15 15 14 15 15.0
+Cleaning rate 10 10 9 10 11 10.0
+Water-quality disturbance 16 15 16 15 14 15.2
+Navigation safety 12 13 12 12 11 12.0
+Humanintervention 12 12 12 13 12 12.2
+Recovery afterfailure 8 8 8 8 8 8.0
+Maintenance requirement 8 8 8 9 8 8.2
+Life-cyclecost 5 5 5 5 6 5.2
+Developmentrisk 5 5 5 5 5 5.0
+Technicaldifficulty 4 5 5 5 5 4.8
+Developmentduration 4 4 5 4 5 4.4
+Total 100 100 100 100 100 100
+Table29. Individual IIAE Concept Scores(C1/C2/C4)
+Criterion Raihana Noor AlHoura Ayesha Bedour
+Cleaning coverage 40/25/35 37/28/35 38/27/35 37/28/35 38/27/35
+Cleaning rate 40/28/32 37/29/34 38/29/33 37/30/33 38/29/33
+Water-quality disturbance 39/34/27 36/36/28 38/34/28 36/35/29 36/36/28
+Navigation safety 40/29/31 38/30/32 37/31/32 38/30/32 37/30/33
+Humanintervention 34/25/41 32/28/40 33/27/40 32/27/41 34/28/38
+Recovery afterfailure 37/32/31 35/34/31 36/33/31 36/32/32 36/34/30
+Maintenance requirement 32/41/27 31/42/27 33/40/27 31/42/27 33/40/27
+Life-cyclecost 31/45/24 30/44/26 32/43/25 31/44/25 31/44/25
+Developmentrisk 35/42/23 33/42/25 34/42/24 34/41/25 34/42/24
+Technicaldifficulty 35/43/22 32/44/24 33/44/23 33/43/24 32/45/23
+Developmentduration 34/44/22 32/44/24 33/44/23 33/43/24 33/44/23
+Table30. Team IIAE WeightedContributions
+Criterion Weight C1 C2 C4
+Cleaning coverage 15.0 570.00 405.00 525.00
+Water-quality disturbance 15.2 562.40 532.00 425.60
+Cleaning rate 10.0 380.00 290.00 330.00
+Navigation safety 12.0 456.00 360.00 384.00
+Humanintervention 12.2 402.60 329.40 488.00
+Recovery afterfailure 8.0 288.00 264.00 248.00
+Maintenance requirement 8.2 262.40 336.20 221.40
+Life-cyclecost 5.2 161.20 228.80 130.00
+Developmentrisk 5.0 170.00 209.00 121.00
+Technicaldifficulty 4.8 158.40 210.24 111.36
+Developmentduration 4.4 145.20 192.72 102.08
+Total 100 3556.20 3357.36 3086.44
+The top-two difference is 3556.20−3357.36=198.84 points. Since 198.84 >50, C1 and C2 are not tied
+under the 50-pointrule.
+E. SponsorInterview Form
+Theten questionsusedto guidetheinitial KAHRAMAA sponsor interviewwere:
+1. Could youwalkusthroughtheentirecurrentreservoir-cleaningprocess?
+2. What are the biggest problems with the current cleaning method, and which are the top three priorities
+to solve?
+3. How oftenis cleaningperformed,andhowlong doeseach stage oftheprocesstake?
+4. What are the actual reservoir dimensions, capacity, layout, internal obstacles, materials, and access
+conditions?
+53
+--- page 55
+5. What exactlydo you expectregardingcleaning full, partiallyfilled,and emptyreservoirs?
+6. What does “autonomous” mean from KAHRAMAA’s perspective, and how much human intervention is
+acceptable?
+7. Whatexactlymustbecleaned,whatcontaminationmustberemoved,andhowdoyoudeterminethatthe
+reservoirissufficiently clean?
+8. What drinking-water, sanitation, surface-protection, electrical, and safety requirements must the system
+satisfy?
+9. Whatrestrictionsorpreferencesexistregardingpower,batteryduration,tethering,charging,operating
+time, androbot retrieval?
+10. Whatarethemust-haverequirementsandtopsuccesscriteriathatKAHRAMAAwillusetoevaluatethe
+finalsystem?
+Theresponses,subsequentsponsormeetings,sitevisit,andtechnicaldocumentsinformedthecustomer
+needs, requirements, and design constraintsused throughoutthereport.
+54

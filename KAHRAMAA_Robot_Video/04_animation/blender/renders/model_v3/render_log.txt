@@ -1,0 +1,37 @@
+/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/build_robot_v3.py:37: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(name); m.use_nodes = True
+/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/build_robot_v3.py:53: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; N = nt.nodes; L = nt.links
+/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/build_robot_v3.py:106: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; N = nt.nodes; L = nt.links
+/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/build_robot_v3.py:503: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  wv = bpy.data.materials.new('Water volume'); wv.use_nodes = True; nt = wv.node_tree; nt.nodes.remove(nt.nodes['Principled BSDF'])
+/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/build_robot_v3.py:520: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  world = bpy.data.worlds.new('World'); scene.world = world; world.use_nodes = True
+00:41.661  render           | Saved: '/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/renders/model_v3/hero.png'
+RENDERED hero
+01:07.295  render           | Saved: '/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/renders/model_v3/side.png'
+RENDERED side
+01:37.263  render           | Saved: '/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/renders/model_v3/rear.png'
+RENDERED rear
+02:09.282  render           | Saved: '/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/renders/model_v3/top.png'
+RENDERED top
+02:40.648  render           | Saved: '/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/renders/model_v3/parts.png'
+RENDERED parts
+03:23.152  render           | Saved: '/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/renders/model_v3/brush.png'
+RENDERED brush
+03:54.440  render           | Saved: '/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/renders/model_v3/hook.png'
+RENDERED hook
+04:33.147  render           | Saved: '/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/renders/model_v3/hatch.png'
+RENDERED hatch
+05:05.246  render           | Saved: '/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/renders/model_v3/hatch_top.png'
+RENDERED hatch_top
+05:52.398  render           | Saved: '/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/renders/model_v3/cover.png'
+RENDERED cover
+07:01.115  render           | Saved: '/Users/manjeshyadav/Documents/thelazybaba/Projects/Claude code/Assignment - TB/KAHRAMAA_Robot_Video/04_animation/blender/renders/model_v3/context.png'
+RENDERED context
+Info: Saved as "robot_C1_v3.blend"
+SAVED
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:49:19)
+
+Blender quit

@@ -1,0 +1,74 @@
+{
+ "parts": {
+  "Suction hood": [
+   1460.7,
+   1025.2
+  ],
+  "Soft rotating brush": [
+   1327.3,
+   1398.0
+  ],
+  "Suction hose": [
+   1476.3,
+   835.0
+  ],
+  "Vortex / slurry pump": [
+   1386.8,
+   553.5
+  ],
+  "Hydrocyclone": [
+   1128.2,
+   290.9
+  ],
+  "Screw conveyor (proposed)": [
+   975.3,
+   408.0
+  ],
+  "Sealed debris cartridge": [
+   805.1,
+   191.7
+  ],
+  "Polishing filter": [
+   580.0,
+   406.8
+  ],
+  "Filtered-water return": [
+   414.8,
+   301.7
+  ],
+  "Battery pack": [
+   973.7,
+   683.6
+  ],
+  "Guided docking eye (proposed)": [
+   905.5,
+   77.6
+  ],
+  "Sonar \u00b7 depth \u00b7 turbidity sensors": [
+   301.4,
+   298.2
+  ],
+  "Two continuous tracks": [
+   598.8,
+   958.4
+  ],
+  "Front sonar + lights": [
+   1312.8,
+   1282.5
+  ]
+ },
+ "hook": {
+  "Quick-release hook with safety latch": [
+   960.0,
+   269.0
+  ],
+  "Eye bolt": [
+   960.0,
+   752.8
+  ],
+  "Bell guide": [
+   960.0,
+   936.2
+  ]
+ }
+}

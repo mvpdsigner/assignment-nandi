@@ -1,0 +1,70 @@
+Robot Operation — Video Animation Scenario
+Intelligent Automated System for Reservoir Cleaning  |  Sponsor: KAHRAMAA
+Purpose: A simple, start-to-finish guide for making a 3D animation of how our proposed cleaning robot works.
+SANITIZE  →  LOWER  →  MAP  →  CLEAN  →  FILTER & STORE  →  RETURN  →  REPORT
+  [IMAGE x1]
+Figure 1. Selected robot concept — battery-powered tracked brush–hydrocyclone crawler (sponsor presentation, slide 9).
+Main operating sequence
+01  Reservoir and equipment setup
+Show: Start outside a KAHRAMAA reservoir. Show the existing access hatch, a portable winch, a surface control station, and the robot ready beside the hatch.
+Key detail: The reservoir stays full of water. No worker enters it.
+02  Sanitize the robot
+Show: Lower the robot into a chlorine sanitization bath. Once the approved sanitization step is complete, lift it out and take it directly to the access hatch.
+Key detail: Do not add a rinse or spray stage. Do not display chlorine concentration or soak time.
+03  Lower the robot into the reservoir
+Show: Attach the robot to the winch, lower it through the hatch and into the water, and place it gently on the reservoir floor. Show the planned release hook disconnecting once the robot is stable.
+Key detail: The robot runs on its own battery after deployment.
+04  Scan and plan a route
+Show: The robot switches on its sensors and scans the floor, walls, and support columns. Show a simple map appearing on the operator’s screen as it chooses a cleaning path.
+Key detail: It uses sonar, motion/depth sensors, and track movement to estimate its position.
+05  Move around pillars
+Show: The tracks move the robot along the floor in planned passes. When it approaches a pillar or obstacle, it slows down, turns around it, and continues cleaning.
+Key detail: Show only floor travel, not climbing walls or swimming.
+06  Brush and collect sediment
+Show: Zoom in on the soft rotating brush inside the front suction hood. The brush gently loosens sediment, and suction picks it up immediately with nearby water.
+Key detail: Keep the surrounding water visually clear; do not show large spreading sediment clouds.
+07  Separate sediment and return filtered water
+Show: Use a cutaway view: the pump sends the collected mixture into the hydrocyclone. Heavier particles go toward the sealed debris cartridge. The water passes through a polishing filter and returns to the reservoir.
+Key detail: Make the two paths easy to follow: brown for sediment, blue for the filtered-water path.
+08  Monitor the operation
+Show: Cut to the surface control screen. Show robot position, areas cleaned, remaining work, battery level, water turbidity, and fault alerts. The operator supervises remotely.
+Key detail: Do not portray a specific underwater wireless technology; that detail is not finalized.
+09  Return after a cleaning cycle
+Show: When an assigned area is finished, the battery reaches its return reserve, or the debris cartridge needs emptying, the robot stops cleaning and travels back toward the hatch.
+Key detail: The system remembers cleaned and remaining areas for later cycles.
+10  Lift, service, and redeploy
+Show: Show the proposed robot-to-hook reconnection below the hatch. The winch raises the robot. At the surface, an operator removes the sealed debris cartridge, checks the filter, and changes or charges the battery.
+Key detail: If more cleaning is needed, repeat the approved chlorine-bath sanitization before redeployment.
+Emergency scene (short alternative sequence)
+11  What happens if something goes wrong?
+Show: Show a warning appearing on the surface control screen. For low battery or a detected problem, the robot stops cleaning and returns to the hatch if it can still move. For lost communication, it stops and enters a safe state. The operator uses emergency stop or manual control when the link is available.
+Key detail: If the robot completely loses power or cannot move, it cannot drive back or reconnect by itself. Show a labeled “proposed backup retrieval system” rather than pretending this recovery method is finalized.
+12  Show the final cleaning report
+Show: End with a screen displaying the cleaned-area map, completed and remaining sections, cleaning history, battery and turbidity records, and any alerts. Then show the reservoir still full of water.
+Key detail: End message: “Cleaner Reservoirs • Safer Operations • Less Water Loss”.
+Notes for the video editor
+Reservoir stays full and in operation; no routine worker entry.
+Robot travels on two tracks and cleans the floor with a soft brush and local suction.
+Sediment is collected onboard; filtered water goes back into the reservoir.
+Normal lifting uses the hatch and portable winch.
+Emergency retrieval after complete power loss is still a proposed design detail.
+This video explains the intended design, not a finished or tested commercial robot.
+Source: KAHRAMAA sponsor presentation (slides 9–13), MEEN 401 Design Review 2, and embodiment design. Latest sponsor clarification: chlorine-bath sanitization followed by direct deployment.
+Visual references — cleaning system
+Use these pictures as references for the animation. They show the selected concept, not final production CAD.
+  [IMAGE x1]
+Figure 2. Complete cleaning flow: brush and suction → pump → hydrocyclone → polishing filter / sediment cartridge. (Slide 12)
+  [IMAGE x1]
+Figure 3. Inside a hydrocyclone: sediment goes down while separated water flows upward. (Slide 10)
+Visual references — deployment and recovery
+  [IMAGE x1]
+Figure 4. Planned winch lowering, hook release, return, and reconnection sequence. (Slide 13)
+  [IMAGE x1]
+Figure 5. Vortex/slurry pump: draws the sediment-water mixture from the suction hood. (Slide 11)
+Visual references — sensors and workflow
+  [IMAGE x1]
+Figure 6. Navigation and status sensors planned for the robot. (Slide 14)
+  [IMAGE x1]
+Figure 7. High-level deployment-to-recovery sequence from the sponsor presentation. (Slide 8)
+  [IMAGE x7]
+  [IMAGE x2]

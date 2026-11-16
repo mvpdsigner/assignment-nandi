@@ -1,0 +1,123 @@
+{
+ "parts": {
+  "Suction hood": [
+   1320.3,
+   898.8,
+   true
+  ],
+  "Suction hose": [
+   1330.3,
+   767.2,
+   true
+  ],
+  "Vortex / slurry pump": [
+   1270.7,
+   570.6,
+   true
+  ],
+  "Hydrocyclone": [
+   1088.2,
+   381.6,
+   true
+  ],
+  "Screw conveyor (proposed)": [
+   977.1,
+   458.7,
+   true
+  ],
+  "Sealed debris cartridge": [
+   849.4,
+   297.8,
+   true
+  ],
+  "Polishing filter": [
+   693.0,
+   465.3,
+   true
+  ],
+  "Filtered-water return": [
+   552.7,
+   376.8,
+   true
+  ],
+  "Battery pack": [
+   982.0,
+   665.5,
+   true
+  ],
+  "Guided docking eye (proposed)": [
+   929.9,
+   180.7,
+   true
+  ],
+  "Sonar \u00b7 depth \u00b7 turbidity sensors": [
+   456.6,
+   358.4,
+   true
+  ],
+  "Two continuous tracks": [
+   716.0,
+   860.5,
+   true
+  ],
+  "Sealed clear cover": [
+   778.5,
+   573.1,
+   true
+  ]
+ },
+ "cover": {
+  "Clear polycarbonate cover": [
+   407.4,
+   401.6,
+   true
+  ],
+  "Bolted flange + gasket": [
+   504.5,
+   792.1,
+   true
+  ],
+  "Clamp strap": [
+   686.3,
+   609.6,
+   true
+  ],
+  "Sealed top plate": [
+   705.1,
+   156.3,
+   true
+  ],
+  "Hose bulkhead gland": [
+   1325.2,
+   617.2,
+   true
+  ],
+  "Sensor mast (outside)": [
+   148.3,
+   345.2,
+   true
+  ]
+ },
+ "hook": {
+  "Quick-release hook with safety latch": [
+   956.9,
+   94.9,
+   true
+  ],
+  "Eye bolt": [
+   957.0,
+   415.8,
+   true
+  ],
+  "Bell guide": [
+   957.0,
+   502.1,
+   true
+  ],
+  "Sealed top plate": [
+   957.0,
+   535.0,
+   true
+  ]
+ }
+}

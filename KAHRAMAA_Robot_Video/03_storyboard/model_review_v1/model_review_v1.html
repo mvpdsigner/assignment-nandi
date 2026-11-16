@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Robot Model Review</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--m:#530018;--m2:#8E0D31;--ink:#1D1F23;--muted:#5C5759;--line:#DBDADA;--tint:#F2EFEF}
+*{box-sizing:border-box}
+html,body{margin:0;background:#E7E5E5}
+.page{width:1920px;height:1080px;position:relative;overflow:hidden;background:#fff;font-family:Inter,Arial,sans-serif;color:var(--ink);margin:0 auto 20px}
+.bar{position:absolute;left:0;right:0;top:0;height:14px;background:var(--m)}
+.wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:60}
+.wm span{font-size:300px;font-weight:800;color:rgba(255,255,255,.18);transform:rotate(-20deg);letter-spacing:-6px;-webkit-text-stroke:3px rgba(83,0,24,.16)}
+.foot{position:absolute;left:70px;right:70px;bottom:24px;display:flex;justify-content:space-between;font-size:16px;color:var(--muted);z-index:5}
+.foot b{color:var(--m)}
+.hd{position:absolute;left:70px;top:44px;right:70px;z-index:5}
+.hd small{font-size:17px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--m2)}
+.hd h1{margin:8px 0 0;font-family:'Times New Roman',Times,serif;font-size:50px;color:var(--m);font-weight:700}
+.hd .rule{width:120px;height:4px;background:var(--m);margin-top:12px}
+.img{position:absolute;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#eee}
+.img img{display:block;width:100%;height:100%;object-fit:cover}
+.cap{position:absolute;left:14px;bottom:12px;background:rgba(29,31,35,.75);color:#fff;font-size:16px;font-weight:700;padding:6px 12px;border-radius:6px}
+.mk{position:absolute;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;background:var(--m);color:#fff;font-family:'JetBrains Mono',monospace;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.35)}
+.legend{position:absolute;font-size:20px;line-height:1.35}
+.legend .row{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px}
+.legend .n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--m);color:#fff;font-family:'JetBrains Mono',monospace;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+.legend .p{font-size:14px;font-weight:700;color:var(--m2);letter-spacing:.06em;text-transform:uppercase;margin-left:6px}
+.note{font-size:19px;line-height:1.5;color:var(--ink)}
+.note b{color:var(--m)}
+.tag{display:inline-block;background:var(--tint);border:1px solid var(--line);border-radius:6px;padding:2px 9px;font-size:16px;font-weight:600;margin:0 6px 6px 0}
+</style>
+</head>
+<body>
+
+<!-- 1 COVER -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="img" style="left:640px;top:14px;width:1280px;height:1066px;border:none;border-radius:0"><img src="hero.jpg" style="object-position:40% 50%"></div>
+  <div style="position:absolute;left:0;top:14px;width:640px;height:1066px;background:#fff"></div>
+  <div style="position:absolute;left:70px;top:90px;width:540px">
+    <img src="../../02_assets/logos/TAMUQ_logo.png" style="height:44px"> <img src="../../02_assets/logos/KAHRAMAA_logo_full.png" style="height:70px;margin-left:16px;vertical-align:middle">
+    <div style="font-size:17px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--m2);margin-top:60px">3D robot model · review 1</div>
+    <div style="font-family:'Times New Roman',Times,serif;font-size:58px;font-weight:700;color:var(--m);line-height:1.08;margin-top:14px">Concept C1<br>Tracked Brush–<br>Hydrocyclone Crawler</div>
+    <div style="width:120px;height:4px;background:var(--m);margin-top:22px"></div>
+    <div class="note" style="margin-top:26px">Built in 3D from your selected concept, the slide 10–13 reference pictures and your layout (slide 48). This is the model we will animate. Please review it before we build the full video.</div>
+    <div class="note" style="margin-top:20px;color:var(--muted);font-size:17px">Renders are stills from the real 3D scene (Blender, path-traced). Concept design, not final production CAD.</div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · Model review 1</span><span>1</span></div>
+</section>
+
+<!-- 2 PARTS -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>Component arrangement</small><h1>Every part from Concept C1, where your layout puts it</h1><div class="rule"></div></div>
+  <div class="img" id="partsImg" style="left:70px;top:190px;width:1300px;height:731px"><img src="parts.jpg"></div>
+  <div class="legend" id="partsLegend" style="left:1410px;top:196px;width:450px"></div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · Model review 1</span><span>2</span></div>
+</section>
+
+<!-- 3 ALL SIDES -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>All sides</small><h1>Side, rear and top views</h1><div class="rule"></div></div>
+  <div class="img" style="left:70px;top:186px;width:880px;height:495px"><img src="side.jpg"><div class="cap">Side · suction hood at the front (right), two tracks</div></div>
+  <div class="img" style="left:970px;top:186px;width:880px;height:495px"><img src="rear.jpg"><div class="cap">Rear · sealed debris cartridge, polishing-filter return, sensor mast</div></div>
+  <div class="img" style="left:70px;top:700px;width:560px;height:315px"><img src="top.jpg"><div class="cap">Top</div></div>
+  <div style="position:absolute;left:670px;top:712px;width:1180px" class="note">
+    <div style="font-weight:700;color:var(--m2);font-size:15px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px">Look</div>
+    <span class="tag">Silver half-round suction hood</span><span class="tag">Dense blue roller brush</span><span class="tag">Grey deck, maroon track guards and battery housing</span><span class="tag">Blue vortex pump, black finned motor</span><span class="tag">Clear hydrocyclone, filter and conveyor bodies with steel flanges</span><span class="tag">Dark sealed cartridge with sediment window</span><span class="tag">Black sonar and sensor pods, front lights</span>
+    <div style="margin-top:14px">Proportions follow the preliminary envelope so the robot passes the <b>1 m × 1 m hatch</b> with clearance. <b>No dimensions will be shown in the video</b>, as you asked.</div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · Model review 1</span><span>3</span></div>
+</section>
+
+<!-- 4 CLEANING HEAD -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>Cleaning head</small><h1>Suction hood and soft rotating brush</h1><div class="rule"></div></div>
+  <div class="img" style="left:70px;top:186px;width:1240px;height:698px"><img src="brush.jpg"></div>
+  <div style="position:absolute;left:1350px;top:196px;width:500px" class="note">
+    The roller brush spans the full hood width and sits right behind the hood lip, so loosened sediment is drawn straight up the outlet into the suction hose.
+    <div style="margin-top:18px">In the animation (scenes 06–07) the hood turns semi-transparent so the brush, the slurry flow and the onboard path can be followed:</div>
+    <div class="mono" style="font-family:'JetBrains Mono',monospace;font-weight:800;color:var(--m);font-size:17px;line-height:1.75;margin-top:14px">brush + suction hood → vortex pump → hydrocyclone → screw conveyor → sealed cartridge<br>hydrocyclone overflow → polishing filter → back to the reservoir</div>
+    <div style="margin-top:18px">On-screen wording will be <b>“the suction system minimizes sediment dispersion”</b>.</div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · Model review 1</span><span>4</span></div>
+</section>
+
+<!-- 5 LIFTING -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>Deployment and recovery</small><h1>Hook, guided docking eye and the 1 m hatch</h1><div class="rule"></div></div>
+  <div class="img" id="hookImg" style="left:70px;top:186px;width:880px;height:495px"><img src="hook.jpg"><div class="cap">Quick-release hook approaching the guided docking eye</div></div>
+  <div class="img" style="left:970px;top:186px;width:880px;height:495px"><img src="hatch.jpg"><div class="cap">Passing the 1 m × 1 m hatch on the winch</div></div>
+  <div class="legend" id="hookLegend" style="left:70px;top:712px;width:880px"></div>
+  <div style="position:absolute;left:970px;top:712px;width:880px" class="note">
+    Matches your slide-13 sequence: a <b>silver hook with a red safety latch</b> on a swivel, and on the robot an <b>eye bolt above a bell-shaped guide</b> on an A-frame over the centre of the robot. The guide steers the hook into the eye for the self-guided re-latch.
+    <div style="margin-top:12px">Hook release and reconnection are labelled <b>“proposed”</b> in the video. The robot is sized so it clears the hatch opening with room for the lifting gear.</div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · Model review 1</span><span>5</span></div>
+</section>
+
+<!-- 6 CONTEXT -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="img" style="left:0;top:14px;width:1920px;height:1066px;border:none;border-radius:0"><img src="context.jpg"></div>
+  <div style="position:absolute;left:70px;top:70px;background:rgba(255,255,255,.92);border-radius:12px;padding:22px 28px;width:760px">
+    <div style="font-size:16px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--m2)">Look test · underwater</div>
+    <div style="font-family:'Times New Roman',Times,serif;font-size:40px;font-weight:700;color:var(--m);margin-top:6px">On the reservoir floor</div>
+    <div class="note" style="font-size:17px;margin-top:8px">Fully submerged among the columns, light falling from above, sediment on the floor ahead. Lighting, water colour and floor detail will be refined for the final scenes.</div>
+  </div>
+  <div class="foot" style="color:#fff"><span><b style="color:#fff">TutorBin</b> · KAHRAMAA reservoir-cleaning robot · Model review 1</span><span>6</span></div>
+</section>
+
+<!-- 7 REVIEW -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>Please review</small><h1>What we need you to confirm</h1><div class="rule"></div></div>
+  <div id="checks" style="position:absolute;left:70px;right:70px;top:200px;display:grid;grid-template-columns:1fr 1fr;gap:18px 40px"></div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · Model review 1</span><span>7</span></div>
+</section>
+
+<script>
+const LAB = {
+ "parts": {
+  "Suction hood": [
+   1460.7,
+   1025.2
+  ],
+  "Soft rotating brush": [
+   1327.3,
+   1398.0
+  ],
+  "Suction hose": [
+   1476.3,
+   835.0
+  ],
+  "Vortex / slurry pump": [
+   1386.8,
+   553.5
+  ],
+  "Hydrocyclone": [
+   1128.2,
+   290.9
+  ],
+  "Screw conveyor (proposed)": [
+   975.3,
+   408.0
+  ],
+  "Sealed debris cartridge": [
+   805.1,
+   191.7
+  ],
+  "Polishing filter": [
+   580.0,
+   406.8
+  ],
+  "Filtered-water return": [
+   414.8,
+   301.7
+  ],
+  "Battery pack": [
+   973.7,
+   683.6
+  ],
+  "Guided docking eye (proposed)": [
+   905.5,
+   77.6
+  ],
+  "Sonar \u00b7 depth \u00b7 turbidity sensors": [
+   301.4,
+   298.2
+  ],
+  "Two continuous tracks": [
+   598.8,
+   958.4
+  ],
+  "Front sonar + lights": [
+   1312.8,
+   1282.5
+  ]
+ },
+ "hook": {
+  "Quick-release hook with safety latch": [
+   960.0,
+   269.0
+  ],
+  "Eye bolt": [
+   960.0,
+   752.8
+  ],
+  "Bell guide": [
+   960.0,
+   936.2
+  ]
+ }
+};
+const PARTS = [
+ ['Suction hood','Suction hood'],['Suction hose','Suction hose'],['Vortex / slurry pump','Vortex / slurry pump'],
+ ['Hydrocyclone','Hydrocyclone separator'],['Screw conveyor (proposed)','Screw conveyor','proposed'],['Sealed debris cartridge','Sealed debris cartridge'],
+ ['Polishing filter','Polishing filter'],['Filtered-water return','Filtered-water return to reservoir'],['Battery pack','Battery pack'],
+ ['Guided docking eye (proposed)','Guided docking eye on A-frame','proposed'],['Sonar · depth · turbidity sensors','Sonar, depth and turbidity sensors'],['Two continuous tracks','Two continuous tracks'],
+];
+function markers(imgId, legendId, view, list, scale, cols){
+  const img=document.getElementById(imgId), lg=document.getElementById(legendId);
+  if(cols){lg.style.display='grid';lg.style.gridTemplateColumns='1fr 1fr';lg.style.columnGap='24px'}
+  list.forEach(([key,label,prop],i)=>{
+    const p=LAB[view][key]; if(!p) return;
+    const m=document.createElement('div'); m.className='mk'; m.textContent=i+1;
+    m.style.left=(p[0]*scale)+'px'; m.style.top=(p[1]*scale)+'px'; img.appendChild(m);
+    lg.insertAdjacentHTML('beforeend',`<div class="row"><span class="n">${i+1}</span><span>${label}${prop?`<span class="p">${prop}</span>`:''}</span></div>`);
+  });
+}
+markers('partsImg','partsLegend','parts',PARTS,1300/1920);
+markers('hookImg','hookLegend','hook',[['Quick-release hook with safety latch','Quick-release hook with red safety latch','proposed'],['Eye bolt','Docking eye bolt'],['Bell guide','Bell guide (steers the hook into the eye)']],880/1920,true);
+const CH=[
+ ['1','Component arrangement','Are the parts in the right places for Concept C1: brush hood at the front, pump front-right, hydrocyclone centre, screw conveyor to the rear cartridge, polishing filter rear-left, battery front-left?'],
+ ['2','Look and colours','Silver hood, maroon housings, blue pump, clear separator/filter bodies. Is this the look you want for the video?'],
+ ['3','Lifting point','Is the A-frame with a bell guide and eye bolt over the centre the right interpretation of your docking eye? Any preferred position?'],
+ ['4','Anything missing','Any part, label or detail from your design that should be added or removed before we animate?'],
+];
+document.getElementById('checks').innerHTML=CH.map(([n,t,d])=>`<div style="border:1.5px solid var(--line);border-radius:12px;padding:22px 26px;background:#fff">
+  <div style="display:flex;align-items:center;gap:12px"><span class="legend" style="position:static"><span class="n" style="display:inline-flex">${n}</span></span><span style="font-family:'Times New Roman',Times,serif;font-size:30px;font-weight:700;color:var(--m)">${t}</span></div>
+  <div class="note" style="margin-top:10px">${d}</div></div>`).join('')+
+ `<div style="grid-column:1/3;border-radius:12px;padding:22px 26px;background:var(--tint)" class="note"><b>Next:</b> once you approve the model, we send Storyboard v2 with real 3D frames for all 12 scenes (more time on cleaning and filtration), together with the voice-over script for your team to record.</div>`;
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>2D Style Options</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--m:#530018;--m2:#8E0D31;--ink:#1D1F23;--muted:#5C5759;--line:#DBDADA;--tint:#F2EFEF}
+*{box-sizing:border-box}
+html,body{margin:0;background:#E7E5E5}
+.page{width:1920px;height:1080px;position:relative;overflow:hidden;background:#fff;font-family:Inter,Arial,sans-serif;color:var(--ink);margin:0 auto 20px}
+.bar{position:absolute;left:0;right:0;top:0;height:14px;background:var(--m)}
+.wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:60}
+.wm span{font-size:300px;font-weight:800;color:rgba(255,255,255,.18);transform:rotate(-20deg);letter-spacing:-6px;-webkit-text-stroke:3px rgba(83,0,24,.16)}
+.foot{position:absolute;left:70px;right:70px;bottom:24px;display:flex;justify-content:space-between;font-size:16px;color:var(--muted);z-index:5}
+.foot b{color:var(--m)}
+.hd{position:absolute;left:70px;top:44px;right:70px;z-index:5}
+.hd small{font-size:17px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--m2)}
+.hd h1{margin:8px 0 0;font-family:'Times New Roman',Times,serif;font-size:50px;color:var(--m);font-weight:700}
+.hd .rule{width:120px;height:4px;background:var(--m);margin-top:12px}
+.frame{position:absolute;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#eee}
+.frame svg,.frame>img{display:block;width:100%;height:100%;object-fit:cover}
+.frame .lt{position:absolute;inset:0;width:100%;height:100%}
+.note{font-size:19px;line-height:1.5}
+.note b{color:var(--m)}
+.side{position:absolute;left:1520px;top:196px;width:340px}
+.side h3{margin:0 0 6px;font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--m2)}
+.side .blk{margin-bottom:24px}
+.badge{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;background:var(--m);color:#fff;font-weight:800;font-size:22px;margin-right:14px;vertical-align:middle}
+.thumb{position:absolute;width:860px;height:484px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.thumb svg,.thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.thumb .tl{position:absolute;left:14px;top:12px;background:rgba(255,255,255,.94);border-radius:8px;padding:6px 14px 6px 6px;font-weight:800;font-size:19px;color:var(--m);display:flex;align-items:center}
+.thumb .tl i{font-style:normal;display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--m);color:#fff;align-items:center;justify-content:center;font-size:16px;margin-right:10px}
+table{border-collapse:collapse;width:100%;font-size:19px}
+th{text-align:left;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--m2);padding:10px 14px;border-bottom:2px solid var(--m)}
+td{padding:16px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.4}
+td:first-child{font-weight:800;color:var(--m);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- 1 OVERVIEW -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>2D animation · style options</small><h1>The same robot in four 2D looks</h1><div class="rule"></div></div>
+  <div class="thumb" style="left:70px;top:180px"><div id="tA" style="width:100%;height:100%"></div><div class="tl"><i>A</i>Flat vector</div></div>
+  <div class="thumb" style="left:990px;top:180px"><div id="tB" style="width:100%;height:100%"></div><div class="tl"><i>B</i>Technical line-art</div></div>
+  <div class="thumb" style="left:70px;top:684px;height:340px"><img src="style_cel.jpg" style="object-position:50% 40%"><div class="tl"><i>C</i>Cel-shaded</div></div>
+  <div class="thumb" style="left:990px;top:684px;height:340px"><img src="style_iso.jpg" style="object-position:50% 45%"><div class="tl"><i>D</i>Isometric flat</div></div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · 2D style options · Robot as approved (model v3)</span><span>1</span></div>
+</section>
+
+<!-- A -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>Option A</small><h1><span class="badge">A</span>Flat vector</h1><div class="rule"></div></div>
+  <div class="frame" style="left:70px;top:196px;width:1420px;height:799px"><div id="fA" style="width:100%;height:100%"></div><img class="lt" src="../../04_animation/overlays/title_card.png"></div>
+  <div class="side note">
+    <div class="blk"><h3>Look</h3>Clean flat shapes in your template colours, seen side-on in the reservoir. Simple, bright and very easy to read.</div>
+    <div class="blk"><h3>Best for</h3>A classic explainer feel and simple step-by-step scenes.</div>
+    <div class="blk"><h3>In motion</h3>Tracks and brush turn, sediment disappears behind the head, callouts pop in. Camera mostly side-on.</div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · 2D style options</span><span>2</span></div>
+</section>
+
+<!-- B -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>Option B</small><h1><span class="badge">B</span>Technical line-art</h1><div class="rule"></div></div>
+  <div class="frame" style="left:70px;top:196px;width:1420px;height:799px"><div id="fB" style="width:100%;height:100%"></div></div>
+  <div class="side note">
+    <div class="blk"><h3>Look</h3>Engineering-drawing style on a light grid. Colour only where it matters: <b style="color:#8A5A2B">brown sediment slurry</b> and <b style="color:#1F7FC4">blue clarified water</b>.</div>
+    <div class="blk"><h3>Best for</h3>The cleaning and filtration cutaway (scene 07) and system overviews. Matches an engineering presentation.</div>
+    <div class="blk"><h3>In motion</h3>The flow paths draw on step by step: brush → pump → hydrocyclone → screw conveyor → cartridge, then filter → back to the reservoir.</div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · 2D style options</span><span>3</span></div>
+</section>
+
+<!-- C -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>Option C</small><h1><span class="badge">C</span>Cel-shaded</h1><div class="rule"></div></div>
+  <div class="frame" style="left:70px;top:196px;width:1420px;height:799px"><img src="style_cel.jpg"><img class="lt" src="../../04_animation/overlays/title_card.png"></div>
+  <div class="side note">
+    <div class="blk"><h3>Look</h3>A cartoon-style 2D look: flat colour bands with ink outlines. Drawn from your approved robot, so every part stays exactly right from any angle.</div>
+    <div class="blk"><h3>Best for</h3>Telling the whole story (hatch, winch, reservoir floor, return and report) with smooth camera moves around the robot.</div>
+    <div class="blk"><h3>In motion</h3>Same moves as the 3D sample: the robot crawls, the brush spins, the clean lane appears behind it.</div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · 2D style options</span><span>4</span></div>
+</section>
+
+<!-- D -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>Option D</small><h1><span class="badge">D</span>Isometric flat</h1><div class="rule"></div></div>
+  <div class="frame" style="left:70px;top:196px;width:1420px;height:799px"><img src="style_iso.jpg"><img class="lt" src="../../04_animation/overlays/title_card.png"></div>
+  <div class="side note">
+    <div class="blk"><h3>Look</h3>A 2.5D infographic look at a fixed isometric angle, with soft colour and thin outlines on a light background.</div>
+    <div class="blk"><h3>Best for</h3>Overview and map-style scenes: sensor scan, coverage of the floor, return trigger and final report.</div>
+    <div class="blk"><h3>In motion</h3>The robot moves across tiles of the reservoir floor, and icons and data cards appear around it.</div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · 2D style options</span><span>5</span></div>
+</section>
+
+<!-- CHOOSE -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>Please choose</small><h1>Which look should the video use?</h1><div class="rule"></div></div>
+  <div style="position:absolute;left:70px;right:70px;top:200px">
+    <table>
+      <tr><th style="width:250px">Option</th><th>Look</th><th>Strongest at</th></tr>
+      <tr><td>A · Flat vector</td><td>Flat shapes, side-on, bright and simple</td><td>Explainer feel, step-by-step scenes</td></tr>
+      <tr><td>B · Technical line-art</td><td>Engineering drawing, colour only on the flows</td><td>Cleaning and filtration cutaway, system overview</td></tr>
+      <tr><td>C · Cel-shaded</td><td>Cartoon 2D look with outlines, any camera angle</td><td>Whole story with camera moves; exact to the approved robot</td></tr>
+      <tr><td>D · Isometric flat</td><td>2.5D infographic at a fixed angle</td><td>Map-style scenes: scan, coverage, report</td></tr>
+    </table>
+    <div class="note" style="margin-top:34px;background:var(--tint);border-radius:12px;padding:24px 28px">
+      Please reply with <b>A, B, C or D</b>. Styles can also be combined, for example <b>C for the story scenes and B for the filtration cutaway</b> (scene 07).
+      <div style="margin-top:10px;color:var(--muted);font-size:17px">Text style stays the same in every option: maroon, white and black as in your template.</div>
+    </div>
+  </div>
+  <div class="thumb" style="left:70px;top:690px;width:420px;height:300px"><div id="cA" style="width:100%;height:100%"></div><div class="tl"><i>A</i>Flat vector</div></div>
+  <div class="thumb" style="left:516px;top:690px;width:420px;height:300px"><div id="cB" style="width:100%;height:100%"></div><div class="tl"><i>B</i>Line-art</div></div>
+  <div class="thumb" style="left:962px;top:690px;width:420px;height:300px"><img src="style_cel.jpg" style="object-position:50% 40%"><div class="tl"><i>C</i>Cel-shaded</div></div>
+  <div class="thumb" style="left:1408px;top:690px;width:442px;height:300px"><img src="style_iso.jpg" style="object-position:50% 45%"><div class="tl"><i>D</i>Isometric</div></div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · 2D style options</span><span>6</span></div>
+</section>
+
+<script src="robot2d.js"></script>
+<script>
+for (const id of ['tA','fA','cA']) document.getElementById(id).innerHTML = frameFlat();
+for (const id of ['tB','fB','cB']) document.getElementById(id).innerHTML = frameLine();
+document.querySelectorAll('#tA svg,#fA svg,#tB svg,#fB svg,#cA svg,#cB svg').forEach(s => s.setAttribute('preserveAspectRatio', 'xMidYMid slice'));
+</script>
+</body>
+</html>

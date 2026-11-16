@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KAHRAMAA Robot Storyboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--maroon:#500000;--maroon2:#732F2F;--ink:#141414;--muted:#5A5A5A;--line:#D9D2D2;--paper:#FFFFFF;--tint:#F6F1F1;
+  --water1:#0F4757;--water2:#08252E;--floor:#3E4B4F;--pillar:#8C8F8A;--sed:#8A5A2B;--blue:#2F8FD8}
+*{box-sizing:border-box}
+html,body{margin:0;background:#E9E6E6}
+.page{width:1920px;height:1080px;position:relative;overflow:hidden;background:var(--paper);font-family:Inter,Helvetica,Arial,sans-serif;color:var(--ink);margin:0 auto 20px}
+.bar{position:absolute;left:0;right:0;top:0;height:14px;background:var(--maroon)}
+.wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:50}
+.wm span{font-size:300px;font-weight:800;color:var(--maroon);opacity:.05;transform:rotate(-20deg);letter-spacing:-6px}
+.foot{position:absolute;left:70px;right:70px;bottom:26px;display:flex;justify-content:space-between;font-size:16px;color:var(--muted)}
+.foot b{color:var(--maroon)}
+.hd{position:absolute;left:70px;top:46px;right:70px}
+.hd small{font-size:17px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--maroon2)}
+.hd h1{margin:8px 0 0;font-family:'Source Serif 4',Georgia,serif;font-size:46px;color:var(--maroon);letter-spacing:-.5px}
+.hd .rule{width:120px;height:4px;background:var(--maroon);margin-top:14px}
+.mono{font-family:'JetBrains Mono',Menlo,monospace}
+
+/* scene cards: two per page */
+.scene{position:absolute;top:190px;width:860px}
+.scene.l{left:70px}.scene.r{left:990px}
+.frame{width:860px;height:484px;border-radius:14px;overflow:hidden;border:1.5px solid var(--line);background:#111;position:relative}
+.frame svg{display:block}
+.tc{position:absolute;right:14px;top:12px;background:rgba(0,0,0,.6);color:#fff;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:800;padding:5px 10px;border-radius:6px}
+.meta{display:flex;align-items:baseline;gap:14px;margin-top:18px}
+.num{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:22px;background:var(--maroon);color:#fff;border-radius:6px;padding:3px 10px}
+.ttl{font-family:'Source Serif 4',Georgia,serif;font-size:31px;font-weight:700;color:var(--maroon)}
+.dur{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--muted);font-weight:600}
+.rows{margin-top:12px;display:grid;grid-template-columns:118px 1fr;row-gap:8px;font-size:18px;line-height:1.38}
+.rows .k{font-weight:700;color:var(--maroon2);font-size:14px;letter-spacing:.1em;text-transform:uppercase;padding-top:3px}
+.rows .v{color:var(--ink)}
+.chip{display:inline-block;background:var(--tint);border:1px solid var(--line);border-radius:6px;padding:1px 8px;font-size:16px;margin:0 4px 4px 0}
+.q{display:inline-block;background:#FFF4D6;border:1px solid #E8C979;color:#6B4E00;border-radius:6px;padding:1px 8px;font-size:15px;font-weight:700}
+.refs{position:absolute;right:70px;top:52px;display:flex;gap:12px}
+.refs figure{margin:0;width:170px;font-size:12px;color:var(--muted);font-weight:600}
+.refs img{width:170px;height:100px;object-fit:cover;border-radius:6px;border:1px solid var(--line);display:block;margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<!-- ===================== PAGE 1: COVER ===================== -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd">
+    <small>Storyboard v1 · for confirmation</small>
+    <h1>Intelligent Automated System for Reservoir Cleaning</h1>
+    <div style="font-size:24px;color:var(--muted);margin-top:10px">3D concept animation · sponsored by <b style="color:var(--ink)">KAHRAMAA</b> · TAMUQ MEEN 401</div>
+    <div class="rule"></div>
+  </div>
+  <div style="position:absolute;left:70px;top:270px;width:1000px">
+    <svg id="cover" width="1000" height="563"></svg>
+    <div style="font-size:15px;color:var(--muted);margin-top:8px">Sketch frames show layout and camera only. The final video is full 3D (Blender), not these drawings.</div>
+  </div>
+  <div style="position:absolute;left:1130px;top:270px;width:720px;font-size:20px;line-height:1.5">
+    <div style="font-weight:700;color:var(--maroon2);font-size:15px;letter-spacing:.14em;text-transform:uppercase">The video at a glance</div>
+    <table style="border-collapse:collapse;width:100%;margin-top:10px;font-size:19px">
+      <tr><td style="padding:8px 0;color:var(--muted);width:190px">Length</td><td><b>about 2:00</b> (12 scenes, 8–14 s each)</td></tr>
+      <tr><td style="padding:8px 0;color:var(--muted)">Format</td><td>1920 × 1080 (4K on request), MP4</td></tr>
+      <tr><td style="padding:8px 0;color:var(--muted)">Look</td><td>3D: reservoir, robot, winch and cutaway; flat on-screen UI for the operator screen</td></tr>
+      <tr><td style="padding:8px 0;color:var(--muted)">Text colours</td><td><span class="chip" style="background:var(--maroon);color:#fff;border-color:var(--maroon)">Maroon</span><span class="chip">White</span><span class="chip" style="background:#141414;color:#fff">Black</span> to match your template</td></tr>
+      <tr><td style="padding:8px 0;color:var(--muted)">Flow colours</td><td><span class="chip" style="background:var(--sed);color:#fff">Brown = sediment</span><span class="chip" style="background:var(--blue);color:#fff">Blue = filtered water</span></td></tr>
+      <tr><td style="padding:8px 0;color:var(--muted)">Audio</td><td>To confirm <span class="q">Q3</span></td></tr>
+    </table>
+    <div style="margin-top:26px;font-weight:700;color:var(--maroon2);font-size:15px;letter-spacing:.14em;text-transform:uppercase">Story</div>
+    <div class="mono" style="margin-top:10px;font-size:19px;font-weight:800;color:var(--maroon);line-height:1.7">SANITIZE → LOWER → MAP → CLEAN →<br>FILTER &amp; STORE → RETURN → REPORT</div>
+  </div>
+  <!-- timeline -->
+  <div style="position:absolute;left:70px;right:70px;top:880px">
+    <div style="font-weight:700;color:var(--maroon2);font-size:14px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px">Timeline · 2:00</div>
+    <div id="tl" style="display:flex;height:66px;border-radius:8px;overflow:hidden;border:1px solid var(--line)"></div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · Storyboard v1</span><span>1</span></div>
+</section>
+
+<!-- ===================== SCENE PAGES (filled by script) ===================== -->
+<div id="scenes"></div>
+
+<!-- ===================== STYLE PAGE ===================== -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>Look &amp; build plan</small><h1>The robot, the reservoir and the screens</h1><div class="rule"></div></div>
+  <div style="position:absolute;left:70px;top:200px;width:900px">
+    <div style="font-weight:700;color:var(--maroon2);font-size:15px;letter-spacing:.14em;text-transform:uppercase">Robot model (built in 3D from your concept C1)</div>
+    <svg id="ortho" width="900" height="470" style="margin-top:12px;background:var(--tint);border-radius:12px;border:1px solid var(--line)"></svg>
+    <div style="font-size:18px;line-height:1.5;margin-top:12px">Sized to <b class="mono">900 × 650 × 450 mm</b>. Parts from your sketch: two tracks, front suction hood with soft brush, vortex pump, hydrocyclone, polishing filter, sealed debris cartridge, battery pack, sonar and sensors, top lifting eye for the winch hook. Colours follow your slide-13 render (light grey body, dark tracks, blue brush) unless you prefer otherwise <span class="q">Q5</span>.</div>
+  </div>
+  <div style="position:absolute;left:1030px;top:200px;width:820px">
+    <div style="font-weight:700;color:var(--maroon2);font-size:15px;letter-spacing:.14em;text-transform:uppercase">On-screen text and operator screen</div>
+    <svg id="ui" width="820" height="300" style="margin-top:12px;border-radius:12px;border:1px solid var(--line)"></svg>
+    <div style="font-weight:700;color:var(--maroon2);font-size:15px;letter-spacing:.14em;text-transform:uppercase;margin-top:26px">Reservoir</div>
+    <div style="display:flex;gap:12px;margin-top:10px">
+      <img src="../02_assets/extracted_docx/word/media/image11.jpg" style="width:265px;height:150px;object-fit:cover;border-radius:8px">
+      <img src="../02_assets/extracted_docx/word/media/image9.jpg" style="width:265px;height:150px;object-fit:cover;border-radius:8px">
+      <img src="../02_assets/extracted_docx/word/media/image16.jpg" style="width:265px;height:150px;object-fit:cover;border-radius:8px">
+    </div>
+    <div style="font-size:18px;line-height:1.5;margin-top:12px">Concrete floor, walls and rows of square columns modelled from your photos, filled with clear water, lit by soft light rays from above. Water level per <span class="q">Q1</span>.</div>
+  </div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · Storyboard v1</span><span>8</span></div>
+</section>
+
+<!-- ===================== QUESTIONS PAGE ===================== -->
+<section class="page">
+  <div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+  <div class="hd"><small>Please confirm</small><h1>Questions before we start the 3D build</h1><div class="rule"></div></div>
+  <div id="qs" style="position:absolute;left:70px;right:70px;top:200px;display:grid;grid-template-columns:1fr 1fr;gap:18px 40px"></div>
+  <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · Storyboard v1</span><span>9</span></div>
+</section>
+
+<script>
+const M='#500000', W='#FFFFFF', K='#141414';
+const SED='#8A5A2B', BLUE='#2F8FD8';
+
+// ---------- drawing helpers (960 × 540 scene space) ----------
+const g = (s) => s;
+function waterBG(level=70){ // level = y of water surface (0 = none shown)
+  return `<defs>
+    <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A6274"/><stop offset="1" stop-color="#08252E"/></linearGradient>
+    <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFE9F2" stop-opacity=".35"/><stop offset="1" stop-color="#BFE9F2" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="#2A2F31"/>
+  <rect y="${level}" width="960" height="${540-level}" fill="url(#wg)"/>
+  ${level>0?`<path d="M0 ${level} q60 -8 120 0 t120 0 t120 0 t120 0 t120 0 t120 0 t120 0 t120 0" fill="none" stroke="#9FD4E0" stroke-width="3" opacity=".7"/>`:''}
+  ${[120,330,610,800].map((x,i)=>`<path d="M${x} ${level} L${x+60} ${level} L${x+200} 540 L${x+90} 540 Z" fill="url(#ray)" opacity="${.5+.15*(i%2)}"/>`).join('')}`;
+}
+function floor(y=470){return `<rect y="${y}" width="960" height="${540-y}" fill="#2E3A3D"/><line x1="0" x2="960" y1="${y}" y2="${y}" stroke="#4E6064" stroke-width="2"/>`}
+function pillar(x,top,bot,w=34,o=1){return `<rect x="${x}" y="${top}" width="${w}" height="${bot-top}" fill="#6F7774" opacity="${o}"/><rect x="${x}" y="${top}" width="${w*.3}" height="${bot-top}" fill="#8C938F" opacity="${o}"/>`}
+// side-view robot, front facing left, origin = bottom-left of tracks, s = scale (1 = 300px long)
+function robot(x,y,s=1,o={}){
+  const L=300*s,H=150*s;
+  const tr=`<rect x="${x+28*s}" y="${y-46*s}" width="${L-28*s}" height="${46*s}" rx="${23*s}" fill="#1E1E1E"/>`+
+    [0,1,2,3,4].map(i=>`<circle cx="${x+(52+i*52)*s}" cy="${y-23*s}" r="${14*s}" fill="#3C3C3C" stroke="#555" stroke-width="${2*s}"/>`).join('');
+  const body=`<rect x="${x+44*s}" y="${y-104*s}" width="${L-56*s}" height="${62*s}" rx="${10*s}" fill="#D9DCDD" stroke="#9AA0A3" stroke-width="${2*s}"/>`;
+  const bat=`<rect x="${x+70*s}" y="${y-98*s}" width="${60*s}" height="${30*s}" rx="${4*s}" fill="#F2C94C" opacity=".9"/>`;
+  const cart=`<rect x="${x+238*s}" y="${y-100*s}" width="${46*s}" height="${44*s}" rx="${5*s}" fill="${M}"/>`;
+  const cyc=`<path d="M${x+150*s} ${y-104*s} l${12*s} ${-40*s} h${24*s} l${12*s} ${40*s} z" fill="#BFC6C9" stroke="#8D9599" stroke-width="${2*s}"/><rect x="${x+158*s}" y="${y-156*s}" width="${32*s}" height="${14*s}" rx="${3*s}" fill="#BFC6C9" stroke="#8D9599" stroke-width="${2*s}"/>`;
+  const filt=`<rect x="${x+196*s}" y="${y-140*s}" width="${34*s}" height="${36*s}" rx="${6*s}" fill="${BLUE}" opacity=".85"/>`;
+  const hood=`<path d="M${x+44*s} ${y-88*s} L${x} ${y-70*s} L${x} ${y-10*s} L${x+40*s} ${y-10*s} Z" fill="#AEB4B7" stroke="#8D9599" stroke-width="${2*s}"/>`+
+    `<circle cx="${x+20*s}" cy="${y-20*s}" r="${14*s}" fill="${BLUE}" stroke="#1C5E92" stroke-width="${2*s}"/>`;
+  const eye=`<path d="M${x+150*s} ${y-158*s} a${10*s} ${10*s} 0 1 1 ${20*s} 0" fill="none" stroke="#444" stroke-width="${4*s}"/>`;
+  const sonar=`<rect x="${x+38*s}" y="${y-112*s}" width="${16*s}" height="${12*s}" rx="${3*s}" fill="#222"/>`;
+  return `<g opacity="${o.op??1}">${tr}${body}${bat}${cart}${cyc}${filt}${hood}${o.eye===false?'':eye}${sonar}</g>`;
+}
+// top-down robot (rect + tracks), centre cx,cy, angle deg
+function robotTop(cx,cy,a=0,s=1){
+  return `<g transform="translate(${cx} ${cy}) rotate(${a}) scale(${s})">
+    <rect x="-34" y="-26" width="68" height="10" rx="4" fill="#1E1E1E"/><rect x="-34" y="16" width="68" height="10" rx="4" fill="#1E1E1E"/>
+    <rect x="-30" y="-18" width="60" height="36" rx="5" fill="#D9DCDD" stroke="#8D9599" stroke-width="2"/>
+    <rect x="-44" y="-20" width="12" height="40" rx="3" fill="${BLUE}"/><rect x="14" y="-12" width="12" height="24" rx="2" fill="${M}"/></g>`;
+}
+function label(x,y,t,o={}){
+  const w=t.length*(o.fs??18)*0.56+26;
+  const bg=o.bg??W, fg=o.fg??K;
+  return `<g><rect x="${x}" y="${y}" width="${w}" height="${(o.fs??18)+16}" rx="6" fill="${bg}" ${o.stroke?`stroke="${o.stroke}"`:''} opacity="${o.op??.96}"/><text x="${x+13}" y="${y+(o.fs??18)+3}" font-family="Inter" font-size="${o.fs??18}" font-weight="700" fill="${fg}">${t}</text></g>`;
+}
+function caption(n,t){ // the on-screen lower-left scene title used in the video
+  return `<g><rect x="28" y="472" width="${t.length*12.5+86}" height="44" rx="4" fill="${M}"/><text x="44" y="501" font-family="JetBrains Mono" font-size="18" font-weight="800" fill="${W}">${n}</text><text x="82" y="501" font-family="Inter" font-size="20" font-weight="700" fill="${W}">${t}</text></g>`;
+}
+function arrow(x1,y1,x2,y2,c=K,w=3,dash=''){
+  const a=Math.atan2(y2-y1,x2-x1),h=12;
+  return `<line x1="${x1}" y1="${y1}" x2="${x2-Math.cos(a)*4}" y2="${y2-Math.sin(a)*4}" stroke="${c}" stroke-width="${w}" ${dash?`stroke-dasharray="${dash}"`:''}/><path d="M${x2} ${y2} L${x2-h*Math.cos(a-0.45)} ${y2-h*Math.sin(a-0.45)} L${x2-h*Math.cos(a+0.45)} ${y2-h*Math.sin(a+0.45)} Z" fill="${c}"/>`;
+}
+function screen(x,y,w,h,inner){ // operator monitor (flat UI), white UI with maroon header
+  return `<g><rect x="${x-10}" y="${y-10}" width="${w+20}" height="${h+20}" rx="12" fill="#111"/><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="4" fill="#FAFAFA"/>
+  <rect x="${x}" y="${y}" width="${w}" height="30" fill="${M}"/><text x="${x+12}" y="${y+20}" font-family="Inter" font-size="14" font-weight="700" fill="#fff">Reservoir cleaning · operator station</text>${inner}</g>`;
+}
+function mapGrid(x,y,w,h,done=.5,robotAt=null){
+  let s=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#EEF2F4" stroke="#C9CFD2"/>`;
+  const rows=6;
+  for(let i=0;i<rows;i++){const yy=y+(i+.5)*h/rows; const frac=Math.max(0,Math.min(1,done*rows-i));
+    s+=`<line x1="${x+8}" x2="${x+w-8}" y1="${yy}" y2="${yy}" stroke="#D4DADD" stroke-width="${h/rows-6}"/>`;
+    if(frac>0) s+=`<line x1="${i%2?x+w-8:x+8}" x2="${i%2?x+w-8-(w-16)*frac:x+8+(w-16)*frac}" y1="${yy}" y2="${yy}" stroke="${M}" stroke-opacity=".45" stroke-width="${h/rows-6}"/>`;}
+  [[.3,.35],[.65,.35],[.3,.72],[.65,.72]].forEach(([a,b])=>s+=`<rect x="${x+a*w-6}" y="${y+b*h-6}" width="12" height="12" fill="#6F7774"/>`);
+  if(robotAt) s+=`<circle cx="${x+robotAt[0]*w}" cy="${y+robotAt[1]*h}" r="7" fill="${BLUE}" stroke="#fff" stroke-width="2"/>`;
+  return s;
+}
+
+// ---------- the 12 scenes ----------
+const SC = [
+ {n:'01',t:'Reservoir and equipment setup',tc:'0:00 – 0:10',d:10,
+  show:'Open on the roof of a KAHRAMAA reservoir. Slow drone move over the existing access hatch, the portable winch, the surface control station, and the robot waiting beside the hatch. Title appears, then the scene caption.',
+  cam:'High wide shot, slow push-in to the hatch.',
+  txt:'Title: Intelligent Automated System for Reservoir Cleaning · Sponsored by KAHRAMAA. Labels: Access hatch · Portable winch · Control station.',
+  note:'Reservoir stays in service; no worker enters it.',
+  svg:()=>`<rect width="960" height="540" fill="#EDE7DC"/><rect y="300" width="960" height="240" fill="#CFC5B4"/>
+   <rect x="380" y="300" width="200" height="120" fill="#7C8285"/><rect x="396" y="314" width="168" height="92" fill="#1D2324"/>
+   <path d="M330 300 L420 150 L510 300" fill="none" stroke="#B33" stroke-width="10"/><rect x="398" y="140" width="44" height="30" rx="6" fill="#B33"/><line x1="420" y1="170" x2="470" y2="330" stroke="#333" stroke-width="3"/>
+   <rect x="660" y="330" width="170" height="16" fill="#6B5B4D"/><rect x="672" y="346" width="10" height="70" fill="#6B5B4D"/><rect x="808" y="346" width="10" height="70" fill="#6B5B4D"/><rect x="690" y="270" width="110" height="62" rx="6" fill="#111"/><rect x="696" y="276" width="98" height="50" fill="${M}" opacity=".85"/>
+   ${robot(110,420,.55)}
+   ${label(370,438,'Access hatch')}${label(300,110,'Portable winch')}${label(650,232,'Control station')}${label(100,438,'Robot')}
+   <rect x="0" y="0" width="960" height="84" fill="${M}" opacity=".94"/><text x="480" y="38" text-anchor="middle" font-family="Source Serif 4" font-size="26" font-weight="700" fill="#fff">Intelligent Automated System for Reservoir Cleaning</text><text x="480" y="66" text-anchor="middle" font-family="Inter" font-size="16" fill="#fff">Sponsored by KAHRAMAA</text>`},
+ {n:'02',t:'Sanitize the robot',tc:'0:10 – 0:18',d:8,
+  show:'The winch hook lifts the robot into a chlorine sanitization bath, holds, lifts it out, and carries it straight to the access hatch.',
+  cam:'Side view of the bath, then a short pan to the hatch.',
+  txt:'Caption: 02 · Sanitize the robot. Label: Chlorine sanitization bath (approved procedure).',
+  note:'No rinse or spray. No chlorine concentration or soak time on screen.',
+  svg:()=>`<rect width="960" height="540" fill="#EDE7DC"/><rect y="400" width="960" height="140" fill="#CFC5B4"/>
+   <rect x="170" y="250" width="380" height="170" rx="8" fill="#9AA3A6"/><rect x="186" y="270" width="348" height="140" fill="#8FD0C9" opacity=".85"/>
+   <line x1="297" y1="0" x2="297" y2="292" stroke="#333" stroke-width="3"/>
+   ${robot(225,370,.45)}
+   ${[0,1,2,3,4,5].map(i=>`<circle cx="${220+i*55}" cy="${300+(i%3)*25}" r="5" fill="#fff" opacity=".6"/>`).join('')}
+   ${arrow(600,330,800,330,M,4,'10 8')}<rect x="810" y="300" width="120" height="70" fill="#1D2324"/>
+   ${label(190,200,'Chlorine sanitization bath')}${label(760,390,'Straight to hatch')}${caption('02','Sanitize the robot')}`},
+ {n:'03',t:'Lower into the reservoir',tc:'0:18 – 0:30',d:12,
+  show:'Hook onto the robot’s lifting eye. The winch lowers it through the hatch, down through the water, and sets it gently on the floor. Close-up: the planned release hook opens once the robot is stable; the hook rises.',
+  cam:'Cut-away section through the reservoir, camera follows the robot down; close-up insert of the hook.',
+  txt:'Caption: 03 · Lower into the reservoir. Labels: Up to 50 m depth · Battery powered after release.',
+  note:'Robot runs on its own battery after deployment. Water level per Q1.',
+  svg:()=>`${waterBG(120)}<rect width="960" height="60" fill="#CFC5B4"/><rect x="420" y="0" width="120" height="70" fill="#1D2324"/>
+   ${pillar(140,60,470)}${pillar(760,60,470)}${floor()}
+   <line x1="410" y1="0" x2="410" y2="306" stroke="#ddd" stroke-width="3"/>${robot(330,390,.5)}
+   ${arrow(600,180,600,360,W,3,'8 8')}
+   <rect x="690" y="150" width="230" height="170" rx="10" fill="#F6F1F1"/><text x="705" y="178" font-family="Inter" font-size="15" font-weight="700" fill="${M}">Planned release hook</text>
+   <path d="M760 210 q-20 40 0 60 q20 10 30 -10" fill="none" stroke="#333" stroke-width="7"/><path d="M850 205 q-26 40 -6 62" fill="none" stroke="#333" stroke-width="7"/>${arrow(800,250,830,250,M,3)}
+   <text x="705" y="305" font-family="Inter" font-size="13" fill="${K}">locked  →  released</text>
+   ${label(40,140,'Up to 50 m',{bg:M,fg:W})}${caption('03','Lower into the reservoir')}`},
+ {n:'04',t:'Scan and plan a route',tc:'0:30 – 0:40',d:10,
+  show:'The robot powers up: sonar pulses ripple out across the floor, walls and columns. Cut to the operator screen, where a simple map of the floor and columns builds up and a cleaning path appears.',
+  cam:'Low hero shot of the robot with sonar rings; split to the operator screen.',
+  txt:'Caption: 04 · Scan and plan a route. Labels: Sonar · IMU · Depth sensor · Track encoders.',
+  note:'Position estimated from sonar, motion/depth sensors and track movement.',
+  svg:()=>`${waterBG(0)}${pillar(90,0,470)}${pillar(370,0,470,30,.8)}${floor()}
+   ${[1,2,3,4].map(i=>`<path d="M${150+i*42} ${400-i*20} a${i*60} ${i*60} 0 0 1 0 ${i*40}" fill="none" stroke="#9FD4E0" stroke-width="4" opacity="${1-i*.2}" transform="rotate(180 ${150} 420)"/>`).join('')}
+   ${robot(180,465,.5)}
+   ${screen(520,90,400,300,mapGrid(536,134,368,240,0,[.08,.5])+`<path d="M546 154 H894 V194 H546 V234 H894 V274 H546 V314 H894" fill="none" stroke="${M}" stroke-width="3" stroke-dasharray="8 6"/>`)}
+   ${label(40,40,'Sonar · IMU · Depth · Encoders',{fs:16})}${caption('04','Scan and plan a route')}`},
+ {n:'05',t:'Move around pillars',tc:'0:40 – 0:50',d:10,
+  show:'The tracks drive the robot along planned straight passes. Nearing a column, a 1 m detection ring touches it; the robot slows, turns around the column and rejoins its pass.',
+  cam:'Top-down view over the floor (passes visible), then a low tracking shot beside the tracks.',
+  txt:'Caption: 05 · Move around pillars. Labels: Obstacle detected · 1 m · Cleaning ≈ 3.5 cm/s (optional, Q4).',
+  note:'Floor travel only: no wall climbing, no swimming.',
+  svg:()=>`<rect width="960" height="540" fill="#2C3A3E"/>${[0,1,2,3,4,5].map(i=>`<rect x="0" y="${40+i*80}" width="960" height="56" fill="#33454A"/>`).join('')}
+   ${[0,1,2,3,4,5].slice(0,3).map(i=>`<rect x="40" y="${40+i*80}" width="${i<2?880:420}" height="56" fill="#4D6A70"/>`).join('')}
+   ${[[300,120],[640,200],[300,360],[640,440]].map(([x,y])=>`<rect x="${x-26}" y="${y-26}" width="52" height="52" fill="#8C938F"/>`).join('')}
+   <path d="M460 228 C520 228 560 160 640 160 S760 228 820 228" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="8 6"/>
+   <circle cx="520" cy="228" r="90" fill="none" stroke="#9FD4E0" stroke-width="3" stroke-dasharray="6 6"/>
+   ${robotTop(520,228,0,1.1)}${label(580,96,'Obstacle · 1 m',{bg:M,fg:W})}${label(40,6,'Planned passes',{fs:16})}${caption('05','Move around pillars')}`},
+ {n:'06',t:'Brush and collect sediment',tc:'0:50 – 1:00',d:10,
+  show:'Close-up inside the front suction hood: the soft brush turns and loosens the sediment, and suction immediately pulls it up into the hood with nearby water. The water around stays clear.',
+  cam:'Macro close-up at floor level, slight orbit; hood shown semi-transparent.',
+  txt:'Caption: 06 · Brush and collect sediment. Labels: Soft rotating brush · Suction hood · 40 m³/h (optional, Q4).',
+  note:'No large spreading sediment clouds.',
+  svg:()=>`${waterBG(0)}${floor(420)}<rect y="420" width="960" height="20" fill="${SED}" opacity=".55"/>
+   <path d="M260 110 L700 110 L760 410 L200 410 Z" fill="#AEB4B7" opacity=".45" stroke="#DDE" stroke-width="3"/>
+   <circle cx="480" cy="340" r="80" fill="${BLUE}" stroke="#1C5E92" stroke-width="6"/>${Array.from({length:36},(_,k)=>k*10).map(a=>`<line x1="${480+70*Math.cos(a*Math.PI/180)}" y1="${340+70*Math.sin(a*Math.PI/180)}" x2="${480+98*Math.cos(a*Math.PI/180)}" y2="${340+98*Math.sin(a*Math.PI/180)}" stroke="#1C5E92" stroke-width="4" stroke-linecap="round"/>`).join('')}<circle cx="480" cy="340" r="16" fill="#1C5E92"/>
+   ${[0,1,2,3,4,5,6,7,8].map(i=>`<circle cx="${330+i*38}" cy="${300-i%3*60-(i*13)%40}" r="5" fill="${SED}"/>`).join('')}
+   ${arrow(400,240,430,150,SED,4)}${arrow(560,240,530,150,SED,4)}<rect x="440" y="60" width="80" height="60" fill="#8D9599"/>
+   ${label(40,40,'Soft rotating brush',{fs:16})}${label(700,60,'Suction hood',{fs:16})}${label(690,470,'Water stays clear',{bg:M,fg:W,fs:16})}${caption('06','Brush and collect sediment')}`},
+ {n:'07',t:'Separate sediment, return filtered water',tc:'1:00 – 1:14',d:14,
+  show:'Cutaway of the robot. The pump draws the mixture from the hood into the hydrocyclone. Heavy particles spiral down into the sealed debris cartridge (brown). Clean water rises, passes the polishing filter and flows back out into the reservoir (blue).',
+  cam:'Robot body fades to a cutaway; camera follows the flow left to right; ends on both paths side by side.',
+  txt:'Caption: 07 · Separate and filter. Labels: Vortex pump · Hydrocyclone · Sealed debris cartridge · Polishing filter · Back to reservoir.',
+  note:'Two easy paths: brown = sediment, blue = filtered water.',
+  svg:()=>`<rect width="960" height="540" fill="#F4F4F4"/>
+   <rect x="120" y="150" width="720" height="260" rx="20" fill="#E3E6E8" stroke="#9AA0A3" stroke-width="3" stroke-dasharray="10 6"/>
+   <rect x="140" y="400" width="680" height="54" rx="27" fill="#1E1E1E"/>
+   <path d="M60 330 L150 300 L150 410 L60 410 Z" fill="#AEB4B7"/><circle cx="95" cy="385" r="22" fill="${BLUE}"/>
+   <circle cx="260" cy="330" r="44" fill="#5B6E8C"/><text x="260" y="336" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" fill="#fff">Pump</text>
+   <path d="M430 190 h80 v40 l-30 140 h-20 l-30 -140 z" fill="#CFD5D8" stroke="#7F888C" stroke-width="3"/>
+   <rect x="640" y="300" width="130" height="90" rx="8" fill="${M}"/><text x="705" y="352" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#fff">Debris cartridge</text>
+   <rect x="600" y="170" width="160" height="60" rx="30" fill="${BLUE}" opacity=".9"/><text x="680" y="206" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#fff">Polishing filter</text>
+   <path d="M110 350 C160 330 200 330 216 330" fill="none" stroke="${SED}" stroke-width="10"/>
+   <path d="M304 330 C360 330 380 210 430 210" fill="none" stroke="${SED}" stroke-width="10"/>
+   <path d="M480 372 C500 400 560 360 640 350" fill="none" stroke="${SED}" stroke-width="10"/>
+   <path d="M470 190 C470 150 560 150 600 190" fill="none" stroke="${BLUE}" stroke-width="10"/>
+   ${arrow(760,200,900,120,BLUE,10)}<text x="820" y="100" font-family="Inter" font-size="16" font-weight="700" fill="${BLUE}">Back to reservoir</text>
+   ${label(400,110,'Hydrocyclone',{fs:16})}
+   <rect x="40" y="40" width="22" height="22" fill="${SED}"/><text x="72" y="58" font-family="Inter" font-size="16" font-weight="600">Sediment</text><rect x="180" y="40" width="22" height="22" fill="${BLUE}"/><text x="212" y="58" font-family="Inter" font-size="16" font-weight="600">Filtered water</text>
+   ${caption('07','Separate and filter')}`},
+ {n:'08',t:'Monitor the operation',tc:'1:14 – 1:22',d:8,
+  show:'Cut to the surface control screen. The operator supervises remotely: robot position on the map, cleaned and remaining areas, battery level, water turbidity, and the fault-alert panel.',
+  cam:'Over-the-shoulder of the operator, push in to the screen; UI elements animate in.',
+  txt:'Caption: 08 · Monitor the operation. Screen labels: Position · Cleaned · Remaining · Battery · Turbidity · Alerts.',
+  note:'No specific underwater wireless technology shown (a neutral “link” icon only). Values on screen are illustrative.',
+  svg:()=>`<rect width="960" height="540" fill="#D8D2C8"/>${screen(110,50,740,410,
+   mapGrid(130,96,420,340,.45,[.6,.42])+
+   `<g font-family="Inter">${[['Battery','',0],['Turbidity','within target',1],['Cleaned','— %',2],['Remaining','— %',3],['Alerts','none',4]].map(([k,v,i])=>`<rect x="570" y="${96+i*68}" width="262" height="58" rx="6" fill="#fff" stroke="#E1D6D6"/><text x="584" y="${118+i*68}" font-size="12" font-weight="700" fill="${M}" letter-spacing="1">${k.toUpperCase()}</text><text x="584" y="${142+i*68}" font-size="17" font-weight="700" fill="${K}">${v}</text>${i===0?`<rect x="584" y="128" width="200" height="14" rx="7" fill="#E7E2E2"/><rect x="584" y="128" width="130" height="14" rx="7" fill="${M}"/>`:''}`).join('')}</g>`)}
+   ${caption('08','Monitor the operation')}`},
+ {n:'09',t:'Return after a cleaning cycle',tc:'1:22 – 1:30',d:8,
+  show:'One of three triggers lights up: area finished, battery at its return reserve, or debris cartridge full. The robot stops cleaning and drives back toward the hatch along the mapped route.',
+  cam:'Top-down map view showing the path home, then a low shot of the robot arriving under the hatch.',
+  txt:'Caption: 09 · Return after a cycle. Trigger chips: Area complete · Battery reserve 20–25% · Cartridge full.',
+  note:'The system remembers cleaned and remaining areas for the next cycle.',
+  svg:()=>`<rect width="960" height="540" fill="#2C3A3E"/>${[0,1,2,3,4,5].map(i=>`<rect x="40" y="${40+i*80}" width="880" height="56" fill="${i<3?'#4D6A70':'#33454A'}"/>`).join('')}
+   <rect x="830" y="20" width="100" height="70" fill="#111" stroke="#fff" stroke-width="2"/><text x="880" y="62" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" fill="#fff">HATCH</text>
+   <path d="M300 290 L700 290 L880 100" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="10 8"/>${robotTop(300,290,0,1.1)}
+   ${label(60,360,'Area complete',{bg:W})}${label(260,360,'Battery reserve 20–25%',{bg:M,fg:W})}${label(560,360,'Cartridge full',{bg:W})}${caption('09','Return after a cycle')}`},
+ {n:'10',t:'Lift, service and redeploy',tc:'1:30 – 1:40',d:10,
+  show:'Below the hatch the proposed hook reconnects to the lifting eye; the winch raises the robot. At the surface an operator removes the sealed debris cartridge, checks the filter, and swaps or charges the battery.',
+  cam:'Underwater close-up of the reconnection, then surface shot of servicing with three quick icons.',
+  txt:'Caption: 10 · Lift, service, redeploy. Labels: Remove cartridge · Check filter · Change or charge battery · Re-sanitize before redeployment.',
+  note:'If more cleaning is needed, repeat the chlorine bath before redeployment (loops back to scene 02).',
+  svg:()=>`<rect width="480" height="540" fill="#0F3B48"/>${pillar(40,0,470)}<rect y="470" width="480" height="70" fill="#2E3A3D"/>
+   <line x1="190" y1="0" x2="190" y2="336" stroke="#ddd" stroke-width="3"/>${robot(110,420,.5)}${arrow(380,300,380,120,W,3,'8 8')}
+   <rect x="480" width="480" height="540" fill="#EDE7DC"/><rect x="480" y="380" width="480" height="160" fill="#CFC5B4"/>
+   ${robot(560,380,.6,{eye:false})}<rect x="720" y="250" width="56" height="52" rx="6" fill="${M}" transform="translate(70 -70)"/>
+   ${label(520,110,'Remove cartridge',{fs:15})}${label(520,150,'Check filter',{fs:15})}${label(520,190,'Change / charge battery',{fs:15})}
+   ${label(640,420,'Re-sanitize → redeploy',{bg:M,fg:W,fs:15})}${caption('10','Lift, service, redeploy')}`},
+ {n:'11',t:'If something goes wrong',tc:'1:40 – 1:50',d:10,
+  show:'A warning flashes on the control screen. Low battery or a detected fault: the robot stops cleaning and returns to the hatch if it can still move. Lost communication: it stops and enters a safe state. The operator can use emergency stop or manual control when the link is available.',
+  cam:'Screen warning, then split view of the three cases.',
+  txt:'Caption: 11 · If something goes wrong. Labels: Emergency stop · Manual override · Safe state · Proposed backup retrieval system.',
+  note:'Complete power loss: the robot cannot drive back or reconnect itself. Shown only as a labelled “proposed backup retrieval system”.',
+  svg:()=>`<rect width="960" height="540" fill="#F4F4F4"/>
+   <rect x="40" y="40" width="880" height="70" rx="8" fill="${M}"/><path d="M90 92 l22 -40 l22 40 z" fill="#fff"/><text x="105" y="88" font-family="Inter" font-size="22" font-weight="800" fill="${M}">!</text><text x="150" y="84" font-family="Inter" font-size="24" font-weight="800" fill="#fff">WARNING · operator notified</text>
+   ${[['Low battery / fault','Stops cleaning → returns to hatch',K],['Lost communication','Stops → safe state',K],['Complete power loss','Proposed backup retrieval system',M]].map(([a,b,c],i)=>`<rect x="${40+i*300}" y="150" width="280" height="290" rx="10" fill="#fff" stroke="${i==2?M:'#D9D2D2'}" stroke-width="${i==2?3:1.5}" ${i==2?'stroke-dasharray="10 6"':''}/><text x="${60+i*300}" y="190" font-family="Inter" font-size="19" font-weight="800" fill="${c}">${a}</text><text x="${60+i*300}" y="400" font-family="Inter" font-size="15" font-weight="600" fill="${K}">${b}</text>`).join('')}
+   ${robot(80,350,.42)}${arrow(240,300,300,260,K,3)}${robot(380,350,.42)}<text x="560" y="300" font-family="JetBrains Mono" font-size="16" font-weight="800" fill="${M}">SAFE</text>${robot(680,350,.42,{op:.5})}<path d="M770 210 v60" stroke="${M}" stroke-width="4" stroke-dasharray="8 6"/>
+   ${caption('11','If something goes wrong')}`},
+ {n:'12',t:'Final cleaning report',tc:'1:50 – 2:00',d:10,
+  show:'The report screen fills in: cleaned-area map with completed and remaining sections, cleaning history, battery and turbidity records, alerts. Camera pulls back to the reservoir, still filled with water and in service (level per Q1). End card with the closing message.',
+  cam:'Screen, then a slow pull-back through the water; end card.',
+  txt:'End message: Cleaner Reservoirs • Safer Operations • Less Water Loss. Logos: TAMUQ · KAHRAMAA (Q2).',
+  note:'Closing note: concept design, not a finished or tested commercial robot.',
+  svg:()=>`<rect width="960" height="540" fill="${M}"/>
+   <rect x="60" y="60" width="400" height="270" rx="10" fill="#FAFAFA"/><rect x="60" y="60" width="400" height="30" rx="10" fill="#300"/><text x="74" y="81" font-family="Inter" font-size="14" font-weight="700" fill="#fff">Final cleaning report</text>
+   ${mapGrid(76,104,220,210,.8)}${[0,1,2,3].map(i=>`<rect x="312" y="${104+i*54}" width="132" height="44" rx="4" fill="#fff" stroke="#E1D6D6"/>`).join('')}
+   <text x="480" y="410" text-anchor="middle" font-family="Source Serif 4" font-size="34" font-weight="700" fill="#fff">Cleaner Reservoirs • Safer Operations • Less Water Loss</text>
+   <text x="480" y="450" text-anchor="middle" font-family="Inter" font-size="16" fill="#fff" opacity=".85">Intelligent Automated System for Reservoir Cleaning · Sponsored by KAHRAMAA</text>
+   <rect x="560" y="120" width="160" height="70" rx="8" fill="#fff" opacity=".9"/><text x="640" y="162" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="${M}">TAMUQ logo</text>
+   <rect x="740" y="120" width="160" height="70" rx="8" fill="#fff" opacity=".9"/><text x="820" y="162" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="${M}">KAHRAMAA logo</text>`},
+];
+const REFS={ '01':['image15.jpg','image16.jpg'],'03':['image4.png'],'04':['image6.png'],'06':['image2.png'],'07':['image2.png','image3.png'],'10':['image4.png'],'02':['image7.png'],'05':['image10.jpg'],'09':['image7.png']};
+
+// scene pages
+const host=document.getElementById('scenes');
+for(let p=0;p<6;p++){
+  const sec=document.createElement('section'); sec.className='page';
+  const a=SC[p*2], b=SC[p*2+1];
+  const refs=[...new Set([...(REFS[a.n]||[]),...(REFS[b.n]||[])])].slice(0,3);
+  sec.innerHTML=`<div class="bar"></div><div class="wm"><span>TutorBin</span></div>
+   <div class="hd"><small>Scenes ${a.n}–${b.n}</small><h1>${a.t} · ${b.t}</h1><div class="rule"></div></div>
+   <div class="refs">${refs.map(r=>`<figure><img src="../02_assets/extracted_docx/word/media/${r}">Your reference</figure>`).join('')}</div>
+   ${[a,b].map((s,i)=>`<div class="scene ${i?'r':'l'}">
+     <div class="frame"><svg viewBox="0 0 960 540" width="860" height="484">${s.svg()}</svg><div class="tc">${s.tc}</div></div>
+     <div class="meta"><span class="num">${s.n}</span><span class="ttl">${s.t}</span><span class="dur">${s.d} s</span></div>
+     <div class="rows">
+       <div class="k">On screen</div><div class="v">${s.show}</div>
+       <div class="k">Camera</div><div class="v">${s.cam}</div>
+       <div class="k">Text</div><div class="v">${s.txt}</div>
+       <div class="k">Rule</div><div class="v" style="color:var(--maroon);font-weight:600">${s.note}</div>
+     </div></div>`).join('')}
+   <div class="foot"><span><b>TutorBin</b> · KAHRAMAA reservoir-cleaning robot · Storyboard v1</span><span>${p+2}</span></div>`;
+  host.appendChild(sec);
+}
+// shrink headings that are too long
+document.querySelectorAll('.hd h1').forEach(h=>{if(h.textContent.length>62)h.style.fontSize='38px'});
+
+// cover frame + timeline
+document.getElementById('cover').setAttribute('viewBox','0 0 960 540');
+document.getElementById('cover').innerHTML=`${waterBG(90)}<rect width="960" height="40" fill="#CFC5B4"/>${pillar(110,40,470)}${pillar(300,40,470,28,.7)}${pillar(640,40,470,28,.7)}${pillar(820,40,470)}${floor()}
+  <rect x="0" y="470" width="420" height="70" fill="#3D5156"/>${robot(380,500,.75)}
+  ${[1,2,3].map(i=>`<path d="M${370-i*30} ${420-i*10} a${i*40} ${i*40} 0 0 0 0 ${i*50}" fill="none" stroke="#9FD4E0" stroke-width="4" opacity="${1-i*.25}"/>`).join('')}
+  ${label(40,60,'Concept C1 · battery-powered tracked brush–hydrocyclone crawler',{bg:M,fg:W,fs:17})}`;
+const tl=document.getElementById('tl');
+SC.forEach((s,i)=>{const d=document.createElement('div');d.style.cssText=`flex:${s.d};background:${i%2?'#6E1C1C':'#500000'};color:#fff;display:flex;flex-direction:column;justify-content:center;padding:0 8px;font-size:13px;font-weight:700;border-right:1px solid #fff;overflow:hidden;white-space:nowrap`;d.innerHTML=`<span class="mono" style="font-size:15px">${s.n}</span><span style="opacity:.85;font-weight:500">${s.d}s</span>`;tl.appendChild(d)});
+
+// ortho robot
+document.getElementById('ortho').setAttribute('viewBox','0 0 900 470');
+document.getElementById('ortho').innerHTML=`<text x="30" y="40" font-family="Inter" font-size="15" font-weight="700" fill="${M}">SIDE</text>${robot(60,360,1.2)}
+ <line x1="60" y1="400" x2="420" y2="400" stroke="${K}" stroke-width="2"/><text x="240" y="428" text-anchor="middle" class="mono" font-family="JetBrains Mono" font-size="16" font-weight="800">900 mm</text>
+ <line x1="440" y1="360" x2="440" y2="170" stroke="${K}" stroke-width="2"/><text x="452" y="270" font-family="JetBrains Mono" font-size="16" font-weight="800">450 mm</text>
+ <text x="520" y="40" font-family="Inter" font-size="15" font-weight="700" fill="${M}">TOP</text>
+ <g transform="translate(700 230) scale(3.2)">${robotTop(0,0,0,1).replace('<g transform="translate(0 0) rotate(0) scale(1)">','<g>')}</g>
+ <line x1="580" y1="400" x2="840" y2="400" stroke="${K}" stroke-width="2"/><text x="710" y="428" text-anchor="middle" font-family="JetBrains Mono" font-size="16" font-weight="800">900 mm</text>
+ <line x1="870" y1="140" x2="870" y2="320" stroke="${K}" stroke-width="2"/><text x="880" y="128" text-anchor="end" font-family="JetBrains Mono" font-size="16" font-weight="800">650 mm</text>
+ ${[['Suction hood + brush',60,90],['Hydrocyclone',190,60],['Polishing filter',300,90],['Debris cartridge',330,130],['Battery',100,130]].map(([t,x,y])=>label(x,y,t,{fs:13})).join('')}`;
+
+// UI sample
+document.getElementById('ui').setAttribute('viewBox','0 0 820 300');
+document.getElementById('ui').innerHTML=`<rect width="820" height="300" fill="#0F3B48"/>
+ ${caption('05','Move around pillars').replace('y="472"','y="30"').replace('y="501"','y="59"').replace('y="501"','y="59"')}
+ ${label(30,110,'Obstacle · 1 m',{bg:M,fg:W})}${label(230,110,'Soft rotating brush',{bg:W,fg:K})}${label(470,110,'Battery reserve 20–25%',{bg:K,fg:W})}
+ <rect x="30" y="170" width="760" height="100" rx="8" fill="#FAFAFA"/><rect x="30" y="170" width="760" height="26" rx="8" fill="${M}"/><text x="44" y="188" font-family="Inter" font-size="13" font-weight="700" fill="#fff">Operator screen · white UI, maroon headers, black values</text>
+ ${['POSITION','CLEANED','BATTERY','TURBIDITY','ALERTS'].map((k,i)=>`<text x="${50+i*150}" y="226" font-family="Inter" font-size="11" font-weight="700" fill="${M}" letter-spacing="1">${k}</text><text x="${50+i*150}" y="252" font-family="JetBrains Mono" font-size="18" font-weight="800" fill="${K}">—</text>`).join('')}`;
+
+// questions
+const QS=[
+ ['Q1','Water level','Your scenario says the reservoir “stays full”, but the comment says it usually has water but is “not full all the time”. Should we show it <b>partly filled</b> (water line below the roof, robot fully under water) or <b>full</b>?'],
+ ['Q2','Template and logos','Please send your slide template (.pptx) and the <b>TAMUQ</b> and <b>KAHRAMAA</b> logos (PNG/SVG) for the title and end card. We only have screenshots of your slides.'],
+ ['Q3','Voice-over and music','On-screen text only, or do you want background music and/or a voice-over? If voice-over: will you provide the script/recording, or should we write the script?'],
+ ['Q4','Numbers on screen','Should key targets appear as labels (e.g. 3.5 cm/s, 50 m²/h, 40 m³/h, 4–5 L, 20–25 % battery reserve, ≤ 0.5 NTU, 4.9 bar at 50 m), or keep text minimal?'],
+ ['Q5','Robot look','We will build the robot from concept C1 and your slide-13 render (light grey body, dark tracks, blue brush). Any preferred colours, or a CAD model we should follow?'],
+ ['Q6','Hatch size','Do you know the hatch opening size? It sets the scale when the robot is lowered through it.'],
+];
+document.getElementById('qs').innerHTML=QS.map(([n,t,d])=>`<div style="border:1.5px solid var(--line);border-radius:12px;padding:20px 24px;background:#fff">
+  <div style="display:flex;align-items:center;gap:12px"><span class="num" style="font-size:18px">${n}</span><span style="font-family:'Source Serif 4',Georgia,serif;font-size:26px;font-weight:700;color:var(--maroon)">${t}</span></div>
+  <div style="font-size:18px;line-height:1.5;margin-top:10px">${d}</div></div>`).join('');
+</script>
+</body>
+</html>
