@@ -1,0 +1,13 @@
+{
+  "_source": "Client message, 8 Nov 2026: results from their Python analysis. These are estimates, not measured annual production, so show them labelled 'Estimated'.",
+  "recommended_panel": "LONGi Hi-MO X10 LR7-54HVD-485M",
+  "panel_rating": "485 W, bifacial",
+  "placement": "South-facing, 25° tilt, portrait orientation",
+  "number_of_panels": 10,
+  "system_size": "4.85 kWp",
+  "estimated_annual_energy": "10,354 kWh",
+  "installation_cost": "23,747 QAR",
+  "payback_period": "15.1 years",
+  "roi": "93% over 30 years",
+  "shading_and_dust_losses": "Shown with energy_by_panel_chart.jpg (capacity, with shade, with shade + dust). No separate figures were given."
+}

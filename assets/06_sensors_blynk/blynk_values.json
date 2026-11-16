@@ -1,0 +1,14 @@
+{
+  "_source": "Real values: Live Data tab of the client's dashboard recording (live_data_source.jpg). Placeholders: the client agreed on 8 Nov 2026 to realistic placeholder readings for humidity, pressure and wind.",
+  "readings": [
+    {"label": "Solar Irradiance", "sensor": "Pyranometer", "value": "25.00", "unit": "W/m²", "status": "real"},
+    {"label": "Ambient Temperature", "sensor": "BME280", "value": "50.47", "unit": "°C", "status": "real"},
+    {"label": "Thermal Average", "sensor": "MLX90640", "value": "27.41", "unit": "°C", "status": "real"},
+    {"label": "Thermal Maximum", "sensor": "MLX90640", "value": "30.48", "unit": "°C", "status": "real"},
+    {"label": "Heading", "sensor": "IMU", "value": "359.94", "unit": "°", "status": "real"},
+    {"label": "Pitch / Roll", "sensor": "IMU", "value": "3.25 / 2.25", "unit": "°", "status": "real"},
+    {"label": "Relative Humidity", "sensor": "BME280", "value": "21.4", "unit": "%", "status": "placeholder (approved by client)"},
+    {"label": "Air Pressure", "sensor": "BME280", "value": "1014.8", "unit": "hPa", "status": "placeholder (approved by client)"},
+    {"label": "Wind Speed", "sensor": "Anemometer", "value": "3.6", "unit": "m/s", "status": "placeholder (approved by client)"}
+  ]
+}
